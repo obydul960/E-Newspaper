@@ -30,7 +30,8 @@ class SliderController extends Controller
         ]);
         if ($validator->fails())
         {
-            return redirect::to("category-create-form")->withErrors($validator);
+            Session::flash('error', 'Something went wrong!');
+            return redirect::to("slider-slider-form")->withErrors($validator);
         }else{
             $image                      =Input::file('picture');
             $uploadFolder               ='Slider_image';
@@ -41,9 +42,7 @@ class SliderController extends Controller
             $image_upload->image        = $createFileName;
             $image_upload->back_link    = $request->get('back_link');
             $image_upload->save();
-            //Toast::success('oops');
-           //toast()->success('messages','How are you');
-            Session::flash('success', 'Paid Payment!');
+            Session::flash('success', 'Successfully Data Insert.');
             return redirect::to('slider-slider-form');
 
         }
@@ -60,6 +59,7 @@ class SliderController extends Controller
         $slider_update->image        = $createFileName;
         $slider_update->back_link    = $request->get('image_link');
         $slider_update->save();
+        Session::flash('success', 'Successfully Data Update.');
         return redirect::to('slider-slider-form');
     }
 

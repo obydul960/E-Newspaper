@@ -4,7 +4,6 @@
 
 <div class="row-fluid">
     <!-- block -->
-
     @yield('content')
     <!-- /block -->
 </div>

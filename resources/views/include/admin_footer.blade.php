@@ -26,74 +26,9 @@
 <script src="Src/vendors/wizard/jquery.bootstrap.wizard.min.js"></script>
 <script type="text/javascript" src="Src/vendors/jquery-validation/dist/jquery.validate.min.js"></script>
 <script src="Src/assets/form-validation.js"></script>
-
+<script src="Src/js/toastr/toastr.min.js"></script>
 
 <!--- Flash message ---->
-<?php
-function js($scripts, $default) {
-    $html = '';
-    foreach ($scripts as $script) {
-        $html.= Html::script($default . $script . '.js');
-    }
-    return $html;
-}
-?>
-{!!
-
-js(
-[
-'jquery.min',
-'/bootstrap/bootstrap.min',
-'plugins',
-'jquery-ui/jquery-ui.min',
-'moment/moment.min',
-'select2',
-'date-range-picker/daterangepicker',
-'toastr/toastr.min',
-'rickshaw/d3.v3',
-'datatable',
-'tabletools',
-'angular',
-],'js/')
-!!}
-<!-- main file -->
-
-
-
-
-
-
-
-
-<script type="text/javascript">
-    $(document).ready(function() {
-        $(".js-example-basic-single").select2();
-    });
-</script>
-<!-- Basic Single Date Picker -->
-<script type="text/javascript">
-    $(document).ready(function() {
-        $('.datepicker').daterangepicker({ singleDatePicker: true }, function(start, end, label) {
-            console.log(start.toISOString(), end.toISOString(), label);
-        });
-
-        // setTimeout(function() {
-        //                toastr.options = {
-        //                    closeButton: true,
-        //                    progressBar: true,
-        //                    showMethod: 'slideDown',
-        //                    timeOut: 4000
-        //                };
-        //                toastr.success('Responsive Admin Theme', 'Welcome to INSPINIA');
-
-        //            }, 1300);
-
-    });
-</script>
-<!-- ================================================
-Below codes are only for index widgets
-================================================ -->
-
 
 @if(Session::has('success'))
 <script type="text/javascript">
@@ -105,6 +40,7 @@ Below codes are only for index widgets
             timeOut: 7000
         };
         toastr.success('{{ Session::get('success') }}');
+        //alert("hello world");
 
     }, 1300);
 </script>
@@ -150,40 +86,6 @@ Below codes are only for index widgets
     }, 1300);
 </script>
 @endif
-
-<!-- /////////////////////////////////////////////////////////////////////// -->
-
-<style type="text/css">
-    table.dataTable tbody td {
-        padding: 4px 2px;
-    }
-    tbody > tr > td, .table > tfoot > tr > td {
-        line-height: 1.7;
-        min-width: 50px;
-        /*text-align: center;*/
-    }
-    .panel-body, .panel-heading {
-        overflow-x:visible;
-    }
-    .table > thead:first-child > tr:first-child > th, .table > caption + thead > tr:first-child > td, .table > colgroup + thead > tr:first-child > td, .table > thead:first-child > tr:first-child > td {
-        border-top: 0;
-        width: 50px;
-    }
-</style>
-<script type="text/javascript">
-
-    $(document).ready(function () {
-        $(".sidebar-panel nav li").removeClass("active");
-        $('#empsalary').addClass('active');
-        // $('.nav li ul ').slideUp();
-        $(".expandsalary").slideDown();
-    });
-
-
-</script>
-
-
-
 <!---- Flsash message end ---- >
 
 
@@ -221,6 +123,12 @@ Below codes are only for index widgets
         });
     });
 </script>
+
+<!--- Sweet alert message --->
+
+
+
+<!-- Sweet alert message end--->
 
 
 
