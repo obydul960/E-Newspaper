@@ -166,6 +166,11 @@ return [
          */
         'Grimthorr\LaravelToast\ServiceProvider',
 
+        /*
+         * image resize ImageServiceProvider
+         */
+        Intervention\Image\ImageServiceProvider::class,
+
     ],
 
     /*
@@ -224,6 +229,10 @@ return [
          */
         'Toast' => 'Grimthorr\LaravelToast\Facade',
 
+        /*
+         * Image resize Intervention
+         */
+        'Image' => Intervention\Image\Facades\Image::class
 
     ],
 

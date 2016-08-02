@@ -11,7 +11,7 @@
 |
 */
 Route::get('/', function () {
-    return view('common_folder.data_table');
+    return view('common_folder.editor');
 });
 
 
@@ -32,9 +32,18 @@ Route::get('sub-category-delete/{id}','CategoryController@sub_cat_delete');
 Route::post('sub-category-update/{id}','CategoryController@sub_cat_update');
 
 //slider image controlling
-Route::get('slider-slider-form','SliderController@slider_form');
-Route::post('slider-slider-image-store','SliderController@slider_upload');
-Route::post('slider-slider-update/{id}','SliderController@slider_update');
-Route::get('slider-slider-delete/{id}','SliderController@slider_delete');
+Route::get('slider-form','SliderController@slider_form');
+Route::post('slider-image-store','SliderController@slider_upload');
+Route::post('slider-update/{id}','SliderController@slider_update');
+Route::get('slider-delete/{id}','SliderController@slider_delete');
+
+// news insert update delete by obydul date:31-7-16
+Route::get('news-create','NewsController@create');
+Route::get('news-category-show','NewsController@sub_category');
+Route::post('news-contain-store','NewsController@news_store');
+Route::get('news-show','NewsController@news_show');
+Route::get('news-show-delete/{id}','NewsController@news_delete');
+Route::get('news-edit-form/{id}','NewsController@edit_news');
+Route::post('news-update/{id}','NewsController@news_update');
 
 

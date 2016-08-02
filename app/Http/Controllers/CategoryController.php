@@ -50,12 +50,12 @@ class CategoryController extends Controller
     // Main menu show by obydul date 24-7-16
     public  function Main_cat_show(){
         // Main category show by obydul date 26-7-16
-        $main_category = DB::table('main_category')->get();
+        $main_category = DB::table('main_category')->orderBy('id', 'desc')->paginate(3);
         //sub category show by obydul date 24-7-16
         $sub_category = DB::table('sub_category')
             ->join('main_category', 'sub_category.main_cat_id', '=', 'main_category.id')
             ->select('sub_category.id','sub_category.sub_cat_name', 'main_category.category_name')
-            ->get();
+            ->orderBy('id', 'desc')->paginate(3);
 
         return view('category.main_category',compact('main_category','sub_category'));
     }

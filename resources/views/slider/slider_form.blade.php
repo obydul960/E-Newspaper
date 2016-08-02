@@ -1,8 +1,6 @@
 @extends('layouts.master')
 
 @section('content')
-
-
 <!------ slider image form and show table by obydul date 24-7-16 ------->
 <div class="row-fluid">
     <div class="span12">
@@ -14,34 +12,39 @@
             <div class="block-content collapse in">
               <!--  @include('toast::messages')-->
                 <div class="block-content collapse in">
-                    {!! Form::open(['url'=>'slider-slider-image-store','class'=>'form-horizontal','method'=>'post','enctype' => 'multipart/form-data','files'=>true])!!}
+                    {!! Form::open(['url'=>'slider-image-store','id'=>'register-form','novalidate'=>'novalidate','class'=>'form-horizontal','method'=>'post','enctype' => 'multipart/form-data','files'=>true])!!}
 
-                    <fieldset>
-                        <div class="control-group">
-                            {!! Form::label('Image Title','',['class'=>'control-label','for'=>'typeahead'])!!}
-                            <div class="controls">
-                                {!! Form::text('image_title','',['class'=>'span10','id'=>'typeahead'])!!}
-                            </div>
-                        </div>
-                        <div class="control-group">
-                            {!! Form::label('Image','',['class'=>'control-label','for'=>'typeahead'])!!}
-                            <div class="controls">
-                                {!! Form::file('picture','',['class'=>'span10','id'=>'typeahead'])!!}
-                            </div>
-                        </div>
-                        <div class="control-group">
-                            {!! Form::label('Back Link','',['class'=>'control-label','for'=>'typeahead'])!!}
-                            <div class="controls">
-                                {!! Form::text('back_link','',['class'=>'span10','id'=>'typeahead'])!!}
-                            </div>
-                        </div>
-                        <div class="form-actions">
-                            {!! Form::submit('Save Changes',['class'=>'btn btn-primary','id'=>'userProfileForm'])!!}
-                            {!! Form::reset('Cancel',['class'=>'btn'])!!}
-                        </div>
-                    </fieldset>
+                  <!--  <form action="" method="post" id="register-form" novalidate="novalidate">-->
+
+                            <fieldset>
+                                <div class="control-group fieldgroup">
+                                    <label for="firstname" class="control-label">Title Name</label>
+                                <div class="controls">
+                                    <input type="text" name="image_title" class="span10">
+                                </div>
+                                </div>
+
+                                <div class="control-group fieldgroup">
+                                    <label for="lastname" class="control-label">Image</label>
+                                <div class="controls">
+                                    <input type="file" name="picture" class="span10">
+                                </div>
+                                </div>
+
+                                <div class="control-group fieldgroup">
+                                    <label for="lastname" class="control-label">Back Link</label>
+                                    <div class="controls">
+                                        <input type="text" name="back_link" class="span10">
+                                    </div>
+                                </div>
+                                <div class="form-actions ">
+                                   <!-- <input type="submit" value="Register" class="submit">-->
+                                    {!! Form::submit('Save Changes',['class'=>'btn btn-primary','id'=>'userProfileForm'])!!}
+                                    {!! Form::reset('Cancel',['class'=>'btn'])!!}
+                                </div>
+                            </fieldset>
+                   <!-- </form>-->
                     {!! Form::close()!!}
-
                 </div>
             </div>
             </div>
@@ -71,11 +74,11 @@
                     <tbody>
                     @foreach($slider_show as $value)
                     <tr>
-                        {!! Form::open(['url' =>['slider-slider-update',$value->id],'class'=>'form-horizontal','method'=>'post','enctype' => 'multipart/form-data','files'=>true ]) !!}
+                        {!! Form::open(['url' =>['slider-update',$value->id],'class'=>'form-horizontal','method'=>'post','enctype' => 'multipart/form-data','files'=>true ]) !!}
                         <fieldset>
                             <td>
                                 <img style="width:150px;height:150px; margin: 0px auto" src="Slider_image/{{$value->image}}">
-                                <input type="file" name="picture" value="" class="span4" id="typeahead">
+                                <input type="file" name="picture" value="{{ $value->image }}" class="span4" id="typeahead">
                             </td>
                             <td><input type="text" name="image_title" value="{{ $value->image_title }}" class="span12" id="typeahead"></td>
                             <td><input type="text" name="image_link" value="{{ $value->back_link }}" class="span12" id="typeahead"></td>
@@ -89,38 +92,6 @@
 
                     </tr>
                     @endforeach
-                    <!--- Swite message show  delete by obydul date:28-7-16-->
-                    <script>
-                        $('button.delete-item').click(function() {
-                            var itemId = $(this).attr("data-item-id");
-                            deletePhoto(itemId);
-                        });
-                        function deletePhoto(itemId) {
-                            swal({
-                                title: "Are you sure?",
-                                text: "Are you sure that you want to delete this Item ?",
-                                type: "warning",
-                                showCancelButton: true,
-                                closeOnConfirm: false,
-                                confirmButtonText: "Yes, delete it!",
-                                confirmButtonColor: "#ec6c62"
-                            }, function() {
-                                $.ajax({
-                                    method: "GET",
-                                    url: "/slider-slider-delete/" + itemId,
-                                    type: "DELETE"
-                                })
-                                    .done(function(data) {
-                                        swal("Deleted!", "Your item was successfully deleted!", "success");
-                                    })
-                                    .error(function(data) {
-                                        swal("Oops", "We couldn't connect to the server!", "error");
-                                    });
-                            });
-                        }
-                    </script>
-
-
                     </tbody>
                 </table>
             </div>
@@ -129,28 +100,6 @@
     <!-- /block -->
 </div>
 
-<!---- Flash message --->
 
-<script type="text/javascript">
-
-    $(document).ready(function () {
-        $(".sidebar-panel nav li").removeClass("active");
-        $('#emply').addClass('active');
-    });
-
-
-</script>
-
-<script type="text/javascript">
-
-    $(document).ready(function () {
-        $(".sidebar-panel nav li").removeClass("active");
-        $('#empsalary').addClass('active');
-        // $('.nav li ul ').slideUp();
-        $(".expandsalary").slideDown();
-    });
-
-
-</script>
-
+@include('include.javascript_code')
 @endsection

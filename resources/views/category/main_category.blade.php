@@ -60,9 +60,17 @@
                             <td><a class="btn btn-danger" href="{{ url('category-main-category-delete')}}/{{$value->id}}">Delete</a></td>
                         </tr>
                         @endforeach
+
+
                         </tbody>
+
                     </table>
+                    <ul class="pagination">
+                        <li>{{$main_category->render() }}</li>
+                    </ul>
                 </div>
+
+
             </div>
             <!-- /block -->
         </div>
@@ -156,6 +164,9 @@
                     @endforeach
                     </tbody>
                 </table>
+                <ul class="pagination">
+                    <li>{{$main_category->render() }}</li>
+                 </ul>
             </div>
         </div>
         <!-- /block -->

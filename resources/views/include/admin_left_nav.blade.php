@@ -9,10 +9,10 @@
                     <a href="{{ url('category-create-form')}}"><i class="icon-chevron-right"></i> Category</a>
                 </li>
                 <li>
-                    <a href="{{ url('slider-slider-form')}}"><i class="icon-chevron-right"></i> Slider</a>
+                    <a href="{{ url('slider-form')}}"><i class="icon-chevron-right"></i> Slider</a>
                 </li>
                 <li>
-                    <a href="#"><i class="icon-chevron-right"></i> Tables</a>
+                    <a href="{{ url('news-create')}}"><i class="icon-chevron-right"></i> News</a>
                 </li>
                 <li>
                     <a href="interface.html"><i class="icon-chevron-right"></i> UI & Interface</a>

@@ -13,9 +13,9 @@
                     <fieldset>
                         <legend>Form Components</legend>
                         <div class="control-group">
-                            <label class="control-label" for="typeahead">Text input </label>
+                            <label class="control-label required" for="typeahead">Text input </label>
                             <div class="controls">
-                                <input type="text" class="span6" id="typeahead">
+                                <input type="text" class="span6 required" id="typeahead">
                             </div>
                         </div>
                         <div class="control-group">
@@ -67,7 +67,7 @@
                             </div>
                         </div>
                         <div class="form-actions">
-                            <button type="submit" class="btn btn-primary">Save changes</button>
+                            <button type="submit" name="val_fomr" class="btn btn-primary">Save changes</button>
                             <button type="reset" class="btn">Cancel</button>
                         </div>
                     </fieldset>
@@ -78,5 +78,7 @@
     </div>
     <!-- /block -->
 </div>
+
+
 
 @endsection
