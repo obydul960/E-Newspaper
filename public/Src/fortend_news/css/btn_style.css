@@ -1,0 +1,88 @@
+
+.sharp {
+  border-radius:0;
+}
+
+/***********************
+  CUSTON BTN VALUES
+************************/
+
+.btn-main {
+   padding: 10px 23px;
+    border: 0 none;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+.btn:focus, .btn:active:focus, .btn.active:focus {
+    outline: 1px none;
+}
+
+.btn-primary {
+    background: #ED5F00;
+    color: #ffffff;
+}
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open > .dropdown-toggle.btn-primary {
+    background: #262626;
+}
+/*.btn-primary:active, .btn-primary.active {
+    background: #007299;
+    box-shadow: none;
+}*
+
+/*=========================
+end rectangle btn
+=============================*/
+
+/***************************
+  DEFAULT BOOTSTRAP STYLES
+**************************/
+
+
+.btn-lg {
+  font-size: 18px;
+  line-height: 1.33;
+  border-radius: inherit;
+}
+
+.btn-denger {
+  color: #fff;
+  background-color:#FFCE44;
+  border-color: #357ebd;
+}
+
+.btn-denger:hover,
+.btn-denger:focus,
+.btn-denger:active,
+.btn-denger.active,
+.open .dropdown-toggle.btn-primary {
+  color: #fff;
+  background-color: #FFCE44;
+  border-color: #285e8e;
+}
+
+/***********************
+  RAISED BUTTONS
+************************/
+.btn-denger.raised {
+    box-shadow: 0 3px 0 0 #9d7914;
+}
+.btn-denger.raised:active, .btn-primary.raised.active {
+    background: #9d7914;
+    box-shadow: none;
+    margin-bottom: -3px;
+    margin-top: 3px;
+}
+
+/***********************
+  CUSTON BTN VALUES
+************************/
+
+
+/*hot-deal*/
+.btn-hot-deal{
+   padding: 6px 77px;
+   background-color: #8A2BE2;
+   color: white;
+   margin-bottom: 10px;
+}

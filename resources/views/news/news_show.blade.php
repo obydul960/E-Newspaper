@@ -36,7 +36,7 @@
                         <td>
 
                             <a class="btn btn-success" href="{{ url('news-edit-form')}}/{{$value->id}}">Edit</a>
-                            <a class="btn btn-danger" href="{{ url('news-show-delete')}}/{{$value->id}}">Delete</a>
+                            <button class="news-delete-item btn btn-danger" data-item-id="{{$value->id}}">Delete</button>
                         </td>
                     </tr>
                     @endforeach
@@ -49,4 +49,5 @@
     </div>
     <!-- /block -->
 </div>
+@include('include.javascript_code')
 @endsection

@@ -15,7 +15,7 @@
                     <a href="{{ url('news-create')}}"><i class="icon-chevron-right"></i> News</a>
                 </li>
                 <li>
-                    <a href="interface.html"><i class="icon-chevron-right"></i> UI & Interface</a>
+                    <a href="{{ url('backing-news')}}"><i class="icon-chevron-right"></i> Backing News</a>
                 </li>
                 <li>
                     <a href="#"><span class="badge badge-success pull-right">731</span> Orders</a>

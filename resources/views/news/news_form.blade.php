@@ -16,6 +16,9 @@
                             <label class="control-label" for="typeahead"> Titli </label>
                             <div class="controls">
                                 <input type="text" name="news_title" class="span6" id="typeahead">
+                                @foreach($errors->get('news_title') as $error)
+                                <b><span style="color: red">{{ $error }}</span></b>
+                                @endforeach
                             </div>
                         </div>
                         <div class="control-group">
@@ -45,7 +48,7 @@
                                                     data: {sub_category: category}
                                                 })
                                                     .success(function (response) {
-                                                       // alert(response);
+                                                        //alert(response);
                                                         $('.sub_category').html(response);
                                                     });
 
@@ -71,6 +74,9 @@
                                         </div>
                                         <div class="block-content collapse in">
                                             <textarea name="news_content" id="ckeditor_full"></textarea>
+                                            @foreach($errors->get('news_content') as $error)
+                                            <b><span style="color: red">{{ $error }}</span></b>
+                                            @endforeach
                                         </div>
                                     </div>
                                     <!-- /block -->

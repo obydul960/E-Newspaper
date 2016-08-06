@@ -46,4 +46,15 @@ Route::get('news-show-delete/{id}','NewsController@news_delete');
 Route::get('news-edit-form/{id}','NewsController@edit_news');
 Route::post('news-update/{id}','NewsController@news_update');
 
+Route::get('backing-news','NewsController@backing_news_form');
+Route::post('backing-news-store','NewsController@backing_news_store');
+Route::post('backing-news-update/{id}','NewsController@backing_news_update');
+Route::get('backing-news-delete/{id}','NewsController@backing_news_delete');
+
+
+// fontend layout controll by obydul date:6-8-16
+Route::get('fontend-news','FontendNewsController@view');
+Route::get('fontend-details/{id}','FontendNewsController@fontend_details');
+Route::get('category-details/{id}','FontendNewsController@category_details');
+
 

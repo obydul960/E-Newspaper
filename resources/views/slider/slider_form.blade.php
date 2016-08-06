@@ -21,6 +21,9 @@
                                     <label for="firstname" class="control-label">Title Name</label>
                                 <div class="controls">
                                     <input type="text" name="image_title" class="span10">
+                                    @foreach($errors->get('image_title') as $error)
+                                    <b><span style="color: red">{{ $error }}</span></b>
+                                    @endforeach
                                 </div>
                                 </div>
 
@@ -35,6 +38,9 @@
                                     <label for="lastname" class="control-label">Back Link</label>
                                     <div class="controls">
                                         <input type="text" name="back_link" class="span10">
+                                        @foreach($errors->get('back_link') as $error)
+                                        <b><span style="color: red">{{ $error }}</span></b>
+                                        @endforeach
                                     </div>
                                 </div>
                                 <div class="form-actions ">

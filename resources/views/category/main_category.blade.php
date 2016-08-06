@@ -14,19 +14,18 @@
                         {!! Form::open(['url' => 'category-store','class'=>'form-horizontal' ]) !!}
                         <fieldset>
                             <div class="control-group">
-                                {!! Form::label('Main Category Name','',['class'=>'control-label','for'=>'typeahead'])!!}
+                                {!! Form::label('Main Category Name','',['class'=>'control-label','for'=>'contact_name'])!!}
                                 <div class="controls">
-                                    {!! Form::text('main_category_name','',['class'=>'span12','id'=>'typeahead'])!!}
-
-                                     @foreach($errors->get('main_category_name') as $error)
+                                    {!! Form::text('main_category_name','',['class'=>'span12','id'=>'contact_name'])!!}
+                                    @foreach($errors->get('main_category_name') as $error)
                                     <b><span style="color: red">{{ $error }}</span></b>
                                     @endforeach
 
                                 </div>
                             </div>
                             <div class="form-actions">
-                                {!! Form::submit('Save Changes',['class'=>'btn btn-primary','id'=>'userProfileForm'])!!}
-                                {!! Form::reset('Cancel',['class'=>'btn'])!!}
+                                {!! Form::submit('Save',['class'=>'btn btn-primary','id'=>'userProfileForm'])!!}
+                                {!! Form::reset('Cancel',['class'=>'btn btn-danger'])!!}
                             </div>
                         </fieldset>
                         {!! Form::close()!!}
@@ -57,7 +56,9 @@
                         @foreach($main_category as $value)
                         <tr>
                             <td>{{ $value->category_name}}</td>
-                            <td><a class="btn btn-danger" href="{{ url('category-main-category-delete')}}/{{$value->id}}">Delete</a></td>
+                            <td>
+                                <button class="main-category-delete btn btn-danger" data-item-id="{{$value->id}}">Delete</button>
+                            </td>
                         </tr>
                         @endforeach
 
@@ -95,9 +96,9 @@
                         <div class="control-group">
                             <label class="control-label" for="select01">Select Main Category list</label>
                             <div class="controls">
-                                <select id="select01" name="min_category_id" class="chzn-select">
-
-                                    @foreach($main_category as $value)
+                                <select id="select01" name="min_category_id" class="chzn-select span10">
+                                   <option>Select once..</option>
+                                    @foreach($main_category_show as $value)
                                     <option value="{{$value->id}}">{{$value->category_name}}</option>
                                     @endforeach
                                 </select>
@@ -109,7 +110,7 @@
                         <div class="control-group">
                             {!! Form::label('Sub Category Name','',['class'=>'control-label','for'=>'typeahead'])!!}
                             <div class="controls">
-                                {!! Form::text('sub_category_name','',['class'=>'span12','id'=>'typeahead'])!!}
+                                {!! Form::text('sub_category_name','',['class'=>'span10','id'=>'typeahead'])!!}
 
                                 @foreach($errors->get('sub_category_name') as $error)
                                 <b><span style="color: red">{{ $error }}</span></b>
@@ -117,8 +118,8 @@
                             </div>
                         </div>
                         <div class="form-actions">
-                            {!! Form::submit('Save Changes',['class'=>'btn btn-primary','id'=>'userProfileForm'])!!}
-                            {!! Form::reset('Cancel',['class'=>'btn'])!!}
+                            {!! Form::submit('Save',['class'=>'btn btn-primary','id'=>'userProfileForm'])!!}
+                            {!! Form::reset('Cancel',['class'=>'btn btn-danger'])!!}
                         </div>
                     </fieldset>
                     {!! Form::close()!!}
@@ -158,7 +159,7 @@
                        {!! Form::close() !!}
 
                         <td>
-                            <a class="btn btn-danger" href="{{ url('sub-category-delete')}}/{{$value->id}}">Delete</a>
+                            <button class="sub-category-delete btn btn-danger" data-item-id="{{$value->id}}">Delete</button>
                         </td>
                     </tr>
                     @endforeach
@@ -173,5 +174,5 @@
     </div>
 </div>
 
-
+@include('include.javascript_code')
 @endsection

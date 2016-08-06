@@ -43,7 +43,7 @@ class SliderController extends Controller
             $image_upload->back_link    = $request->get('back_link');
             $image_upload->save();
             Session::flash('success', 'Successfully Data Insert.');
-            return redirect::to('slider-form');
+            return redirect::to('slider-form')->withErrors($validator);
 
         }
     }
