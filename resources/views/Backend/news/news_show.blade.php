@@ -49,5 +49,5 @@
     </div>
     <!-- /block -->
 </div>
-@include('include.javascript_code')
+
 @endsection

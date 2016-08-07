@@ -18,7 +18,7 @@ class SliderController extends Controller
     public function slider_form(){
         //show slider image by obydul date 25-7-16
         $slider_show = SliderModel::all();
-        return view('slider.slider_form',compact('slider_show'));
+        return view('Backend.slider.slider_form',compact('slider_show'));
     }
 
     // Slider image uploading by obydul date 25-7-16

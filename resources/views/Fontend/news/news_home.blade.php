@@ -1,26 +1,6 @@
-@include("include_fontend.fontend_header")
-<body>
+@extends('layouts.fontend_master')
 
-<!--header start-->
-<section class="clearfix">
-    <div class="container">
-        <div  class="container-fulid">
-            <div class="col-md-3 col-sm-3" >
-                <div class="header-logo">
-                    <a href="index.html"><img src="Src/fortend_news/image/logo_header.png" class="img-responsive"></a>
-                </div>
-            </div>
-            <div class="cl-md-9">
-                <div class="header-add-section">
-                    <article class="pull-right">
-                        <!--<img src="image/add/banner_03.jpg" class="img-responsive">-->
-                    </article>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-<!--header end-->
+@section('content')
 
 <!--main menu start-->
 <section id="header" class="hidden-xs m-top menu-box clearfix" >
@@ -65,7 +45,7 @@
                         <strong><a href="{{$value->back_link}}"  target="_blank"><i class="fa fa-location-arrow" aria-hidden="true"></i>{{$value->news_title}}</a></strong>
                         @endforeach
 
-                </marquee>
+                    </marquee>
                 </div>
             </div>
         </div>
@@ -290,14 +270,19 @@
                     <div class="col-md-6 col-sm-12  gird-2 ">
                         <div class="left ">
                             <article class="catagory-section ca-pg-img">
-                                <img src="Src/fortend_news/image/content-image/national-big-2.jpg" class="img-responsive" alt="">
+                                @foreach($national_news as $value)
+                                  @if($img=App\Model\ImageModel::where('news_id','=',$value->news_id)->first())
+                                <img src="{{URL::to('/')}}/image_folder/{{$img->image}}" class="img-responsive" alt="">
+                                @endif
+
                                 <div class="cata-content">
-                                    @foreach($national_news as $value)
+
                                     <h4 class="catagory-title1 cata-content-right h-ca">
                                         <a href="{{ url('fontend-details')}}/{{ $value->main_category}}">{{ $value->news_title}}</a>
                                     </h4>
-                                    @endforeach
+
                                 </div>
+                                  @endforeach
                             </article>
                             <div class="clearfix"></div>
                         </div>
@@ -309,9 +294,11 @@
                                 <li>
                                     <div class="media right-Selected-body" style="margin-top: 10px;">
                                         <div class="media-left">
-                                            <a href="#">
-                                                <img class="media-object" src="image_folder/{{$value->image}}" alt="...">
+                                          @if($img=App\Model\ImageModel::where('news_id','=',$value->news_id)->first())
+                                             <a href="#">
+                                                <img class="media-object" src="{{URL::to('/')}}/image_folder/{{$img->image}}" alt="...">
                                             </a>
+                                              @endif
                                         </div>
                                         <div class="media-body cata-content">
                                             <h4 class="media-heading"><a href="#">{{ $value->news_title}}</a></h4>
@@ -372,7 +359,7 @@
     <div class="container">
         <div class="row">
             <div id="home-middle">
-                @foreach($home_view_category as $value)
+                @foreach($viewHomePage as $value)
                 <div class="col-md-6 col-sm-12 m-top clearfix">
                     <div class="  clearfix mo-en-sp cata-ho bg-shadow">
                         <h3 class="populer-news-text-section" style=" width: 50px;">
@@ -381,15 +368,21 @@
                         <hr class="cata-title-border">
                         <div class="col-md-6 col-sm-12  gird-2 ">
                             <div class="left ">
+
                                 <article class="catagory-section ca-pg-img">
-                                    <img src="Src/fortend_news/image/content-image/Entertainment-1.jpg" class="img-responsive" alt="">
+                                    @foreach($v=App\Model\NewsModel::where('main_category','=',$value->id)->take(1)->orderBy('id','desc')->get() as $a)
+                                    @if($img=App\Model\ImageModel::where('news_id','=',$a->news_id)->first())
+                                    <img src="{{URL::to('/')}}/image_folder/{{$img->image}}" class="img-responsive" alt="">
+                                    @endif
                                     <div class="cata-content">
-                                        @foreach($home_view_category_image as $value)
+
+
                                         <h4 class="catagory-title1 cata-content-right h-ca">
-                                            <a href="#">{!! $value->news_title !!}</a>
+                                            <a href="#">{!! $a->news_title !!}</a>
                                         </h4>
-                                        @endforeach
+
                                     </div>
+                                      @endforeach
                                 </article>
                                 <div class="clearfix"></div>
                             </div>
@@ -397,71 +390,55 @@
                         <div class="col-md-6 col-sm-12  gird-2">
                             <div class="news-wrapper right-content  bg-shadow" style="height: 262px;">
                                 <ul id="international-h">
-                                    <li>
-                                        <div class="media right-Selected-body">
+                                  @foreach($v=App\Model\NewsModel::where('main_category','=',$value->id)->orderBy('id','desc')->get() as $a)
+
+                                   <li>
+                                          <div class="media right-Selected-body">
                                             <div class="media-left">
-                                                <a href="#">
-                                                    <img class="media-object" src="image_folder/{{$value->image}}" alt="...">
-                                                </a>
+
+                                                    @if($img=App\Model\ImageModel::where('news_id','=',$a->news_id)->first())
+                                                        <a href="#">
+                                                    <img class="media-object" src="{{URL::to('/')}}/image_folder/{{$img->image}}" alt="...">
+                                                         </a>
+                                                     @endif
                                             </div>
                                             <div class="media-body cata-content">
-                                                <h4 class="media-heading"><a href="#">{{$value->news_title}}</a></h4>
-
+                                                <h4 class="media-heading"><a href="#">{{$a->news_title}}</a></h4>
                                             </div>
                                         </div>
                                     </li>
-                                    <li>
-
-                                        <div class="media right-Selected-body">
-                                            <div class="media-left">
-                                                <a href="#">
-                                                    <img class="media-object" src="image_folder/{{$value->image}}" alt="...">
-                                                </a>
-                                            </div>
-                                            <div class="media-body cata-content cata-content-right">
-                                                <h4 class="media-heading cata-list-right" ><a href="#">{{$value->news_title}}</a></h4>
-
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li>
-
-                                        <div class="media right-Selected-body">
-                                            <div class="media-left">
-                                                <a href="#">
-                                                    <img class="media-object" src="image_folder/{{$value->image}}" alt="...">
-                                                </a>
-                                            </div>
-                                            <div class="media-body cata-content">
-                                                <h4 class="media-heading"><a href="#">{{$value->news_title}}</a></h4>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li>
-
-                                        <div class="media right-Selected-body">
-                                            <div class="media-left">
-                                                <a href="#">
-                                                    <img class="media-object" src="image_folder/{{$value->image}}" alt="...">
-                                                </a>
-                                            </div>
-                                            <div class="media-body cata-content">
-                                                <h4 class="media-heading"><a href="#">{{$value->news_title}}</a></h4>
-                                            </div>
-                                        </div>
-                                    </li>
-
+                                   @endforeach
                                 </ul>
                             </div>
                             <div id="news-navigation">
-                                <a href="#" id="news-next-international" class="bg-shadow"><i class="fa fa-chevron-up"></i></a>
+                               <a href="#" id="news-next-international" class="bg-shadow"><i class="fa fa-chevron-up"></i></a>
                                 <a href="#" id="news-prev-international" class="bg-shadow"><i class="fa fa-chevron-down"></i></a>
-                            </div>
+                                 </div>
                         </div>
                         <!--end international-->
                     </div>
                 </div>
+<!-- <script type="text/javascript">
 
+    $internationalh = $('#international-h').bxSlider({
+        auto: false,
+        mode: 'vertical',
+        maxSlides: 5,
+        minSlides:2,
+        pager: false,
+        slideMargin: 10,
+        controls:false
+
+    });
+$('#news-next-international').click(function (e) {
+    e.preventDefault();
+    $nationalh.goToNextSlide();
+});
+$('#news-prev-international').click(function (e) {
+    e.preventDefault();
+    $nationalh.goToPrevSlide();
+});
+</script> -->
                 @endforeach
 
 
@@ -470,9 +447,4 @@
         </div>
     </div>
 </section>
-
-<!--end international+sport-->
-<!--start entertainment+carrier-->
-
-
-@include("include_fontend.fontend_footer")
+@endsection

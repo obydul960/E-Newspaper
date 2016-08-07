@@ -53,6 +53,12 @@ Route::get('backing-news-delete/{id}','NewsController@backing_news_delete');
 
 
 // fontend layout controll by obydul date:6-8-16
+
+
 Route::get('/','FontendNewsController@view');
 Route::get('fontend-details/{id}','FontendNewsController@fontend_details');
 Route::get('category-details/{id}','FontendNewsController@category_details');
+
+
+// Add controll by obydul date:7-8-16
+Route::get('add-form','AddController@create');
