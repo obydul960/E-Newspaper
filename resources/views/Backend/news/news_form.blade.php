@@ -65,6 +65,16 @@
                             </div>
                         </div>
                         <div class="control-group">
+                            <label class="control-label" for="fileInput">Selected News ?</label>
+                            <div class="controls">
+                                <select name="news_selected">
+                                    <option>Select</option>
+                                    <option value="1">Yes</option>
+                                    <option value="0">No</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="control-group">
                             <div class="span12" id="content">
                                 <div class="row-fluid">
                                     <!-- block -->

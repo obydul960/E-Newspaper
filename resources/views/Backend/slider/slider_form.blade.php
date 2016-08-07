@@ -93,7 +93,8 @@
                         </fieldset>
                         {!! Form::close() !!}
                         <td>
-                            <button class="delete-item btn btn-danger" data-item-id="{{$value->id}}">Delete</button>
+                            <button class=" btn btn-danger slider-delete" data-item-id="{{$value->id}}">Delete</button>
+
                         </td>
 
                     </tr>

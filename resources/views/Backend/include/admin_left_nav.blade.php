@@ -21,7 +21,7 @@
                     <a href="{{ url('news-show')}}"><i class="icon-chevron-right"></i>News Show</a>
                 </li>
                 <li>
-                    <a href="#"><span class="badge badge-success pull-right">731</span> Orders</a>
+                    <a href="{{ url('add-create-form')}}"><i class="icon-chevron-right"></i>Ad</a>
                 </li>
                 <li>
                     <a href="#"><span class="badge badge-success pull-right">812</span> Invoices</a>

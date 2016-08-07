@@ -65,6 +65,24 @@ class CategoryController extends Controller
 
         return view('Backend.category.main_category',compact('main_category','sub_category','main_category_show'));
     }
+ // main category show home page by obydul date:7-8-16
+    public function  home_show_store(Request $request,$id){
+        $data =  CategoryModel::find($id);
+        $data->status  = $request->get('main_category_show');
+        $data->save();
+        Session::flash('success', 'Successfully Data Insert.');
+        return redirect::to('category-create-form');
+    }
+    // main category up and down home page by obydul date:7-8-16
+    public function  up_down_store(Request $request,$id){
+        $data =  CategoryModel::find($id);
+        $data->view_status = $request->get('up_down');
+        $data->save();
+        Session::flash('success', 'Successfully Data Insert.');
+        return redirect::to('category-create-form');
+    }
+
+
 
 
     //sub category update by obydul date 24-7-16

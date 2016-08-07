@@ -49,6 +49,8 @@
                         <thead>
                         <tr>
                             <th>Main Category Name</th>
+                            <th>Home page view</th>
+                            <th>Up & Down</th>
                             <th>Action</th>
                         </tr>
                         </thead>
@@ -56,6 +58,38 @@
                         @foreach($main_category as $value)
                         <tr>
                             <td>{{ $value->category_name}}</td>
+                            <td>
+                                {!!Form::open(['url'=>['home-store',$value->id],'class'=>'form-horizontal'])!!}
+                                <select name="main_category_show" onchange='this.form.submit()' style="width: 100%">
+                                    <option selected>
+                                        @if($value->status == 1)
+                                         Yes
+                                        @endif
+                                        @if($value->status == 0)
+                                         No
+                                        @endif
+                                    </option>
+                                    <option value="1">Yes</option>
+                                    <option value="0">No</option>
+                                </select>
+                                {!!Form::close()!!}
+                            </td>
+                            <td>
+                                {!!Form::open(['url'=>['up-down-store',$value->id],'class'=>'form-horizontal'])!!}
+                                <select name="up_down" onchange='this.form.submit()' style="width: 100%">
+                                    <option selected>
+                                        @if($value->view_status == 1)
+                                        Up
+                                        @endif
+                                        @if($value->view_status == 0)
+                                        Down
+                                        @endif
+                                    </option>
+                                    <option value="1">Yes</option>
+                                    <option value="0">No</option>
+                                </select>
+                                {!!Form::close()!!}
+                            </td>
                             <td>
                                 <button class="main-category-delete btn btn-danger" data-item-id="{{$value->id}}">Delete</button>
                             </td>

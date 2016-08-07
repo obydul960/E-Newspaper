@@ -1,10 +1,10 @@
 <!--- Swite message show  delete form slider image by obydul date:28-7-16-->
 <script>
-    $('button.delete-item').click(function() {
+    $('button.slider-delete').click(function() {
         var itemId = $(this).attr("data-item-id");
         deletePhoto(itemId);
     });
-    function deletePhoto(itemId) {
+    function deleteslider(itemId) {
         swal({
             title: "Are you sure?",
             text: "Are you sure that you want to delete this Item ?",

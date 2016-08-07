@@ -25,6 +25,8 @@ Route::get('/home', 'HomeController@index');
 Route::get('category-create-form','CategoryController@Main_cat_show');
 Route::post('category-store','CategoryController@store');
 Route::get('category-main-category-delete/{id}','CategoryController@delete');
+Route::post('home-store/{id}','CategoryController@home_show_store');
+Route::post('up-down-store/{id}','CategoryController@up_down_store');
 
 // Sub category add by obydul date 24-7-16
 Route::post('sub-category-store','CategoryController@sub_cat_store');
@@ -60,6 +62,7 @@ Route::get('category-details/{id}','FontendNewsController@category_details');
 
 
 // Add controll by obydul date:7-8-16
-Route::get('add-form','AddController@create');
+Route::get('add-create-form','AddController@create');
+Route::post('add-store','AddController@add_store');
 
 

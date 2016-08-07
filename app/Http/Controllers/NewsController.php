@@ -63,6 +63,7 @@ class NewsController extends Controller
             $news_content->main_category = $request->get('sel_min_category');
             $news_content->sub_category  = $request->get('sel_sub_category');
             $news_content->news_title    = $request->get('news_title');
+            $news_content->selected_news = $request->get('news_selected');
             $news_content->short_details = $short_details;
             $news_content->full_details  = $request->get('news_content');
             $news_content->save();
