@@ -10,9 +10,9 @@
 | and give it the controller to call when that URI is requested.
 |
 */
-Route::get('/', function () {
-    return view('common_folder.editor');
-});
+// Route::get('/', function () {
+//     return view('common_folder.editor');
+// });
 
 
 
@@ -53,8 +53,6 @@ Route::get('backing-news-delete/{id}','NewsController@backing_news_delete');
 
 
 // fontend layout controll by obydul date:6-8-16
-Route::get('fontend-news','FontendNewsController@view');
+Route::get('/','FontendNewsController@view');
 Route::get('fontend-details/{id}','FontendNewsController@fontend_details');
 Route::get('category-details/{id}','FontendNewsController@category_details');
-
-

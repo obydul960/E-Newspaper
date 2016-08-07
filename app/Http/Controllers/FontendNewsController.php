@@ -16,6 +16,8 @@ class FontendNewsController extends Controller
     public function view(){
         $main_category_up   = CategoryModel::where('status','=',1)->get();
         $main_category_down = CategoryModel::where('status','=',2)->get();
+        $viewHomePage=CategoryModel::where('view_status','=',1)->get();
+      //  dd($viewHomePage);
         $backing_news       = BackingNewsModel::all();
         $national_news      = NewsModel::where('main_category','=',6)->orderBy('id','desc')->take(1)->get();
         $national_news_2nd = DB::table('news_table')
@@ -38,7 +40,8 @@ class FontendNewsController extends Controller
             ->select('news_table.id','news_table.news_title','news_table.short_details','main_category.category_name' ,'image_table.image')
             ->orderBy('id', 'desc')->take(1)->get();
 
-        return view('frontend_news.fontend_layout',compact('main_category_up','main_category_down','backing_news','national_news','national_news_2nd','job_query','home_view_category','home_view_category_image'));
+        return view('frontend_news.fontend_layout',compact('main_category_up','main_category_down','backing_news','national_news',
+        'national_news_2nd','job_query','home_view_category','home_view_category_image','viewHomePage'));
     }
 
     // Fontant Details news show by obydul date: 6-8-16
