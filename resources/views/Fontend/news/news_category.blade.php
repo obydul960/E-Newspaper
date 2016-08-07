@@ -1,26 +1,6 @@
-@include("include_fontend.fontend_header")
-<body>
+@extends('layouts.fontend_master')
 
-<!--header start-->
-<section class="clearfix">
-    <div class="container">
-        <div  class="container-fulid">
-            <div class="col-md-3 col-sm-3" >
-                <div class="header-logo">
-                    <a href="index.html"><img src="image/logo_header.png" class="img-responsive"></a>
-                </div>
-            </div>
-            <div class="cl-md-9">
-                <div class="header-add-section">
-                    <article class="pull-right">
-                        <!--<img src="image/add/banner_03.jpg" class="img-responsive">-->
-                    </article>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-<!--header end-->
+@section('content')
 
 <!--main menu start-->
 <section id="header" class="hidden-xs m-top menu-box clearfix" >
@@ -248,7 +228,7 @@
                         <!--end international-->
                     </div>
                 </div>
-            @endforeach
+                @endforeach
 
                 <!--end sport-->
             </div>
@@ -256,8 +236,5 @@
     </div>
 </section>
 <!--end international+sport-->
-<!--start entertainment+carrier-->
 
-
-
-@include("include_fontend.fontend_footer")
+@endsection

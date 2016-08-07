@@ -41,3 +41,25 @@
     <!--responsive CSS-->
     <link href="{{URL::to('/')}}/Src/fortend_news/css/responsive.css" rel="stylesheet">
 </head>
+<body>
+
+<!--header start-->
+<section class="clearfix">
+    <div class="container">
+        <div  class="container-fulid">
+            <div class="col-md-3 col-sm-3" >
+                <div class="header-logo">
+                    <a href="{{URL::to('/')}}"><img src="{{URL::to('/')}}/Src/fortend_news/image/logo_header.png" class="img-responsive"></a>
+                </div>
+            </div>
+            <div class="cl-md-9">
+                <div class="header-add-section">
+                    <article class="pull-right">
+                        <!--<img src="image/add/banner_03.jpg" class="img-responsive">-->
+                    </article>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--header end-->

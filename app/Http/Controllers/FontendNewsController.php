@@ -12,6 +12,10 @@ use DB;
 
 class FontendNewsController extends Controller
 {
+
+    public function create(){
+        return view('layouts.fontend_master');
+    }
     //foneted news form show by obydul date:4-8-16
     public function view(){
         $main_category_up   = CategoryModel::where('status','=',1)->get();
@@ -26,19 +30,19 @@ class FontendNewsController extends Controller
 
         $home_view_category = DB::table('news_table')
             ->join('main_category', 'news_table.main_category', '=', 'main_category.id')
-            ->select('news_table.id','news_table.news_title','news_table.short_details','main_category.category_name')
+            ->select('main_category.id','news_table.news_title','news_table.short_details','main_category.category_name')
             ->orderBy('id', 'asc')
             ->take(4)
             ->groupBy('main_category')
             ->get();
        // dd($home_view_category);
         $home_view_category_image = DB::table('news_table')
-            ->join('main_category', 'news_table.main_category', '=', 'main_category.id')
+            ->where('news_table.main_category','=',6)
             ->join('image_table', 'news_table.news_id', '=', 'image_table.news_id')
-            ->select('news_table.id','news_table.news_title','news_table.short_details','main_category.category_name' ,'image_table.image')
-            ->orderBy('id', 'desc')->take(1)->get();
-
-        return view('frontend_news.fontend_layout',compact('main_category_up','main_category_down','backing_news','national_news','national_news_2nd','job_query','home_view_category','home_view_category_image'));
+            ->select('news_table.id','news_table.news_title','news_table.short_details','image_table.image')
+            ->orderBy('id', 'desc')->get();
+    // dd($home_view_category_image);
+        return view('Fontend.news.news_home',compact('main_category_up','main_category_down','backing_news','national_news','national_news_2nd','job_query','home_view_category','home_view_category_image'));
     }
 
     // Fontant Details news show by obydul date: 6-8-16
@@ -49,7 +53,7 @@ class FontendNewsController extends Controller
             ->join('image_table', 'news_table.news_id', '=', 'image_table.news_id')
             ->select('news_table.id','news_table.news_title','news_table.short_details','news_table.full_details','image_table.image')
             ->first();
-        return view('frontend_news.fontend_details',compact('main_category','news_details'));
+        return view('Fontend.news.news_details',compact('main_category','news_details'));
     }
 
     public function category_details($id){
@@ -80,7 +84,7 @@ class FontendNewsController extends Controller
             ->where('news_table.main_category',$id)
             ->get();
        // dd($sub_category_news_details);
-       return view('frontend_news.category_details',compact('category','category_news_details','sub_category','sub_category_news_details'));
+       return view('Fontend.news.news_category',compact('category','category_news_details','sub_category','sub_category_news_details'));
     }
 
     //end class

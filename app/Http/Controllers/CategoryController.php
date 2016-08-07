@@ -63,7 +63,7 @@ class CategoryController extends Controller
             ->select('sub_category.id','sub_category.sub_cat_name', 'main_category.category_name')
             ->orderBy('id', 'desc')->paginate(3);
 
-        return view('category.main_category',compact('main_category','sub_category','main_category_show'));
+        return view('Backend.category.main_category',compact('main_category','sub_category','main_category_show'));
     }
 
 

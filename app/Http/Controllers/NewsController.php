@@ -22,7 +22,7 @@ class NewsController extends Controller
     public  function create(){
         // category show by obydul date:1-8-16
         $min_category_show =CategoryModel::all();
-        return view('news.news_form',compact('min_category_show'));
+        return view('Backend.news.news_form',compact('min_category_show'));
     }
 
     // sub category show category wish form show by obydul date:1-8-16
@@ -89,7 +89,7 @@ class NewsController extends Controller
             ->join('image_table', 'news_table.news_id', '=', 'image_table.news_id')
             ->select('news_table.id','news_table.news_title','news_table.short_details','image_table.image')
             ->orderBy('id', 'desc')->get();
-        return view('news.news_show',compact('show_news'));
+        return view('Backend.news.news_show',compact('show_news'));
     }
 
     // news edit form show by obydul date:2-8-16
@@ -103,7 +103,7 @@ class NewsController extends Controller
                 'news_table.short_details','news_table.full_details','main_category.category_name','sub_category.sub_cat_name','image_table.image')
             ->where('news_table.id','=',$id)
             ->first($id);
-        return view('news.edit_news',compact('category_show','show_news_data'));
+        return view('Backend.news.edit_news',compact('category_show','show_news_data'));
     }
 
     // news update by obydul date:2-8-16
@@ -125,17 +125,13 @@ class NewsController extends Controller
 
     }
 
-    //news delete obydul date:2-8-16
-    public  function  news_delete($id){
-        $news_delete=NewsModel::find($id)->delete();
-        return redirect::to('news-show');
-    }
+
  // backing New form show by obydul date:3-8-16
     public function  backing_news_form(){
         $backing_new=DB::table('breaking_news')->orderBy('id', 'desc')->get();
         //dd($backing_new);
         //$backing_new=BackingNewsModel::all()->orderBy('id', 'desc');
-        return view('news.backing_news',compact('backing_new'));
+        return view('Backend.news.backing_news',compact('backing_new'));
     }
     // Backing News store by obydul date:3-8-16
     public function backing_news_store(Request $request){
@@ -210,6 +206,11 @@ class NewsController extends Controller
         Session::flash('success', 'Successfully Data Update...');
         return redirect::to('backing-news');
 
+    }
+    //news delete obydul date:2-8-16
+    public  function  news_delete($id){
+        $news_delete=NewsModel::find($id)->delete();
+        return redirect::to('news-show');
     }
 
     //backing news delete by obydul date:3-8-16

@@ -1,26 +1,6 @@
-@include("include_fontend.fontend_header")
-<body>
+@extends('layouts.fontend_master')
 
-<!--header start-->
-<section class="clearfix">
-    <div class="container">
-        <div  class="container-fulid">
-            <div class="col-md-3 col-sm-3" >
-                <div class="header-logo">
-                    <a href="index.html"><img src="Src/fortend_news/image/logo_header.png" class="img-responsive"></a>
-                </div>
-            </div>
-            <div class="cl-md-9">
-                <div class="header-add-section">
-                    <article class="pull-right">
-                        <!--<img src="image/add/banner_03.jpg" class="img-responsive">-->
-                    </article>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-<!--header end-->
+@section('content')
 
 <!--main menu start-->
 <section id="header" class="hidden-xs m-top menu-box clearfix" >
@@ -65,7 +45,7 @@
                         <strong><a href="{{$value->back_link}}"  target="_blank"><i class="fa fa-location-arrow" aria-hidden="true"></i>{{$value->news_title}}</a></strong>
                         @endforeach
 
-                </marquee>
+                    </marquee>
                 </div>
             </div>
         </div>
@@ -376,7 +356,7 @@
                 <div class="col-md-6 col-sm-12 m-top clearfix">
                     <div class="  clearfix mo-en-sp cata-ho bg-shadow">
                         <h3 class="populer-news-text-section" style=" width: 50px;">
-                            <a href="#" title="Game News"><span>{{$value->category_name}}</span></a>
+                            <a href="#" title="Game News"><span>{{$value->category_name}}/{{$value->id}}</span></a>
                         </h3>
                         <hr class="cata-title-border">
                         <div class="col-md-6 col-sm-12  gird-2 ">
@@ -384,7 +364,8 @@
                                 <article class="catagory-section ca-pg-img">
                                     <img src="Src/fortend_news/image/content-image/Entertainment-1.jpg" class="img-responsive" alt="">
                                     <div class="cata-content">
-                                        @foreach($home_view_category_image as $value)
+                                        @foreach(App\Model\NewsModel::all() as $value)
+
                                         <h4 class="catagory-title1 cata-content-right h-ca">
                                             <a href="#">{!! $value->news_title !!}</a>
                                         </h4>
@@ -470,9 +451,4 @@
         </div>
     </div>
 </section>
-
-<!--end international+sport-->
-<!--start entertainment+carrier-->
-
-
-@include("include_fontend.fontend_footer")
+@endsection

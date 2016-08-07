@@ -1,5 +1,5 @@
-@include("include.admin_header")
-@include("include.admin_left_nav")
+@include("Backend.include.admin_header")
+@include("Backend.include.admin_left_nav")
 
 
 <div class="row-fluid">
@@ -9,4 +9,5 @@
 </div>
 
 
-@include("include.admin_footer")
+@include("Backend.include.admin_footer")
+@include('Backend.include.javascript_code')
