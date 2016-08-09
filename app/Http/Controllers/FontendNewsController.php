@@ -8,24 +8,43 @@ use App\Http\Requests;
 use App\Model\CategoryModel;
 use App\Model\BackingNewsModel;
 use App\Model\NewsModel;
+use App\Model\SliderModel;
+use App\Model\SubCategoryModel;
+use App\Model\AddModel;
 use DB;
+use Auth;
+use Increment;
 
 class FontendNewsController extends Controller
 {
 
     public function create(){
-        return view('layouts.fontend_master');
+        return view('Fontend.news.news_home');
     }
     //foneted news form show by obydul date:4-8-16
-    public function view(){
-        $main_category_up   = CategoryModel::where('status','=',1)->get();
-        $main_category_down = CategoryModel::where('status','=',2)->get();
-        $backing_news       = BackingNewsModel::all();
+    public function news_home(){
+        $slider_image = SliderModel::where('status','=',1)->orderBy('id','desc')->take(3)->get();
+        $selected_news = NewsModel::where('selected_news','=',1)->orderBy('id','desc')->get();
+        $selected_add = AddModel::where('status','=',1)->where('position','=',1)->orderBy('id','desc')->take(1)->get();
+        $selected_add_two = AddModel::where('status','=',1)->where('position','=',2)->orderBy('id','desc')->take(1)->get();
+        $viewHomePage=CategoryModel::where('view_status','=',1)->get();
+        $hid_news = NewsModel::where('hite_count','>=',1)->get();
+       // dd($hid_news);
+
+
+
+
+
         $national_news      = NewsModel::where('main_category','=',6)->orderBy('id','desc')->take(1)->get();
-        $national_news_2nd = DB::table('news_table')
-            ->join('image_table', 'news_table.news_id', '=', 'image_table.news_id')
-            ->select('news_table.id','news_table.news_title', 'image_table.image')
-            ->orderBy('id', 'desc')->get();
+
+        $national_news_2nd = NewsModel::where('main_category','=',6)->orderBy('id','desc')->get();
+
+      //  $national_news_2nd = DB::table('news_table')
+      //           ->join('image_table', 'news_table.news_id', '=', 'image_table.news_id')
+      //           ->select('news_table.id','news_table.news_title', 'image_table.image')
+      //           ->orderBy('id', 'desc')->get();
+
+
         $job_query      = NewsModel::where('main_category','=',10)->orderBy('id','desc')->get();
 
         $home_view_category = DB::table('news_table')
@@ -42,49 +61,55 @@ class FontendNewsController extends Controller
             ->select('news_table.id','news_table.news_title','news_table.short_details','image_table.image')
             ->orderBy('id', 'desc')->get();
     // dd($home_view_category_image);
-        return view('Fontend.news.news_home',compact('main_category_up','main_category_down','backing_news','national_news','national_news_2nd','job_query','home_view_category','home_view_category_image'));
+        return view('Fontend.news.news_home',compact('national_news','national_news_2nd',
+        'job_query','home_view_category','home_view_category_image','viewHomePage','slider_image','selected_news','selected_add','selected_add_two','hid_news'));
     }
 
-    // Fontant Details news show by obydul date: 6-8-16
-    public function fontend_details($id){
-        $main_category = DB::table('main_category')->where('id',$id)->first();
-        $news_details  = DB::table('news_table')
-            ->where('news_table.main_category',$id)
-            ->join('image_table', 'news_table.news_id', '=', 'image_table.news_id')
-            ->select('news_table.id','news_table.news_title','news_table.short_details','news_table.full_details','image_table.image')
+
+    //News details by obydul date:8-8-16
+    public function news_details($id){
+
+        //$new = DB::table('news_table')->where('news_id',$id)->increment('hite_count');
+       $new = DB::table('news_table')->where('news_id',$id)->first()->hite_count;
+       // return $id;
+        $final=$new+=1;
+        $postd=DB::table('news_table')->where('news_id',$id)->update(['hite_count'=>$final]);
+       // dd($final);
+
+
+        $main_category = DB::table('news_table')
+            ->join('main_category', 'news_table.main_category', '=', 'main_category.id')
+            ->select('main_category.category_name')
+            ->where('news_table.news_id','=',$id)
             ->first();
-        return view('Fontend.news.news_details',compact('main_category','news_details'));
+        $news_details = DB::table('news_table')
+            ->join('image_table', 'news_table.news_id', '=', 'image_table.news_id')
+            ->select('*')
+            ->where('news_table.news_id','=',$id)
+            ->first();
+        $related_news = NewsModel::orderBy('id','desc')->get();
+        $selected_add = AddModel::where('status','=',1)->where('position','=',1)->orderBy('id','desc')->take(1)->get();
+        $selected_add_two = AddModel::where('status','=',1)->where('position','=',2)->orderBy('id','desc')->take(1)->get();
+        return view('Fontend.news.news_details',compact('main_category','news_details','related_news','selected_add','selected_add_two'));
     }
 
-    public function category_details($id){
-        $category = DB::table('main_category')->where('id',$id)->first();
-        $category_news_details  = DB::table('news_table')
-            ->where('news_table.main_category',$id)
-            ->join('image_table', 'news_table.news_id', '=', 'image_table.news_id')
-            ->select('news_table.id','news_table.news_title','news_table.short_details','news_table.full_details','image_table.image')
-            ->orderBy('id', 'desc')
-            ->take(2)
-            ->get();
-        $sub_category = DB::table('sub_category')->where('main_cat_id',$id)->get();
 
-        $sub_category_news_details  = DB::table('news_table')
-            ->leftJoin('sub_category', 'news_table.sub_category', '=', 'sub_category.id')
-            ->leftJoin('image_table', 'news_table.news_id', '=', 'image_table.news_id')
+    // Category waish news details by obydul date:8-8-16
+    public function category_news_details($id){
+
+        $category = DB::table('news_table')
+            ->join('main_category', 'news_table.main_category', '=', 'main_category.id')
             ->select('*')
-            //->select('sub_category.sub_cat_name','sub_category.id','news_table.id','news_table.main_category','news_table.sub_category','news_table.news_title','news_table.short_details','news_table.full_details','image_table.image')
-            ->where('news_table.main_category',$id)
-            //->orderBy('id', 'desc')
-           // ->take(4)
+            ->where('news_table.main_category','=',$id)
             ->get();
-       // dd($sub_category_news_details);
-        $sub_category_news  = DB::table('news_table')
-            ->leftJoin('sub_category', 'news_table.sub_category', '=', 'sub_category.id')
-            ->leftJoin('image_table', 'news_table.news_id', '=', 'image_table.news_id')
-            ->select('sub_category.sub_cat_name','news_table.id','news_table.sub_category','news_table.news_title','news_table.short_details','news_table.full_details','image_table.image')
-            ->where('news_table.main_category',$id)
-            ->get();
-       // dd($sub_category_news_details);
-       return view('Fontend.news.news_category',compact('category','category_news_details','sub_category','sub_category_news_details'));
+       // dd($category);
+
+        $viewSubcategory=SubCategoryModel::where('main_cat_id','=',$id)->where('status','=',1)->get();
+        $rlative_id = NewsModel::orderBy('id','desc')->get();
+
+        //dd($viewSubcategory);
+        return view('Fontend.news.news_category',compact('category','viewSubcategory','rlative_id','id'));
+
     }
 
     //end class

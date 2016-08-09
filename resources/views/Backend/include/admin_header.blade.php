@@ -9,7 +9,7 @@
     <link href="{{URL::to('/')}}/Src/vendors/easypiechart/jquery.easy-pie-chart.css" rel="stylesheet" media="screen">
     <link href="{{URL::to('/')}}/Src/css/toastr.min.css" rel="stylesheet" media="screen">
     <!--- Sweet Alert message --->
-    <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+    <script src="{{URL::to('/')}}/Src/js/jquery-2.1.3.min.js"></script>
     <script src="{{URL::to('/')}}/Src/dist/sweetalert.min.js"></script>
     <link rel="stylesheet" type="text/css" href="{{URL::to('/')}}/Src/dist/sweetalert.css">
     <!-- Jquery form validation -->

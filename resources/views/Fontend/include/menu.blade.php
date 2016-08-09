@@ -1,4 +1,3 @@
-@include('Fontend.include.header')
 
 <!--main menu start-->
 <section id="header" class="hidden-xs m-top menu-box clearfix" >
@@ -7,8 +6,8 @@
             <div class=" main-menu2  ">
                 <div class="col-md-12 col-sm-12 " >
                     <ul id="menu-li">
-                        <li><a href="{{URL::to('/')}}"> হোম</a></li>
-                        @foreach($v=App\Model\CategoryModel::where('status','=',1)->get() as $value)
+                        <li><a href="index.html"> হোম</a></li>
+                        @foreach($main_category_up as $value)
                         <li><a href="{{URL::to('/')}}/category-news-details/{{$value->id}}">{{$value->category_name}}</a> </li>
                         @endforeach
                     </ul>
@@ -22,8 +21,8 @@
             <div class=" main-menu2  ">
                 <div class="col-md-12 col-sm-12 " >
                     <ul id="menu-li">
-                        @foreach($v=App\Model\CategoryModel::where('status','=',2)->get() as $value)
-                        <li><a href="{{URL::to('/')}}/category-news-details/{{$value->id}}">{{$value->category_name}}</a></li>
+                        @foreach($main_category_down as $value)
+                        <li><a href="{{URL::to('/')}}/manueDetails/{{$value->id}}">{{$value->category_name}}</a></li>
                         @endforeach
                     </ul>
                 </div>
@@ -39,8 +38,7 @@
             <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="br-news-text">
                     <marquee direction="left" height="322" behavior="scroll" direction="left" onmouseover="this.stop();" onmouseout="this.start();">
-                        @foreach($v=App\Model\BackingNewsModel::where('status','=',1)->get() as $value)
-
+                        @foreach($backing_news as $value)
                         <strong><a href="{{$value->back_link}}"  target="_blank"><i class="fa fa-location-arrow" aria-hidden="true"></i>{{$value->news_title}}</a></strong>
                         @endforeach
 
@@ -59,16 +57,10 @@
         <div class=" ">
             <ul class="menuzord-menu border-tb hidden-xs " id="menu-list5">
                 <li><a href="index.php" class="current">  হোম</a></li>
-                @foreach($v=App\Model\CategoryModel::where('status','=',2)->get() as $value)
+                @foreach($main_category_down as $value)
                 <li><a href="{{URL::to('/')}}/category-details/{{$value->id}}">{{$value->category_name}} </a></li>
                 @endforeach
             </ul>
         </div>
     </div>
 </section>
-<!--main menu start-->
-@yield('content')
-
-<!--end international+sport-->
-<!--start entertainment+carrier-->
-@include('Fontend.include.footer')

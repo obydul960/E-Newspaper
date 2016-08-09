@@ -67,11 +67,7 @@
                         <div class="control-group">
                             <label class="control-label" for="fileInput">Selected News ?</label>
                             <div class="controls">
-                                <select name="news_selected">
-                                    <option>Select</option>
-                                    <option value="1">Yes</option>
-                                    <option value="0">No</option>
-                                </select>
+                                Yes <input type="checkbox" name="news_selected" value="1">
                             </div>
                         </div>
                         <div class="control-group">

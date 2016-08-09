@@ -74,7 +74,8 @@
                         <th>Title</th>
                         <th>Link</th>
                         <th>Action</th>
-                        <th></th>
+                        <th>.</th>
+                        <th>status</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -88,19 +89,37 @@
                             </td>
                             <td><input type="text" name="image_title" value="{{ $value->image_title }}" class="span12" id="typeahead"></td>
                             <td><input type="text" name="image_link" value="{{ $value->back_link }}" class="span12" id="typeahead"></td>
-
                             <td> <input type="submit"  value="Update" class="btn btn-success" data-photo-id="{{$value->id}}"></td>
                         </fieldset>
                         {!! Form::close() !!}
+
                         <td>
                             <button class=" btn btn-danger slider-delete" data-item-id="{{$value->id}}">Delete</button>
 
                         </td>
-
+                        <td>
+                            {!!Form::open(['url'=>['slider-show-store',$value->id],'class'=>'form-horizontal'])!!}
+                            <select name="slider_store" onchange='this.form.submit()' style="width: 100%" class="span12">
+                                <option selected>
+                                    @if($value->status == 1)
+                                    Yes
+                                    @endif
+                                    @if($value->status == 0)
+                                    No
+                                    @endif
+                                </option>
+                                <option value="1">Yes</option>
+                                <option value="0">No</option>
+                            </select>
+                            {!!Form::close()!!}
+                        </td>
                     </tr>
                     @endforeach
                     </tbody>
                 </table>
+                <ul class="pagination" style="float: left;text-decoration: none">
+                    <li>{{$slider_show->render() }}</li>
+                </ul>
             </div>
         </div>
     </div>

@@ -46,7 +46,7 @@ class NewsController extends Controller
         $validator = Validator::make($request->all(),[
             'news_title'       => 'required',
             'sel_min_category' => 'required',
-            'sel_sub_category' => 'required',
+            //'sel_sub_category' => 'required',
             'news_image'       => 'required | mimes:jpeg,jpg,png',
             'news_content'     => 'required'
         ]);
@@ -219,6 +219,14 @@ class NewsController extends Controller
         $backing_news_delete=BackingNewsModel::find($id)->delete();
         return redirect::to('backing-news');
 
+    }
+    // backing news controll by obydul date:8-8-16
+    public function  backing_news_show(Request $request,$id){
+        $data =  BackingNewsModel::find($id);
+        $data->status = $request->get('backing_news');
+        $data->save();
+        Session::flash('success', 'Successfully  Insert.');
+        return redirect::to('backing-news');
     }
 //end class
 }

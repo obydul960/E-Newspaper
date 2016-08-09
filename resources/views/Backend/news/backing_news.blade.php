@@ -66,6 +66,7 @@
                         <th>Back Link</th>
                         <th>Update</th>
                         <th>Action</th>
+                        <th>Status</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -83,8 +84,25 @@
 
                         </fieldset>
                         {!! Form::close() !!}
+
                         <td>
                             <button class="backing-new-delete btn btn-danger" data-item-id="{{$value->id}}">Delete</button>
+                        </td>
+                        <td>
+                            {!!Form::open(['url'=>['backing-news-show',$value->id],'class'=>'form-horizontal'])!!}
+                            <select name="backing_news" onchange='this.form.submit()' style="width: 100%">
+                                <option selected>
+                                    @if($value->status == 1)
+                                    Yes
+                                    @endif
+                                    @if($value->status == 0)
+                                    No
+                                    @endif
+                                </option>
+                                <option value="1">Yes</option>
+                                <option value="0">No</option>
+                            </select>
+                            {!!Form::close()!!}
                         </td>
                     </tr>
                     @endforeach

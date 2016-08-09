@@ -10,9 +10,9 @@
 | and give it the controller to call when that URI is requested.
 |
 */
-Route::get('/', function () {
-    return view('common_folder.editor');
-});
+// Route::get('/', function () {
+//     return view('common_folder.editor');
+// });
 
 
 
@@ -38,6 +38,7 @@ Route::get('slider-form','SliderController@slider_form');
 Route::post('slider-image-store','SliderController@slider_upload');
 Route::post('slider-update/{id}','SliderController@slider_update');
 Route::get('slider-delete/{id}','SliderController@slider_delete');
+Route::post('slider-show-store/{id}','SliderController@slider_store');
 
 // news insert update delete by obydul date:31-7-16
 Route::get('news-create','NewsController@create');
@@ -52,17 +53,20 @@ Route::get('backing-news','NewsController@backing_news_form');
 Route::post('backing-news-store','NewsController@backing_news_store');
 Route::post('backing-news-update/{id}','NewsController@backing_news_update');
 Route::get('backing-news-delete/{id}','NewsController@backing_news_delete');
-
+Route::post('backing-news-show/{id}','NewsController@backing_news_show');
 
 // fontend layout controll by obydul date:6-8-16
 
-Route::get('fontend-news','FontendNewsController@view');
-Route::get('fontend-details/{id}','FontendNewsController@fontend_details');
-Route::get('category-details/{id}','FontendNewsController@category_details');
+
+Route::get('/','FontendNewsController@news_home');
+//Route::get('/','FontendNewsController@create');
+Route::get('news-details/{id}','FontendNewsController@news_details');
+Route::get('category-news-details/{id}','FontendNewsController@category_news_details');
 
 
 // Add controll by obydul date:7-8-16
+
 Route::get('add-create-form','AddController@create');
 Route::post('add-store','AddController@add_store');
-
+Route::post('add-update/{id}','AddController@add_update');
 
