@@ -24,7 +24,7 @@ Route::get('/home', 'HomeController@index');
 
 Route::get('category-create-form','CategoryController@Main_cat_show');
 Route::post('category-store','CategoryController@store');
-Route::get('category-main-category-delete/{id}','CategoryController@delete');
+Route::get('category-delete/{id}','CategoryController@category_delete');
 Route::post('home-store/{id}','CategoryController@home_show_store');
 Route::post('up-down-store/{id}','CategoryController@up_down_store');
 
@@ -48,6 +48,7 @@ Route::get('news-show','NewsController@news_show');
 Route::get('news-show-delete/{id}','NewsController@news_delete');
 Route::get('news-edit-form/{id}','NewsController@edit_news');
 Route::post('news-update/{id}','NewsController@news_update');
+Route::post('news-published/{id}','NewsController@new_publish');
 
 Route::get('backing-news','NewsController@backing_news_form');
 Route::post('backing-news-store','NewsController@backing_news_store');
@@ -69,4 +70,6 @@ Route::get('category-news-details/{id}','FontendNewsController@category_news_det
 Route::get('add-create-form','AddController@create');
 Route::post('add-store','AddController@add_store');
 Route::post('add-update/{id}','AddController@add_update');
+Route::post('add-status/{id}','AddController@AdsStatus');
+Route::get('add-delete/{id}','AddController@adds_delete');
 

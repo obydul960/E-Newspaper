@@ -3,7 +3,7 @@
 @section('content')
 <div class="block">
     <div class="navbar navbar-inner block-header">
-        <div class="muted pull-left">ADD Form</div>
+        <div class="muted pull-left">Ads Form</div>
     </div>
     <div class="block-content collapse in">
         <div class="span12">
@@ -14,6 +14,9 @@
                         <label class="control-label required" for="typeahead"> Title </label>
                         <div class="controls">
                             <input type="text" name="add_title" class="span6 required" id="typeahead">
+                            @foreach($errors->get('add_title') as $error)
+                            <b><span style="color: red">{{ $error }}</span></b>
+                            @endforeach
                         </div>
                     </div>
                     <div class="control-group">
@@ -26,6 +29,9 @@
                         <label class="control-label required" for="typeahead"> Link </label>
                         <div class="controls">
                             <input type="text" name="back_link" class="span6 required" id="typeahead">
+                            @foreach($errors->get('back_link') as $error)
+                            <b><span style="color: red">{{ $error }}</span></b>
+                            @endforeach
                         </div>
                     </div>
                     <div class="control-group">
@@ -44,6 +50,9 @@
                                 <option value="9">9</option>
                                 <option value="10">10</option>
                             </select>
+                            @foreach($errors->get('add_position') as $error)
+                            <b><span style="color: red">{{ $error }}</span></b>
+                            @endforeach
                         </div>
                     </div>
 
@@ -65,7 +74,7 @@
     <!-- block -->
     <div class="block">
         <div class="navbar navbar-inner block-header">
-            <div class="muted pull-left">Bootstrap dataTables with Toolbar</div>
+            <div class="muted pull-left">Ads Show</div>
         </div>
         <div class="block-content collapse in">
             <div class="span12">
@@ -78,7 +87,8 @@
                         <th>Title</th>
                         <th>Link</th>
                         <th>Position</th>
-                        <th rowspan="2">Action</th>
+                        <th colspan="2">Action</th>
+                        <th>Status</th>
 
                     </tr>
                     </thead>
@@ -88,8 +98,8 @@
                         {!! Form::open(['url' =>['add-update',$value->id],'class'=>'form-horizontal','method'=>'post','enctype' => 'multipart/form-data','files'=>true ]) !!}
                         <fieldset>
                             <td>
-                                <img style="width:150px;height:150px; margin: 0px auto" src="image_folder/{{$value->add_image}}">
-                                <input type="file" name="image_add" value="{{ $value->add_image }}" class="span4" id="typeahead">
+                                <img style="width:50px;height:50px; border-radius: 5px; margin: 0px auto" src="image_folder/{{$value->add_image}}">
+                                <input type="file" name="image_add" value="{{ $value->add_image }}" class="span12" id="typeahead">
                             </td>
                             <td><input type="text" name="add_title" value="{{ $value->add_title }}" class="span12" id="typeahead"></td>
                             <td><input type="text" name="back_link" value="{{ $value->back_link }}" class="span12" id="typeahead"></td>
@@ -112,17 +122,65 @@
                         </fieldset>
                         {!! Form::close() !!}
                         <td>
-                            <button class=" btn btn-danger slider-delete" data-item-id="{{$value->id}}">Delete</button>
+                            <button id="adds-delete-item" class=" btn btn-danger " data-item-id="{{$value->id}}">Delete</button>
 
+                        </td>
+                        <td class="span2">
+                            {!!Form::open(['url'=>['add-status',$value->id],'class'=>'form-horizontal'])!!}
+                            <select name="ads_status" onchange='this.form.submit()' style="width: 100%">
+                                <option selected>
+                                    @if($value->status == 1)
+                                    Yes
+                                    @elseif($value->status == 0)
+                                    No
+                                    @endif
+                                </option>
+                                <option value="1">Yes</option>
+                                <option value="2">No</option>
+                            </select>
+                            {!!Form::close()!!}
                         </td>
 
                     </tr>
                     @endforeach
                     </tbody>
                 </table>
+                <ul class="pagination">
+                    <li>{{$show_add->render() }}</li>
+                </ul>
             </div>
         </div>
     </div>
     <!-- /block -->
 </div>
+<!--- Swite message show  delete form News by obydul date:28-7-16-->
+<script>
+    $('button#adds-delete-item').click(function() {
+        var itemId = $(this).attr("data-item-id");
+        deleteadds(itemId);
+    });
+    function deleteadds(itemId) {
+        swal({
+            title: "Are you sure?",
+            text: "Are you sure that you want to delete this Item ?",
+            type: "warning",
+            showCancelButton: true,
+            closeOnConfirm: false,
+            confirmButtonText: "Yes, delete it!",
+            confirmButtonColor: "#ec6c62"
+        }, function() {
+            $.ajax({
+                method: "GET",
+                url: "/add-delete/" + itemId,
+                type: "DELETE"
+            })
+                .done(function(data) {
+                    swal("Deleted!", "Your item was successfully deleted!", "success");
+                })
+                .error(function(data) {
+                    swal("Oops", "We couldn't connect to the server!", "error");
+                });
+        });
+    }
+</script>
 @endsection

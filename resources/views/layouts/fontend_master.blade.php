@@ -58,7 +58,7 @@
     <div class="col-md-12 col-sm-12 ">
         <div class=" ">
             <ul class="menuzord-menu border-tb hidden-xs " id="menu-list5">
-                <li><a href="index.php" class="current">  হোম</a></li>
+                <li><a href="index.php" class="current">হোম</a></li>
                 @foreach($v=App\Model\CategoryModel::where('status','=',2)->get() as $value)
                 <li><a href="{{URL::to('/')}}/category-details/{{$value->id}}">{{$value->category_name}} </a></li>
                 @endforeach

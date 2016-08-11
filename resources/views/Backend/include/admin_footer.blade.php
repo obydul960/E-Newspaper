@@ -28,14 +28,14 @@
 <script src="{{URL::to('/')}}/Src/validation/jquery.validate.min.js"></script>
 <!--- editor  runing--->
 <!--/.fluid-container-->
-<script src="Src/vendors/bootstrap-wysihtml5/lib/js/wysihtml5-0.3.0.js"></script>
-<script src="Src/vendors/jquery-1.9.1.min.js"></script>
-<script src="Src/vendors/bootstrap-wysihtml5/src/bootstrap-wysihtml5.js"></script>
+<script src="{{URL::to('/')}}/Src/vendors/bootstrap-wysihtml5/lib/js/wysihtml5-0.3.0.js"></script>
+<script src="{{URL::to('/')}}/Src/vendors/jquery-1.9.1.min.js"></script>
+<script src="{{URL::to('/')}}/Src/vendors/bootstrap-wysihtml5/src/bootstrap-wysihtml5.js"></script>
 
-<script src="Src/vendors/ckeditor/ckeditor.js"></script>
-<script src="Src/vendors/ckeditor/adapters/jquery.js"></script>
+<script src="{{URL::to('/')}}/Src/vendors/ckeditor/ckeditor.js"></script>
+<script src="{{URL::to('/')}}/Src/vendors/ckeditor/adapters/jquery.js"></script>
 
-<script type="text/javascript" src="Src/vendors/tinymce/js/tinymce/tinymce.min.js"></script>
+<script type="text/javascript" src="{{URL::to('/')}}/Src/vendors/tinymce/js/tinymce/tinymce.min.js"></script>
 
 
 <script>

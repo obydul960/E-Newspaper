@@ -7,6 +7,7 @@
             <div class="col-md-12 gird-2 m-top ca-gird clearfix" >
                 <div class="col-md-12">
                     <ol class="breadcrumb catagory-breadcrumb bg-shadow">
+                        <li><a href="{{URL::to('/')}}">হোম</a></li>
                         <li class="active">
                             @if($category=App\Model\CategoryModel::where('id','=',$id)->first())
                             {{ $category->category_name }}
@@ -17,13 +18,15 @@
                 <!-- left add section-->
                 <div id="home-middle">
                     <div class="col-md-12 m-top gird-2 clearfix">
-                        @foreach($category=App\Model\NewsModel::where('main_category','=',$id)->take(2)->orderBy('id','desc')->get() as $details)
+                        @foreach($category=App\Model\NewsModel::where('main_category','=',$id)->where('published','=',1)->take(2)->orderBy('id','desc')->get() as $details)
                         <div class="col-md-6 ">
                             <div class="left bg-shadow">
                                 <article class="catagory-section">
                                     @if($img=App\Model\ImageModel::where('news_id','=',$details->news_id)->first())
+                                    <a href="{{ url('news-details')}}/{{ $details->news_id }}">
                                     <img src="{{URL::to('/')}}/image_folder/{{$img->image}}" class="img-responsives" alt="shutterstock_58382248" height="177" width="371">
-                                    @endif
+                                    </a>
+                                        @endif
                                     <div class="cata-page-content">
                                         <h4 class="catagory-title">
                                             <a href="{{ url('news-details')}}/{{ $details->news_id }}" title="Permalink to Integer vitae libero ac risus egestas placerat urna" rel="bookmark">{{ $details->news_title }}</a>
@@ -47,19 +50,21 @@
         <div class="row">
             <div id="home-middle">
                 @foreach($viewSubcategory as $sub_category)
-                @if($img=App\Model\NewsModel::where('sub_category','=',$sub_category->id)->first() )
+                @if($img=App\Model\NewsModel::where('sub_category','=',$sub_category->id)->where('published','=',1)->first() )
                 <div class="col-md-6 col-sm-12 m-top clearfix">
                     <div class="  clearfix mo-en-sp cata-ho bg-shadow">
                         <h3 class="populer-news-text-section" style=" width: 50px;">
-                            <a href="#" title="Game News"><span>{{ $sub_category->sub_cat_name }}</span></a>
+                            <a href="{{URL::to('/')}}/category-news-details/{{$sub_category->id}}" title="Game News"><span>{{ $sub_category->sub_cat_name }}</span></a>
                         </h3>
                         <hr class="cata-title-border">
                         <div class="col-md-6 col-sm-12  gird-2 ">
                             <div class="left ">
-                                @foreach($v=App\Model\NewsModel::where('sub_category','=',$sub_category->id)->take(1)->orderBy('id','desc')->get() as $subCat)
+                                @foreach($v=App\Model\NewsModel::where('sub_category','=',$sub_category->id)->where('published','=',1)->take(1)->orderBy('id','desc')->get() as $subCat)
                                 <article class="catagory-section ca-pg-img">
                                     @if($img=App\Model\ImageModel::where('news_id','=',$subCat->news_id)->first())
-                                    <img src="{{URL::to('/')}}/image_folder/{{$img->image}}" class="img-responsive" alt="">
+                                    <a href="{{ url('news-details')}}/{{ $subCat->news_id }}">
+                                        <img src="{{URL::to('/')}}/image_folder/{{$img->image}}" class="img-responsive" alt="">
+                                    </a>
                                     @endif
                                     <div class="cata-content">
                                         <h4 class="catagory-title1 cata-content-right h-ca">
@@ -74,7 +79,7 @@
                         <div class="col-md-6 col-sm-12  gird-2">
                             <div class="news-wrapper right-content  bg-shadow" style="height: 262px;">
                                 <ul id="international-h">
-                                    @foreach($v=App\Model\NewsModel::where('sub_category','=',$sub_category->id)->orderBy('id','desc')->get() as $subCat)
+                                    @foreach($v=App\Model\NewsModel::where('sub_category','=',$sub_category->id)->where('published','=',1)->orderBy('id','desc')->get() as $subCat)
                                     <li>
                                         <div class="media right-Selected-body">
                                             <div class="media-left">

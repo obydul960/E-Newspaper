@@ -10,6 +10,7 @@ use App\Model\CategoryModel;
 use App\Model\SubCategoryModel;
 use Session;
 use DB;
+use Illuminate\Support\Facades\Input;
 
 class CategoryController extends Controller
 {
@@ -67,16 +68,32 @@ class CategoryController extends Controller
     }
  // main category show home page by obydul date:7-8-16
     public function  home_show_store(Request $request,$id){
-        $data =  CategoryModel::find($id);
-        $data->status  = $request->get('main_category_show');
-        $data->save();
-        Session::flash('success', 'Successfully Data Insert.');
-        return redirect::to('category-create-form');
+        $a=Input::get('main_category_show');
+
+        $check=CategoryModel::where('view_status',$a)->count();
+        //return $check;
+        if($check>0)
+        {
+            Session::flash('error', 'data all ready use.');
+            return redirect::to('category-create-form');
+        }
+
+        else{
+            $data =  CategoryModel::find($id);
+            $data->view_status  = $request->get('main_category_show');
+            $data->save();
+            Session::flash('success', 'Successfully Data Insert.');
+            return redirect::to('category-create-form');
+        }
+
+
+
+
     }
     // main category up and down home page by obydul date:7-8-16
     public function  up_down_store(Request $request,$id){
-        $data =  CategoryModel::find($id);
-        $data->view_status = $request->get('up_down');
+        $data         =  CategoryModel::find($id);
+        $data->status = $request->get('up_down');
         $data->save();
         Session::flash('success', 'Successfully Data Insert.');
         return redirect::to('category-create-form');
@@ -102,7 +119,7 @@ class CategoryController extends Controller
 
 
     // Main menu delete by obydul date 24-7-16
-   public function  delete($id){
+   public function  category_delete($id){
        $main_category_delete = CategoryModel::find($id)->delete();
        return redirect::to('category-create-form');
    }

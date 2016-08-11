@@ -15,11 +15,21 @@ use Intervention\Image\Facades\Image;
 class AddController extends Controller
 {
     public function create(){
-        $show_add = AddModel::all();
+        $show_add = AddModel::paginate(4);
        return view('Backend.add.add_added',compact('show_add'));
     }
       // add store database by obydul date:7-8-16
     public function add_store(Request $request){
+        $validator = Validator::make($request->all(),[
+            'add_title'    =>'required',
+            'add_position' =>'required',
+            'back_link'    =>'required'
+        ]);
+        if($validator->fails()){
+            Session::flash('error', 'Something went wrong!');
+            return redirect::to("add-create-form")->withErrors($validator);
+        }
+        else{
             $add_content = new AddModel();
 
         //dd($add_content);
@@ -36,6 +46,7 @@ class AddController extends Controller
 
             Session::flash('success', 'Successfully Data Insert.');
             return redirect::to('add-create-form');
+        }
 
     }
     public function add_update(Request $request,$id){
@@ -67,6 +78,19 @@ class AddController extends Controller
         Session::flash('success', 'Successfully updated.');
         return redirect::to('add-create-form');
 
+    }
+    // ads status by obydul dae:11-8-16
+    public function  AdsStatus(Request $request,$id){
+        $data         =  AddModel::find($id);
+        $data->status = $request->get('ads_status');
+        $data->save();
+        Session::flash('success', 'Successfully  Inserted.');
+        return redirect::to('add-create-form');
+    }
+//adds delete by obydul date:10-8-16
+    public function adds_delete($id){
+        $sub_cat_delete= AddModel::find($id)->delete();
+        return redirect::to('add-create-form');
     }
 
     //end class

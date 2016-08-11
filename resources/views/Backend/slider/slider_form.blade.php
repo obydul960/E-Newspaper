@@ -75,7 +75,7 @@
                         <th>Link</th>
                         <th>Action</th>
                         <th>.</th>
-                        <th>status</th>
+                        <th colspan="2">status</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -84,7 +84,7 @@
                         {!! Form::open(['url' =>['slider-update',$value->id],'class'=>'form-horizontal','method'=>'post','enctype' => 'multipart/form-data','files'=>true ]) !!}
                         <fieldset>
                             <td>
-                                <img style="width:150px;height:150px; margin: 0px auto" src="Slider_image/{{$value->image}}">
+                                <img style="width:80px;height:80px;border-radius:  margin: 0px auto" src="Slider_image/{{$value->image}}">
                                 <input type="file" name="picture" value="{{ $value->image }}" class="span4" id="typeahead">
                             </td>
                             <td><input type="text" name="image_title" value="{{ $value->image_title }}" class="span12" id="typeahead"></td>
@@ -97,7 +97,7 @@
                             <button class=" btn btn-danger slider-delete" data-item-id="{{$value->id}}">Delete</button>
 
                         </td>
-                        <td>
+                        <td class="span2">
                             {!!Form::open(['url'=>['slider-show-store',$value->id],'class'=>'form-horizontal'])!!}
                             <select name="slider_store" onchange='this.form.submit()' style="width: 100%" class="span12">
                                 <option selected>

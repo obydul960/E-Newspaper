@@ -13,7 +13,7 @@
 
                     <fieldset>
                         <div class="control-group">
-                            <label class="control-label" for="typeahead"> Titli </label>
+                            <label class="control-label" for="typeahead"> Title </label>
                             <div class="controls">
                                 <input type="text" name="news_title" class="span6" id="typeahead">
                                 @foreach($errors->get('news_title') as $error)
@@ -36,7 +36,7 @@
                             <label class="control-label" for="select01">Select Sub-Category</label>
                             <div class="controls">
                                 <select name="sel_sub_category" id="select01" class="sub_category">
-                                    <option>First select main category</option>
+                                    <option value="0">First select main category</option>
                                     <script>
                                         $(document).ready(function () {
                                             $('.main_category').change(function () {
@@ -62,6 +62,29 @@
                             <label class="control-label" for="fileInput">Image Upload</label>
                             <div class="controls">
                                 <input name="news_image" class="input-file uniform_on" id="fileInput" type="file">
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <label class="control-label" for="fileInput">Editor</label>
+                            <div class="controls">
+                                 <input type="text" name="news_editor" value="">
+                                @foreach($errors->get('news_editor') as $error)
+                                <b><span style="color: red">{{ $error }}</span></b>
+                                @endforeach
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label" for="fileInput">Status</label>
+                            <div class="controls">
+                               <select name="news_status">
+                                   <option>Select</option>
+                                   <option value="1">Published</option>
+                                   <option value="0">unpublished</option>
+                                   @foreach($errors->get('news_status') as $error)
+                                   <b><span style="color: red">{{ $error }}</span></b>
+                                   @endforeach
+                               </select>
                             </div>
                         </div>
                         <div class="control-group">

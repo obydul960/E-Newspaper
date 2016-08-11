@@ -33,7 +33,7 @@ class NewsController extends Controller
                     echo "<option value=".$value->id.">". $value->sub_cat_name ."</option>";
                 }
                 else{
-                    echo  "<option value=".$value->id.">". 'Data Not Found' ."</option>";
+                    echo  "<option value=".'0'.">". 'Data Not Found' ."</option>";
                 }
 
             }
@@ -46,26 +46,36 @@ class NewsController extends Controller
         $validator = Validator::make($request->all(),[
             'news_title'       => 'required',
             'sel_min_category' => 'required',
-            //'sel_sub_category' => 'required',
             'news_image'       => 'required | mimes:jpeg,jpg,png',
-            'news_content'     => 'required'
+            'news_content'     => 'required',
+            'news_editor'           => 'required',
+            'news_status'           => 'required'
         ]);
         if ($validator->fails())
         {
             Session::flash('error', 'Something went wrong!');
             return redirect::to("news-create")->withErrors($validator);
         }else{
+
+
             $news_id=uniqid();
             $short_contain= $request->get('news_content');
             $short_details = substr($short_contain, 0, 250);
             $news_content = new NewsModel();
             $news_content->news_id       = $news_id;
             $news_content->main_category = $request->get('sel_min_category');
-            $news_content->sub_category  = $request->get('sel_sub_category');
+            if($request->get('sel_sub_category') == ''){
+
+            }
+            else{
+                $news_content->sub_category  = $request->get('sel_sub_category');
+            }
             $news_content->news_title    = $request->get('news_title');
             $news_content->selected_news = $request->get('news_selected');
             $news_content->short_details = $short_details;
             $news_content->full_details  = $request->get('news_content');
+            $news_content->editor        = $request->get('news_editor');
+            $news_content->published     = $request->get('news_status');
             $news_content->save();
 
             if(Input::file())
@@ -88,8 +98,8 @@ class NewsController extends Controller
     public function news_show(){
         $show_news = DB::table('news_table')
             ->join('image_table', 'news_table.news_id', '=', 'image_table.news_id')
-            ->select('news_table.id','news_table.news_title','news_table.short_details','image_table.image')
-            ->orderBy('id', 'desc')->get();
+            ->select('news_table.id','news_table.published','news_table.news_title','news_table.short_details','image_table.image')
+            ->orderBy('id', 'desc')->paginate(5);
         return view('Backend.news.news_show',compact('show_news'));
     }
 
@@ -100,7 +110,7 @@ class NewsController extends Controller
             ->leftjoin('main_category', 'news_table.main_category', '=', 'main_category.id')
             ->leftjoin('sub_category', 'news_table.sub_category', '=', 'sub_category.id')
             ->leftjoin('image_table', 'news_table.news_id', '=', 'image_table.news_id')
-            ->select('news_table.id','news_table.news_title',
+            ->select('news_table.id','news_table.news_title','news_table.editor','news_table.published',
                 'news_table.short_details','news_table.full_details','main_category.category_name','sub_category.sub_cat_name','image_table.image')
             ->where('news_table.id','=',$id)
             ->first($id);
@@ -120,6 +130,8 @@ class NewsController extends Controller
         $news_update->news_title     = $request->get('news_title');
         $news_update->short_details  = $short_details;
         $news_update->full_details   = $request->get('news_content');
+        $news_update->editor         = $request->get('news_editor');
+        $news_update->published      = $request->get('news_status');
         $news_update->save();
         Session::flash('success', 'Successfully Data Update.');
         return redirect::to('news-create');
@@ -127,11 +139,26 @@ class NewsController extends Controller
     }
 
 
+    // news published and unpublished by obydul date:10-8-16
+    public function  new_publish(Request $request,$id){
+        $data         =  NewsModel::find($id);
+        $data->published = $request->get('published_news');
+        $data->save();
+        Session::flash('success', 'Successfully  Insert.');
+        return redirect::to('news-show');
+    }
+
+
+    //news delete obydul date:2-8-16
+    public  function  news_delete($id){
+        $news_delete=NewsModel::find($id)->delete();
+        return redirect::to('news-show');
+    }
+
+
  // backing New form show by obydul date:3-8-16
     public function  backing_news_form(){
-        $backing_new=DB::table('breaking_news')->orderBy('id', 'desc')->get();
-        //dd($backing_new);
-        //$backing_new=BackingNewsModel::all()->orderBy('id', 'desc');
+        $backing_new=DB::table('breaking_news')->orderBy('id', 'desc')->paginate(5);
         return view('Backend.news.backing_news',compact('backing_new'));
     }
     // Backing News store by obydul date:3-8-16
@@ -208,11 +235,7 @@ class NewsController extends Controller
         return redirect::to('backing-news');
 
     }
-    //news delete obydul date:2-8-16
-    public  function  news_delete($id){
-        $news_delete=NewsModel::find($id)->delete();
-        return redirect::to('news-show');
-    }
+
 
     //backing news delete by obydul date:3-8-16
     public function backing_news_delete($id){

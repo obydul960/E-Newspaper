@@ -24,20 +24,29 @@ class FontendNewsController extends Controller
     //foneted news form show by obydul date:4-8-16
     public function news_home(){
         $slider_image = SliderModel::where('status','=',1)->orderBy('id','desc')->take(3)->get();
-        $selected_news = NewsModel::where('selected_news','=',1)->orderBy('id','desc')->get();
+        $selected_news = NewsModel::where('selected_news','=',1)->where('published','=',1)->orderBy('id','desc')->get();
         $selected_add = AddModel::where('status','=',1)->where('position','=',1)->orderBy('id','desc')->take(1)->get();
         $selected_add_two = AddModel::where('status','=',1)->where('position','=',2)->orderBy('id','desc')->take(1)->get();
         $viewHomePage=CategoryModel::where('view_status','=',1)->get();
-        $hid_news = NewsModel::where('hite_count','>=',1)->get();
+        $hid_news = NewsModel::where('published','=',1)->where('hite_count','>=',1)->get();
        // dd($hid_news);
 
+        $viewHomePage1=CategoryModel::where('view_status','=',1)->first();
+        $viewHomePage2=CategoryModel::where('view_status','=',2)->first();
+        $viewHomePage3=CategoryModel::where('view_status','=',3)->first();
+        $viewHomePage4=CategoryModel::where('view_status','=',4)->first();
+        $viewHomePage5=CategoryModel::where('view_status','=',5)->first();
+        $viewHomePage6=CategoryModel::where('view_status','=',6)->first();
+        $viewHomePage7=CategoryModel::where('view_status','=',7)->first();
+        $viewHomePage8=CategoryModel::where('view_status','=',8)->first();
+        $viewHomePage9=CategoryModel::where('view_status','=',9)->first();
+        $viewHomePage10=CategoryModel::where('view_status','=',10)->first();
 
+      //return $v=count($viewHomePage6);
 
+        ///$national_news      = NewsModel::where('main_category','=',6)->orderBy('id','desc')->take(1)->get();
 
-
-        $national_news      = NewsModel::where('main_category','=',6)->orderBy('id','desc')->take(1)->get();
-
-        $national_news_2nd = NewsModel::where('main_category','=',6)->orderBy('id','desc')->get();
+       // $national_news_2nd = NewsModel::where('main_category','=',6)->orderBy('id','desc')->get();
 
       //  $national_news_2nd = DB::table('news_table')
       //           ->join('image_table', 'news_table.news_id', '=', 'image_table.news_id')
@@ -62,7 +71,8 @@ class FontendNewsController extends Controller
             ->orderBy('id', 'desc')->get();
     // dd($home_view_category_image);
         return view('Fontend.news.news_home',compact('national_news','national_news_2nd',
-        'job_query','home_view_category','home_view_category_image','viewHomePage','slider_image','selected_news','selected_add','selected_add_two','hid_news'));
+        'job_query','home_view_category','home_view_category_image','viewHomePage','slider_image','selected_news','selected_add','selected_add_two','hid_news',
+        'viewHomePage1','viewHomePage2','viewHomePage3','viewHomePage4','viewHomePage5','viewHomePage6'));
     }
 
 

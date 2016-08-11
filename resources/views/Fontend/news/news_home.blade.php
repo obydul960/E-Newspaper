@@ -98,23 +98,27 @@
 <section style="margin-top: 30px;">
     <div class="container">
         <div class="row">
+            @if(count($viewHomePage1)>0)
+
             <div class="col-md-6 col-sm-12">
                 <div class="  clearfix mo-en-sp cata-ho bg-shadow">
                     <h3 class="populer-news-text-section" style=" width: 50px;">
-                        <a href="#" title="Game News"><span>জাতীয়</span></a>
+                        <a href="{{URL::to('/')}}/category-news-details/{{$viewHomePage1->id}}" title="Game News"><span>{{ $viewHomePage1->category_name}}</span></a>
                     </h3>
                     <hr class="cata-title-border">
                     <div class="col-md-6 col-sm-12  gird-2 ">
                         <div class="left ">
                             <article class="catagory-section ca-pg-img">
-                                @foreach($national_news as $value)
-                                  @if($img=App\Model\ImageModel::where('news_id','=',$value->news_id)->first())
-                                <img src="{{URL::to('/')}}/image_folder/{{$img->image}}" class="img-responsive" alt="">
+
+                                @foreach($v=App\Model\NewsModel::where('main_category','=',$viewHomePage1->id)->where('published','=',1)->take(1)->orderBy('id','desc')->get() as $national)
+
+                                  @if($img=App\Model\ImageModel::where('news_id','=',$national->news_id)->first())
+                               <a href="{{ url('news-details')}}/{{ $national->news_id }}"> <img src="{{URL::to('/')}}/image_folder/{{$img->image}}" class="img-responsive" alt=""></a>
                                 @endif
                                 <div class="cata-content">
                                     <!-- details code -->
                                     <h4 class="catagory-title1 cata-content-right h-ca">
-                                        <a href="{{ url('news-details')}}/{{ $value->news_id }}">{{ $value->news_title}}</a>
+                                        <a href="{{ url('news-details')}}/{{ $national->news_id }}">{{ $national->news_title}}</a>
                                     </h4>
                                 </div>
                                   @endforeach
@@ -125,12 +129,13 @@
                     <div class="col-md-6 col-sm-12  gird-2">
                         <div class="news-wrapper right-content  bg-shadow" style="height: 262px;">
                             <ul id="national-h">
-                                @foreach($national_news_2nd as $value)
+                                @foreach($v=App\Model\NewsModel::where('main_category','=',$viewHomePage1->id)->where('published','=',1)->orderBy('id','desc')->get() as $value)
+
                                 <li>
                                     <div class="media right-Selected-body" style="margin-top: 10px;">
                                         <div class="media-left">
                                           @if($img=App\Model\ImageModel::where('news_id','=',$value->news_id)->first())
-                                             <a href="#">
+                                             <a href="{{ url('news-details')}}/{{ $value->news_id }}">
                                                 <img class="media-object" src="{{URL::to('/')}}/image_folder/{{$img->image}}" alt="...">
                                             </a>
                                               @endif
@@ -151,19 +156,29 @@
                     </div>
                     <!--end national-->
                 </div>
-            </div><!--populer news-->
+            </div>
+            @endif
+            @if(count($viewHomePage2)>0)
+
+            <!--populer news-->
             <div class="col-md-3 col-sm-12 middle_section">
                 <div class="bg-shadow job-h-section" >
                     <h3 class="populer-news-text-section" style=" width: 50px;">
-                        <a href="#" title="Game News"><span>চাকুরী </span></a>
+                        <a href="{{URL::to('/')}}/category-news-details/{{$viewHomePage2->id}}" title="Game News"><span>{{$viewHomePage2->category_name }} </span></a>
                     </h3>
+
+
+
+
                     <hr class="cata-title-border">
                     <div class="news-wrapper right-content job-h-section  bg-shadow" style="height: 262px;">
                         <ul id="job-h">
-                            @foreach($job_query as $value)
+
+
+                            @foreach($v=App\Model\NewsModel::where('main_category','=',$viewHomePage2->id)->where('published','=',1)->orderBy('id','desc')->get() as $value)
                             <li>
-                                <h4><a href="#">{{ $value->news_title}}</a></h4>
-                                <p>{{$value->short_details}}</p>
+                                <h4><a href="{{ url('news-details')}}/{{ $value->news_id }}">{{ $value->news_title}}</a></h4>
+                                <p>{!! $value->short_details !!}</p>
                             </li>
                             @endforeach
                         </ul>
@@ -174,6 +189,7 @@
                     </div>
                 </div>
             </div>
+            @endif
             <!--add right-->
             <div class="col-md-3 hidden-sm hidden-xs right-section">
                 <div class="right-add" style="">
@@ -186,65 +202,269 @@
     </div>
 </section>
 <!-- left add section-->
+
+
+
+
+
 <section>
     <div class="container">
         <div class="row">
             <div id="home-middle">
-                @foreach($viewHomePage as $value)
+                @if(count($viewHomePage3)>0)
+
                 <div class="col-md-6 col-sm-12 m-top clearfix">
                     <div class="  clearfix mo-en-sp cata-ho bg-shadow">
                         <h3 class="populer-news-text-section" style=" width: 50px;">
-                            <a href="#" title="Game News"><span>{{$value->category_name}}</span></a>
+                            <a href="{{URL::to('/')}}/category-news-details/{{$viewHomePage3->id}}" title="Game News"><span>{{ $viewHomePage3->category_name }}</span></a>
                         </h3>
                         <hr class="cata-title-border">
                         <div class="col-md-6 col-sm-12  gird-2 ">
                             <div class="left ">
-
                                 <article class="catagory-section ca-pg-img">
-                                    @foreach($v=App\Model\NewsModel::where('main_category','=',$value->id)->take(1)->orderBy('id','desc')->get() as $a)
-                                    @if($img=App\Model\ImageModel::where('news_id','=',$a->news_id)->first())
-                                    <img src="{{URL::to('/')}}/image_folder/{{$img->image}}" class="img-responsive" alt="">
+                                    @foreach($v=App\Model\NewsModel::where('main_category','=',$viewHomePage3->id)->where('published','=',1)->take(1)->orderBy('id','desc')->get() as $value)
+
+                                    @if($img=App\Model\ImageModel::where('news_id','=',$value->news_id)->first())
+                                    <a href="{{ url('news-details')}}/{{ $national->news_id }}"> <img src="{{URL::to('/')}}/image_folder/{{$img->image}}" class="img-responsive" alt=""></a>
                                     @endif
                                     <div class="cata-content">
                                         <h4 class="catagory-title1 cata-content-right h-ca">
-                                           <a href="{{ url('news-details')}}/{{ $a->news_id }}">{!! $a->news_title !!}</a>
+                                            <a href="{{ url('news-details')}}/{{ $national->news_id }}">{{ $value->news_title}}</a>
                                         </h4>
                                     </div>
-                                      @endforeach
+                                    @endforeach
                                 </article>
                                 <div class="clearfix"></div>
                             </div>
                         </div>
                         <div class="col-md-6 col-sm-12  gird-2">
                             <div class="news-wrapper right-content  bg-shadow" style="height: 262px;">
+
                                 <ul id="international-h">
-                                  @foreach($v=App\Model\NewsModel::where('main_category','=',$value->id)->orderBy('id','desc')->get() as $a)
-                                   <li>
-                                          <div class="media right-Selected-body">
+                                    @foreach($v=App\Model\NewsModel::where('main_category','=',$viewHomePage3->id)->where('published','=',1)->orderBy('id','desc')->get() as $value)
+
+                                    <li>
+                                        <div class="media right-Selected-body" style="margin-top: 10px;">
                                             <div class="media-left">
-                                                    @if($img=App\Model\ImageModel::where('news_id','=',$a->news_id)->first())
-                                                        <a href="#">
+                                                @if($img=App\Model\ImageModel::where('news_id','=',$value->news_id)->first())
+                                                <a href="{{ url('news-details')}}/{{ $value->news_id }}">
                                                     <img class="media-object" src="{{URL::to('/')}}/image_folder/{{$img->image}}" alt="...">
-                                                         </a>
-                                                     @endif
+                                                </a>
+                                                @endif
                                             </div>
                                             <div class="media-body cata-content">
-                                                <h4 class="media-heading"><a href="{{ url('news-details')}}/{{ $a->news_id }}">{{$a->news_title}}</a></h4>
+                                                <h4 class="media-heading"><a href="{{ url('news-details')}}/{{ $value->news_id }}">{{ $value->news_title}}</a></h4>
+
                                             </div>
                                         </div>
                                     </li>
-                                   @endforeach
+                                    @endforeach
+
                                 </ul>
                             </div>
                             <div id="news-navigation">
-                               <a href="#" id="news-next-international" class="bg-shadow"><i class="fa fa-chevron-up"></i></a>
+                                <a href="#" id="news-next-international" class="bg-shadow"><i class="fa fa-chevron-up"></i></a>
                                 <a href="#" id="news-prev-international" class="bg-shadow"><i class="fa fa-chevron-down"></i></a>
-                                 </div>
+                            </div>
                         </div>
                         <!--end international-->
                     </div>
                 </div>
-                @endforeach
+                @endif
+                @if(count($viewHomePage4)>0)
+
+                <div class="col-md-6 col-sm-12 m-top clearfix">
+                    <div class="  clearfix mo-en-sp cata-ho bg-shadow">
+                        <h3 class="populer-news-text-section" style=" width: 50px;">
+                            <a href="{{URL::to('/')}}/category-news-details/{{$viewHomePage4->id}}" title="Game News"><span>{{ $viewHomePage4->category_name }}</span></a>
+                        </h3>
+                        <hr class="cata-title-border">
+                        <div class="col-md-6 col-sm-12  gird-2 ">
+                            <div class="left ">
+                                <article class="catagory-section ca-pg-img">
+                                    @foreach($v=App\Model\NewsModel::where('main_category','=',$viewHomePage4->id)->where('published','=',1)->take(1)->orderBy('id','desc')->get() as $value)
+
+                                    @if($img=App\Model\ImageModel::where('news_id','=',$value->news_id)->first())
+                                   <a href="{{ url('news-details')}}/{{ $national->news_id }}"> <img src="{{URL::to('/')}}/image_folder/{{$img->image}}" class="img-responsive" alt=""></a>
+                                    @endif
+                                    <div class="cata-content">
+                                        <h4 class="catagory-title1 cata-content-right h-ca">
+                                            <a href="{{ url('news-details')}}/{{ $national->news_id }}">{{ $value->news_title}}</a>
+                                        </h4>
+                                    </div>
+                                    @endforeach
+                                </article>
+                                <div class="clearfix"></div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-12  gird-2">
+                            <div class="news-wrapper right-content  bg-shadow" style="height: 262px;">
+                                <ul id="sport-h">
+                                    @foreach($v=App\Model\NewsModel::where('main_category','=',$viewHomePage4->id)->where('published','=',1)->orderBy('id','desc')->get() as $value)
+
+                                    <li>
+                                        <div class="media right-Selected-body" style="margin-top: 10px;">
+                                            <div class="media-left">
+                                                @if($img=App\Model\ImageModel::where('news_id','=',$value->news_id)->first())
+                                                <a href="{{ url('news-details')}}/{{ $value->news_id }}">
+                                                    <img class="media-object" src="{{URL::to('/')}}/image_folder/{{$img->image}}" alt="...">
+                                                </a>
+                                                @endif
+                                            </div>
+                                            <div class="media-body cata-content">
+                                                <h4 class="media-heading"><a href="{{ url('news-details')}}/{{ $value->news_id }}">{{ $value->news_title}}</a></h4>
+
+                                            </div>
+                                        </div>
+                                    </li>
+                                    @endforeach
+
+                                </ul>
+                            </div>
+                            <div id="news-navigation">
+                                <a href="#" id="news-next-sport" class="bg-shadow"><i class="fa fa-chevron-up"></i></a>
+                                <a href="#" id="news-prev-sport" class="bg-shadow"><i class="fa fa-chevron-down"></i></a>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                @endif
+                <!--end sport-->
+            </div>
+        </div>
+    </div>
+</section>
+<!--end international+sport-->
+<!--start entertainment+carrier-->
+
+
+
+<section>
+    <div class="container">
+        <div class="row">
+            <div id="home-middle">
+                @if(count($viewHomePage5)>0)
+
+                <div class="col-md-6 col-sm-12 m-top clearfix">
+                    <div class="  clearfix mo-en-sp cata-ho bg-shadow">
+                        <h3 class="populer-news-text-section" style=" width: 50px;">
+                            <a href="{{URL::to('/')}}/category-news-details/{{$viewHomePage5->id}}" title="Game News"><span>{{ $viewHomePage5->category_name }}</span></a>
+                        </h3>
+                        <hr class="cata-title-border">
+                        <div class="col-md-6 col-sm-12  gird-2 ">
+                            <div class="left ">
+                                <article class="catagory-section ca-pg-img">
+                                    @foreach($v=App\Model\NewsModel::where('main_category','=',$viewHomePage5->id)->where('published','=',1)->take(1)->orderBy('id','desc')->get() as $value)
+
+                                    @if($img=App\Model\ImageModel::where('news_id','=',$value->news_id)->first())
+                                    <a href="{{ url('news-details')}}/{{ $national->news_id }}"> <img src="{{URL::to('/')}}/image_folder/{{$img->image}}" class="img-responsive" alt=""></a>
+                                    @endif
+                                    <div class="cata-content">
+                                        <h4 class="catagory-title1 cata-content-right h-ca">
+                                            <a href="{{ url('news-details')}}/{{ $national->news_id }}">{{ $value->news_title}}</a>
+                                        </h4>
+                                    </div>
+                                    @endforeach
+                                </article>
+                                <div class="clearfix"></div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-12  gird-2">
+                            <div class="news-wrapper right-content  bg-shadow" style="height: 262px;">
+
+                                <ul id="international-h">
+                                    @foreach($v=App\Model\NewsModel::where('main_category','=',$viewHomePage5->id)->where('published','=',1)->orderBy('id','desc')->get() as $value)
+
+                                    <li>
+                                        <div class="media right-Selected-body" style="margin-top: 10px;">
+                                            <div class="media-left">
+                                                @if($img=App\Model\ImageModel::where('news_id','=',$value->news_id)->first())
+                                                <a href="{{ url('news-details')}}/{{ $value->news_id }}">
+                                                    <img class="media-object" src="{{URL::to('/')}}/image_folder/{{$img->image}}" alt="...">
+                                                </a>
+                                                @endif
+                                            </div>
+                                            <div class="media-body cata-content">
+                                                <h4 class="media-heading"><a href="{{ url('news-details')}}/{{ $value->news_id }}">{{ $value->news_title}}</a></h4>
+
+                                            </div>
+                                        </div>
+                                    </li>
+                                    @endforeach
+
+                                </ul>
+                            </div>
+                            <div id="news-navigation">
+                                <a href="#" id="news-next-entertainment" class="bg-shadow"><i class="fa fa-chevron-up"></i></a>
+                                <a href="#" id="news-prev-entertainment" class="bg-shadow"><i class="fa fa-chevron-down"></i></a>
+                            </div>
+                        </div>
+                        <!--end international-->
+                    </div>
+                </div>
+                @endif
+
+               @if(count($viewHomePage6)>0)
+
+                <div class="col-md-6 col-sm-12 m-top clearfix">
+                    <div class="  clearfix mo-en-sp cata-ho bg-shadow">
+                        <h3 class="populer-news-text-section" style=" width: 50px;">
+                            <a href="{{URL::to('/')}}/category-news-details/{{$viewHomePage6->id}}" title="Game News"><span>{{ $viewHomePage6->category_name }}</span></a>
+                        </h3>
+                        <hr class="cata-title-border">
+                        <div class="col-md-6 col-sm-12  gird-2 ">
+                            <div class="left ">
+                                <article class="catagory-section ca-pg-img">
+                                    @foreach($v=App\Model\NewsModel::where('main_category','=',$viewHomePage6->id)->where('published','=',1)->take(1)->orderBy('id','desc')->get() as $value)
+
+                                    @if($img=App\Model\ImageModel::where('news_id','=',$value->news_id)->first())
+                                    <a href="{{ url('news-details')}}/{{ $value->news_id }}"><img src="{{URL::to('/')}}/image_folder/{{$img->image}}" class="img-responsive" alt=""></a>
+                                    @endif
+                                    <div class="cata-content">
+                                        <h4 class="catagory-title1 cata-content-right h-ca">
+                                            <a href="{{ url('news-details')}}/{{ $value->news_id }}">{{ $value->news_title}}</a>
+                                        </h4>
+                                    </div>
+                                    @endforeach
+                                </article>
+                                <div class="clearfix"></div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-12  gird-2">
+                            <div class="news-wrapper right-content  bg-shadow" style="height: 262px;">
+                                <ul id="sport-h">
+                                    @foreach($v=App\Model\NewsModel::where('main_category','=',$viewHomePage6->id)->where('published','=',1)->orderBy('id','desc')->get() as $value)
+
+                                    <li>
+                                        <div class="media right-Selected-body" style="margin-top: 10px;">
+                                            <div class="media-left">
+                                                @if($img=App\Model\ImageModel::where('news_id','=',$value->news_id)->first())
+                                                <a href="{{ url('news-details')}}/{{ $value->news_id }}">
+                                                    <img class="media-object" src="{{URL::to('/')}}/image_folder/{{$img->image}}" alt="...">
+                                                </a>
+                                                @endif
+                                            </div>
+                                            <div class="media-body cata-content">
+                                                <h4 class="media-heading"><a href="{{ url('news-details')}}/{{ $value->news_id }}">{{ $value->news_title}}</a></h4>
+
+                                            </div>
+                                        </div>
+                                    </li>
+                                    @endforeach
+
+                                </ul>
+                            </div>
+                            <div id="news-navigation">
+                                <a href="#" id="news-next-entertainment" class="bg-shadow"><i class="fa fa-chevron-up"></i></a>
+                                <a href="#" id="news-prev-entertainment" class="bg-shadow"><i class="fa fa-chevron-down"></i></a>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                @endif
+
 
 
                 <!--end sport-->
@@ -252,4 +472,5 @@
         </div>
     </div>
 </section>
+
 @endsection

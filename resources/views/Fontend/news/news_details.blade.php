@@ -9,6 +9,7 @@
                 <div class="col-md-9 gird-2">
                     <div class="col-md-12">
                         <ol class="breadcrumb catagory-breadcrumb bg-shadow">
+                            <li><a href="{{URL::to('/')}}">হোম</a></li>
                             <li><a href="#">{{$main_category->category_name}}</a></li>
                         </ol>
                     </div>
@@ -49,17 +50,17 @@
                                 <h3 class="populer-news-text-section" style="width: 120px;"><span>সম্পর্কিত সংবাদ</span></h3>
                                 <hr class="">
                                 <div class="col-md-12">
-                                    @foreach($related_news=App\Model\NewsModel::where('main_category','=',$news_details->main_category)->orderBy('id','desc')->get() as $relatedNews)
+                                    @foreach($related_news=App\Model\NewsModel::where('main_category','=',$news_details->main_category)->where('published','=',1)->orderBy('id','desc')->get() as $relatedNews)
                                     <div class="col-md-6">
                                         <div class="media catagory-thememail-section">
                                             <div class="media-left">
-                                                <a href="#">
+
                                                     @if($reNews=App\Model\ImageModel::where('news_id','=',$relatedNews->news_id)->first())
-                                                    <a href="#">
+                                                    <a href="{{ url('news-details')}}/{{ $relatedNews->news_id }}">
                                                         <img class="media-object" src="{{URL::to('/')}}/image_folder/{{$reNews->image}}" alt="...">
                                                     </a>
                                                     @endif
-                                                </a>
+
                                             </div>
                                             <div class="media-body cata-content">
                                                 <h4 class="media-heading"><a href="{{ url('news-details')}}/{{ $relatedNews->news_id }}">{{ $relatedNews->news_title }}</a></h4>
@@ -79,7 +80,7 @@
                     <div class="col-md-12 m-top gird-2">
                         <div class="add-rightside-1">
                             @foreach($selected_add as $value)
-                            <img src="{{URL::to('/')}}/image_folder/{{$value->add_image}}" class="img-responsive">
+                           <a href="{{ url('news-details')}}/{{ $value->news_id }}"> <img src="{{URL::to('/')}}/image_folder/{{$value->add_image}}" class="img-responsive"></a>
                             @endforeach
                         </div>
                     </div>

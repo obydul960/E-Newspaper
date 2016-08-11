@@ -52,7 +52,7 @@
     <!-- block -->
     <div class="block">
         <div class="navbar navbar-inner block-header">
-            <div class="muted pull-left">Bootstrap dataTables with Toolbar</div>
+            <div class="muted pull-left">Backing news show</div>
         </div>
         <div class="block-content collapse in">
             <div class="span12">
@@ -75,8 +75,8 @@
                         {!! Form::open(['url' =>['backing-news-update',$value->id],'class'=>'form-horizontal','method'=>'post','enctype' => 'multipart/form-data','files'=>true ]) !!}
                         <fieldset>
                             <td>
-                                <img style="width:30px;height:30px; border-radius: 5px; margin: 0px auto" src="image_folder/{{$value->news_icon}}">
-                                <input class="input-file uniform_on" name="news_icon" id="fileInput" type="file">
+                                <img style="width:50px;height:50px; border-radius: 5px; margin: 0px auto" src="image_folder/{{$value->news_icon}}">
+                                <input type="file" name="news_icon" >
                             </td>
                             <td><input type="text" name="news_title" value="{{ $value->news_title }}" class="span12" id="typeahead"></td>
                             <td><input type="text" name="back_link" value="{{ $value->back_link }}" class="span12" id="typeahead"></td>
@@ -88,9 +88,9 @@
                         <td>
                             <button class="backing-new-delete btn btn-danger" data-item-id="{{$value->id}}">Delete</button>
                         </td>
-                        <td>
+                        <td class="span2">
                             {!!Form::open(['url'=>['backing-news-show',$value->id],'class'=>'form-horizontal'])!!}
-                            <select name="backing_news" onchange='this.form.submit()' style="width: 100%">
+                            <select name="backing_news" class="span12" onchange='this.form.submit()' >
                                 <option selected>
                                     @if($value->status == 1)
                                     Yes
@@ -108,6 +108,9 @@
                     @endforeach
                     </tbody>
                 </table>
+                <ul class="pagination">
+                    <li>{{$backing_new->render() }}</li>
+                </ul>
             </div>
         </div>
     </div>
