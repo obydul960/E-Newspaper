@@ -14,6 +14,11 @@ use DB;
 class CategoryController extends Controller
 {
 
+  public function __construct()
+  {
+      $this->middleware('auth');
+  }
+
     // Main menu store by obydul date 24-7-16
    public function store(Request $request){
        $validator = Validator::make($request->all(),[

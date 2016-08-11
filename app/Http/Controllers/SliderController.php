@@ -14,6 +14,10 @@ use DB;
 
 class SliderController extends Controller
 {
+      public function __construct()
+      {
+          $this->middleware('auth');
+      }
     // Slider image form by obydul date 25-7-16
     public function slider_form(){
         //show slider image by obydul date 25-7-16

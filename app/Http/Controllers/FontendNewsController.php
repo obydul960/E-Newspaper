@@ -13,6 +13,11 @@ use DB;
 class FontendNewsController extends Controller
 {
 
+  public function __construct()
+  {
+      $this->middleware('auth');
+  }
+
     public function create(){
         return view('layouts.fontend_master');
     }
