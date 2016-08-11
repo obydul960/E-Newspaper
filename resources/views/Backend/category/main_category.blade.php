@@ -49,6 +49,8 @@
                         <thead>
                         <tr>
                             <th>Main Category Name</th>
+                            <th>Home page view</th>
+                            <th>Up & Down</th>
                             <th>Action</th>
                         </tr>
                         </thead>
@@ -57,7 +59,42 @@
                         <tr>
                             <td>{{ $value->category_name}}</td>
                             <td>
-                                <button class="main-category-delete btn btn-danger" data-item-id="{{$value->id}}">Delete</button>
+                                {!!Form::open(['url'=>['home-store',$value->id],'class'=>'form-horizontal'])!!}
+                                <select name="main_category_show" onchange='this.form.submit()' style="width: 100%">
+                                    <option selected>{{ $value->view_status }}</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                    <option value="7">7</option>
+                                    <option value="8">8</option>
+                                    <option value="9">9</option>
+                                    <option value="10">10</option>
+                                </select>
+                                {!!Form::close()!!}
+                            </td>
+                            <td>
+                                {!!Form::open(['url'=>['up-down-store',$value->id],'class'=>'form-horizontal'])!!}
+                                <select name="up_down" onchange='this.form.submit()' style="width: 100%">
+                                    <option selected>
+                                        @if($value->status == 1)
+                                        Up
+                                        @elseif($value->status == 2)
+                                        Down
+                                        @elseif($value->status == 0)
+                                        Nan
+                                        @endif
+                                    </option>
+                                    <option value="1">Up</option>
+                                    <option value="2">Down</option>
+                                    <option value="0">Nan</option>
+                                </select>
+                                {!!Form::close()!!}
+                            </td>
+                            <td>
+                                <button id="main_category_delete" class=" btn btn-danger" data-item-id="{{$value->id}}">Delete</button>
                             </td>
                         </tr>
                         @endforeach
@@ -142,7 +179,7 @@
                     <thead>
                     <tr>
                         <th>Main category Name</th>
-                        <th>Sub category name</th>
+                        <th>Sub category Name</th>
                         <th colspan="2">Action</th>
                     </tr>
                     </thead>
@@ -167,11 +204,44 @@
                 </table>
                 <ul class="pagination">
                     <li>{{$main_category->render() }}</li>
-                 </ul>
+                </ul>
             </div>
         </div>
         <!-- /block -->
     </div>
 </div>
+<!--- Swite message show  delete form main category  by obydul date:28-7-16-->
+<script>
+    $('button#main_category_delete').click(function() {
+        var itemId = $(this).attr("data-item-id");
+
+        deletec(itemId);
+    });
+    function deletec(itemId) {
+
+        swal({
+            title: "Are you sure?",
+            text: "Are you sure that you want to delete this Item ?",
+            type: "warning",
+            showCancelButton: true,
+            closeOnConfirm: false,
+            confirmButtonText: "Yes, delete it!",
+            confirmButtonColor: "#ec6c62"
+        }, function() {
+
+            $.ajax({
+                method: "GET",
+                url: "/category-delete/" + itemId,
+                type: "DELETE"
+            })
+                .done(function(data) {
+                    swal("Deleted!", "Your item was successfully deleted!", "success");
+                })
+                .error(function(data) {
+                    swal("Oops", "We couldn't connect to the server!", "error");
+                });
+        });
+    }
+</script>
 
 @endsection

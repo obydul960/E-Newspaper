@@ -1,10 +1,11 @@
+
 <!--- Swite message show  delete form slider image by obydul date:28-7-16-->
 <script>
-    $('button.delete-item').click(function() {
+    $('button.slider-delete').click(function() {
         var itemId = $(this).attr("data-item-id");
-        deletePhoto(itemId);
+        deleteslider(itemId);
     });
-    function deletePhoto(itemId) {
+    function deleteslider(itemId) {
         swal({
             title: "Are you sure?",
             text: "Are you sure that you want to delete this Item ?",
@@ -28,73 +29,15 @@
         });
     }
 </script>
-<!--- Swite message show  delete form news  by obydul date:28-7-16-->
-<script>
-    $('button.news-delete-item').click(function() {
-        var itemId = $(this).attr("data-item-id");
-        deletePhoto(itemId);
-    });
-    function deletePhoto(itemId) {
-        swal({
-            title: "Are you sure?",
-            text: "Are you sure that you want to delete this Item ?",
-            type: "warning",
-            showCancelButton: true,
-            closeOnConfirm: false,
-            confirmButtonText: "Yes, delete it!",
-            confirmButtonColor: "#ec6c62"
-        }, function() {
-            $.ajax({
-                method: "GET",
-                url: "/news-show-delete/" + itemId,
-                type: "DELETE"
-            })
-                .done(function(data) {
-                    swal("Deleted!", "Your item was successfully deleted!", "success");
-                })
-                .error(function(data) {
-                    swal("Oops", "We couldn't connect to the server!", "error");
-                });
-        });
-    }
-</script>
-<!--- Swite message show  delete form main category  by obydul date:28-7-16-->
-<script>
-    $('button.main-category-delete').click(function() {
-        var itemId = $(this).attr("data-item-id");
-        deletePhoto(itemId);
-    });
-    function deletePhoto(itemId) {
-        swal({
-            title: "Are you sure?",
-            text: "Are you sure that you want to delete this Item ?",
-            type: "warning",
-            showCancelButton: true,
-            closeOnConfirm: false,
-            confirmButtonText: "Yes, delete it!",
-            confirmButtonColor: "#ec6c62"
-        }, function() {
-            $.ajax({
-                method: "GET",
-                url: "/category-main-category-delete/" + itemId,
-                type: "DELETE"
-            })
-                .done(function(data) {
-                    swal("Deleted!", "Your item was successfully deleted!", "success");
-                })
-                .error(function(data) {
-                    swal("Oops", "We couldn't connect to the server!", "error");
-                });
-        });
-    }
-</script>
+
+
 <!--- Swite message show  delete form sub category  by obydul date:28-7-16-->
 <script>
     $('button.sub-category-delete').click(function() {
         var itemId = $(this).attr("data-item-id");
-        deletePhoto(itemId);
+        deleteSubCat(itemId);
     });
-    function deletePhoto(itemId) {
+    function deleteSubCat(itemId) {
         swal({
             title: "Are you sure?",
             text: "Are you sure that you want to delete this Item ?",
@@ -122,9 +65,9 @@
 <script>
     $('button.backing-new-delete').click(function() {
         var itemId = $(this).attr("data-item-id");
-        deletePhoto(itemId);
+        deletebackingNews(itemId);
     });
-    function deletePhoto(itemId) {
+    function deletebackingNews(itemId) {
         swal({
             title: "Are you sure?",
             text: "Are you sure that you want to delete this Item ?",

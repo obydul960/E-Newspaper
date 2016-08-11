@@ -1,5 +1,7 @@
 @extends('layouts.master')
+
 @section('content')
+
 <div class="row-fluid">
     <!-- block -->
     <div class="block">
@@ -12,7 +14,7 @@
 
                 <fieldset>
                     <div class="control-group">
-                        <label class="control-label" for="typeahead"> Titli </label>
+                        <label class="control-label" for="typeahead"> Title </label>
                         <div class="controls">
                             <input type="text" value="{{$show_news_data->news_title}}" name="news_title" class="span6" id="typeahead">
                         </div>
@@ -61,6 +63,23 @@
                             <input name="news_image" class="input-file uniform_on" id="fileInput" type="file">
                         </div>
                     </div>
+
+                    <div class="control-group">
+                        <label class="control-label" for="fileInput">Editor</label>
+                        <div class="controls">
+                            <input type="text" name="news_editor" value="{{ $show_news_data->editor }}">
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="fileInput">Status</label>
+                        <div class="controls">
+                            <select name="news_status">
+                                <option selected>{{$show_news_data->published}}</option>
+                                <option value="1">Published</option>
+                                <option value="0">unpublished</option>
+                            </select>
+                        </div>
+                    </div>
                     <div class="control-group">
                         <div class="span12" id="content">
                             <div class="row-fluid">
@@ -90,4 +109,6 @@
     </div>
     <!-- /block -->
 </div>
+
+
 @endsection

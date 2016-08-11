@@ -170,6 +170,10 @@ return [
          * image resize ImageServiceProvider
          */
         Intervention\Image\ImageServiceProvider::class,
+        /*
+         *  hite counter use
+         */
+        Kryptonit3\Counter\CounterServiceProvider::class,
 
     ],
 
@@ -232,7 +236,11 @@ return [
         /*
          * Image resize Intervention
          */
-        'Image' => Intervention\Image\Facades\Image::class
+        'Image' => Intervention\Image\Facades\Image::class,
+        /*
+         * hite  counter use
+         */
+        'Counter' => Kryptonit3\Counter\Facades\CounterFacade::class
 
     ],
 

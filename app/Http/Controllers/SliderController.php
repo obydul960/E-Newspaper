@@ -21,7 +21,7 @@ class SliderController extends Controller
     // Slider image form by obydul date 25-7-16
     public function slider_form(){
         //show slider image by obydul date 25-7-16
-        $slider_show = SliderModel::all();
+        $slider_show = SliderModel::orderBy('id','desc')->paginate(4);
         return view('Backend.slider.slider_form',compact('slider_show'));
     }
 
@@ -81,6 +81,14 @@ class SliderController extends Controller
     //Delete slider image by obydul date 25-7-16
     public function slider_delete($id){
         $slider_delete = SliderModel::find($id)->delete();
+        return redirect::to('slider-form');
+    }
+    // slider controll display by obydul date:8-8-16
+    public function slider_store(Request $request,$id){
+        $data         =  SliderModel::find($id);
+        $data->status = $request->get('slider_store');
+        $data->save();
+        Session::flash('success', 'Successfully  Insert.');
         return redirect::to('slider-form');
     }
 

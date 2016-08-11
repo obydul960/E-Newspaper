@@ -74,7 +74,8 @@
                         <th>Title</th>
                         <th>Link</th>
                         <th>Action</th>
-                        <th></th>
+                        <th>.</th>
+                        <th colspan="2">status</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -83,23 +84,42 @@
                         {!! Form::open(['url' =>['slider-update',$value->id],'class'=>'form-horizontal','method'=>'post','enctype' => 'multipart/form-data','files'=>true ]) !!}
                         <fieldset>
                             <td>
-                                <img style="width:150px;height:150px; margin: 0px auto" src="Slider_image/{{$value->image}}">
+                                <img style="width:80px;height:80px;border-radius:  margin: 0px auto" src="Slider_image/{{$value->image}}">
                                 <input type="file" name="picture" value="{{ $value->image }}" class="span4" id="typeahead">
                             </td>
                             <td><input type="text" name="image_title" value="{{ $value->image_title }}" class="span12" id="typeahead"></td>
                             <td><input type="text" name="image_link" value="{{ $value->back_link }}" class="span12" id="typeahead"></td>
-
                             <td> <input type="submit"  value="Update" class="btn btn-success" data-photo-id="{{$value->id}}"></td>
                         </fieldset>
                         {!! Form::close() !!}
-                        <td>
-                            <button class="delete-item btn btn-danger" data-item-id="{{$value->id}}">Delete</button>
-                        </td>
 
+                        <td>
+                            <button class=" btn btn-danger slider-delete" data-item-id="{{$value->id}}">Delete</button>
+
+                        </td>
+                        <td class="span2">
+                            {!!Form::open(['url'=>['slider-show-store',$value->id],'class'=>'form-horizontal'])!!}
+                            <select name="slider_store" onchange='this.form.submit()' style="width: 100%" class="span12">
+                                <option selected>
+                                    @if($value->status == 1)
+                                    Yes
+                                    @endif
+                                    @if($value->status == 0)
+                                    No
+                                    @endif
+                                </option>
+                                <option value="1">Yes</option>
+                                <option value="0">No</option>
+                            </select>
+                            {!!Form::close()!!}
+                        </td>
                     </tr>
                     @endforeach
                     </tbody>
                 </table>
+                <ul class="pagination" style="float: left;text-decoration: none">
+                    <li>{{$slider_show->render() }}</li>
+                </ul>
             </div>
         </div>
     </div>

@@ -18,13 +18,10 @@
                     <a href="{{ url('backing-news')}}"><i class="icon-chevron-right"></i> Backing News</a>
                 </li>
                 <li>
-                    <a href="{{ url('news-show')}}"><i class="icon-chevron-right"></i>News Show</a>
+                    <a href="{{ url('news-show')}}"><i class="icon-chevron-right"></i>News Manage</a>
                 </li>
                 <li>
-                    <a href="#"><span class="badge badge-success pull-right">731</span> Orders</a>
-                </li>
-                <li>
-                    <a href="#"><span class="badge badge-success pull-right">812</span> Invoices</a>
+                    <a href="{{ url('add-create-form')}}"><i class="icon-chevron-right"></i>Adds</a>
                 </li>
             </ul>
         </div>

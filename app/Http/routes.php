@@ -24,7 +24,9 @@ Route::get('/home', 'HomeController@index');
 
 Route::get('category-create-form','CategoryController@Main_cat_show');
 Route::post('category-store','CategoryController@store');
-Route::get('category-main-category-delete/{id}','CategoryController@delete');
+Route::get('category-delete/{id}','CategoryController@category_delete');
+Route::post('home-store/{id}','CategoryController@home_show_store');
+Route::post('up-down-store/{id}','CategoryController@up_down_store');
 
 // Sub category add by obydul date 24-7-16
 Route::post('sub-category-store','CategoryController@sub_cat_store');
@@ -36,6 +38,7 @@ Route::get('slider-form','SliderController@slider_form');
 Route::post('slider-image-store','SliderController@slider_upload');
 Route::post('slider-update/{id}','SliderController@slider_update');
 Route::get('slider-delete/{id}','SliderController@slider_delete');
+Route::post('slider-show-store/{id}','SliderController@slider_store');
 
 // news insert update delete by obydul date:31-7-16
 Route::get('news-create','NewsController@create');
@@ -45,20 +48,28 @@ Route::get('news-show','NewsController@news_show');
 Route::get('news-show-delete/{id}','NewsController@news_delete');
 Route::get('news-edit-form/{id}','NewsController@edit_news');
 Route::post('news-update/{id}','NewsController@news_update');
+Route::post('news-published/{id}','NewsController@new_publish');
 
 Route::get('backing-news','NewsController@backing_news_form');
 Route::post('backing-news-store','NewsController@backing_news_store');
 Route::post('backing-news-update/{id}','NewsController@backing_news_update');
 Route::get('backing-news-delete/{id}','NewsController@backing_news_delete');
-
+Route::post('backing-news-show/{id}','NewsController@backing_news_show');
 
 // fontend layout controll by obydul date:6-8-16
 
 
-Route::get('/','FontendNewsController@view');
-Route::get('fontend-details/{id}','FontendNewsController@fontend_details');
-Route::get('category-details/{id}','FontendNewsController@category_details');
+Route::get('/','FontendNewsController@news_home');
+//Route::get('/','FontendNewsController@create');
+Route::get('news-details/{id}','FontendNewsController@news_details');
+Route::get('category-news-details/{id}','FontendNewsController@category_news_details');
 
 
 // Add controll by obydul date:7-8-16
-Route::get('add-form','AddController@create');
+
+Route::get('add-create-form','AddController@create');
+Route::post('add-store','AddController@add_store');
+Route::post('add-update/{id}','AddController@add_update');
+Route::post('add-status/{id}','AddController@AdsStatus');
+Route::get('add-delete/{id}','AddController@adds_delete');
+
