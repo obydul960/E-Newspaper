@@ -26,7 +26,9 @@ class SliderController extends Controller
         $slider_show = SliderModel::orderBy('id','desc')->paginate(4);
         return view('Backend.slider.slider_form',compact('slider_show'));
         }
-        else{}
+        else{
+            return view('errors.404');
+        }
     }
 
     // Slider image uploading by obydul date 25-7-16
@@ -56,7 +58,9 @@ class SliderController extends Controller
 
         }
         }
-        else{}
+        else{
+            return view('errors.404');
+        }
     }
 
     public function slider_update(Request $request,$id){
@@ -84,7 +88,9 @@ class SliderController extends Controller
             Session::flash('success', 'Successfully Data Update.');
             return redirect::to('slider-form');
         }
-        else{}
+        else{
+            return view('errors.404');
+        }
 
     }
 
@@ -94,7 +100,9 @@ class SliderController extends Controller
         $slider_delete = SliderModel::find($id)->delete();
         return redirect::to('slider-form');
         }
-        else{}
+        else{
+            return view('errors.404');
+        }
     }
     // slider controll display by obydul date:8-8-16
     public function slider_store(Request $request,$id){
@@ -105,7 +113,9 @@ class SliderController extends Controller
         Session::flash('success', 'Successfully  Insert.');
         return redirect::to('slider-form');
         }
-        else{}
+        else{
+            return view('errors.404');
+        }
     }
 
 

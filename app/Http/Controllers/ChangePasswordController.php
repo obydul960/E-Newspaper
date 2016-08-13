@@ -20,7 +20,9 @@ class ChangePasswordController extends Controller
         if(Auth::check()){
         return view('Backend.password.change_password');
         }
-        else{}
+        else{
+            return view('errors.404');
+        }
     }
 
     // change password mange by obydul date:11-8-16
@@ -42,7 +44,7 @@ class ChangePasswordController extends Controller
         }
         }
         else{
-          
+            return view('errors.404');
         }
     }
 //end class
