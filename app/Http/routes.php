@@ -41,11 +41,14 @@ Route::post('sub-category-update/{id}','CategoryController@sub_cat_update');
 
 //slider image controlling
 Route::get('slider-form','SliderController@slider_form');
-Route::post('slider-image-store','SliderController@slider_upload');
+//saif test water mark
+Route::post('slider-form','SliderController@slider_upload');
+//end watermark
+//Route::post('slider-image-store','SliderController@slider_upload');
 Route::post('slider-update/{id}','SliderController@slider_update');
 Route::get('slider-delete/{id}','SliderController@slider_delete');
 Route::post('slider-show-store/{id}','SliderController@slider_store');
-Route::post('slider-form','SliderController@waterpallImage');
+//Route::post('slider-form','SliderController@waterpallImage');
 
 
 // news insert update delete by obydul date:31-7-16
@@ -85,4 +88,5 @@ Route::get('change-password','ChangePasswordController@changePasswordForm');
 Route::post('change-pass','ChangePasswordController@changePassword');
 
 // 404 page controll by obydul date:13-8-16
+
 //Route::get('404','AddController@errorpage');

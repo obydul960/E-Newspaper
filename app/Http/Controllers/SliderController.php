@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
-
+use Montesjmm\ResizeAndWatermark\ResizeAndWatermark;
 use App\Http\Requests;
 use App\Model\SliderModel;
 use Session;
@@ -48,6 +48,7 @@ class SliderController extends Controller
             $uploadFolder               ='Slider_image';
             $createFileName             = time() . '.' . $image->getClientOriginalExtension();
             $moveFile                   =$image->move($uploadFolder,$createFileName);
+
             $image_upload               = new SliderModel;
             $image_upload->image_title  = $request->get('image_title');
             $image_upload->image        = $createFileName;
@@ -62,6 +63,7 @@ class SliderController extends Controller
             return view('errors.404');
         }
     }
+ 
 
     public function slider_update(Request $request,$id){
         if(Auth::check()){
