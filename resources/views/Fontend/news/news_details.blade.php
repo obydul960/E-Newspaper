@@ -22,8 +22,8 @@
                                         <h4 class="de-catagory-title">
                                             <a href="#">{{ $news_details->news_title }} </a>
                                         </h4>
-                                        <h6 style="font-weight: 600; color: rgb(137, 135, 135);font-size: 13px;">সিনিয়র করেসপন্ডেন্ট</h6>
-                                        <span><i class="fa fa-clock-o" aria-hidden="true"></i> {{ $news_details->created_at }} </span>
+                                        <h6 style="font-weight: 600; color: rgb(137, 135, 135);font-size: 13px;">{{ $news_details->editor }}</h6>
+                                        <span><i class="fa fa-clock-o" aria-hidden="true"></i>{{date("F j, Y, g:i a",strtotime($news_details->created_at))}} </span>
                                         <hr class="details-post-hr">
                                     </div>
                                     <div class="de-content-se text-center">
@@ -34,10 +34,10 @@
                                 <hr class="details-post-hr ">
                                 <div class="social-icon text-center">
                                     <div class="ssk-group pull-left">
-                                        <a href="https://www.facebook.com" class="ssk ssk-facebook"></a>
-                                        <a href="" class="ssk ssk-twitter"></a>
-                                        <a href="" class="ssk ssk-google-plus"></a>
-                                        <a href="" class="ssk ssk-pinterest"></a>
+                                        <a href="https://www.facebook.com" target="_blank" class="ssk ssk-facebook"></a>
+                                        <a href="" class="ssk ssk-twitter"  ></a>
+                                        <a href="" class="ssk ssk-google-plus"   ></a>
+                                        <a href="" class="ssk ssk-pinterest" ></a>
                                         <a href="" class="ssk ssk-tumblr"></a>
                                     </div>
                                 </div>

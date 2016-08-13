@@ -20,13 +20,17 @@ class NewsController extends Controller
 {
     // news form show by obydul date:1-8-16
     public  function create(){
+        if(Auth::check()){
         // category show by obydul date:1-8-16
         $min_category_show =CategoryModel::all();
         return view('Backend.news.news_form',compact('min_category_show'));
+        }
+        else{}
     }
 
     // sub category show category wish form show by obydul date:1-8-16
     public function sub_category(Request $request){
+        if(Auth::check()){
             $subCategory_show = SubCategoryModel::where('main_cat_id',$request->get('sub_category'))->get();
             foreach($subCategory_show as $value){
                 if($value!= NULL ){
@@ -37,12 +41,15 @@ class NewsController extends Controller
                 }
 
             }
+        }
+        else{}
 
 
     }
 
     // news new store  by obydul date:1-8-16
     public function news_store(Request $request){
+        if(Auth::check()){
         $validator = Validator::make($request->all(),[
             'news_title'       => 'required',
             'sel_min_category' => 'required',
@@ -93,18 +100,24 @@ class NewsController extends Controller
             return redirect::to('news-create');
 
         }
+        }
+        else{}
     }
     //show the news data by obydul date:2-8-16
     public function news_show(){
+        if(Auth::check()){
         $show_news = DB::table('news_table')
             ->join('image_table', 'news_table.news_id', '=', 'image_table.news_id')
             ->select('news_table.id','news_table.published','news_table.news_title','news_table.short_details','image_table.image')
             ->orderBy('id', 'desc')->paginate(5);
         return view('Backend.news.news_show',compact('show_news'));
+        }
+        else{}
     }
 
     // news edit form show by obydul date:2-8-16
     public function edit_news($id){
+        if(Auth::check()){
         $category_show =CategoryModel::all();
         $show_news_data = DB::table('news_table')
             ->leftjoin('main_category', 'news_table.main_category', '=', 'main_category.id')
@@ -115,10 +128,13 @@ class NewsController extends Controller
             ->where('news_table.id','=',$id)
             ->first($id);
         return view('Backend.news.edit_news',compact('category_show','show_news_data'));
+        }
+        else{}
     }
 
     // news update by obydul date:2-8-16
     public function news_update(Request $request,$id){
+        if(Auth::check()){
         $news_update                 = NewsModel::find($id);
         $news_image_update           = ImageModel::find($id);
         $short_contain= $request->get('news_content');
@@ -135,34 +151,46 @@ class NewsController extends Controller
         $news_update->save();
         Session::flash('success', 'Successfully Data Update.');
         return redirect::to('news-create');
+        }
+        else{}
 
     }
 
 
     // news published and unpublished by obydul date:10-8-16
     public function  new_publish(Request $request,$id){
+        if(Auth::check()){
         $data         =  NewsModel::find($id);
         $data->published = $request->get('published_news');
         $data->save();
         Session::flash('success', 'Successfully  Insert.');
         return redirect::to('news-show');
+        }
+        else{}
     }
 
 
     //news delete obydul date:2-8-16
     public  function  news_delete($id){
+        if(Auth::check()){
         $news_delete=NewsModel::find($id)->delete();
         return redirect::to('news-show');
+        }
+        else{}
     }
 
 
  // backing New form show by obydul date:3-8-16
     public function  backing_news_form(){
+        if(Auth::check()){
         $backing_new=DB::table('breaking_news')->orderBy('id', 'desc')->paginate(5);
         return view('Backend.news.backing_news',compact('backing_new'));
+        }
+        else{}
     }
     // Backing News store by obydul date:3-8-16
     public function backing_news_store(Request $request){
+        if(Auth::check()){
         $validator = Validator::make($request->all(),[
             'news_title'       => 'required',
             'back_link' => 'required'
@@ -201,10 +229,13 @@ class NewsController extends Controller
             Session::flash('success', 'Successfully Data Insert.');
             return redirect::to('backing-news');
         }
+        }
+        else{}
     }
 
     //Backing News update by obydul date:3-8-16
     public function backing_news_update(Request $request,$id){
+        if(Auth::check()){
         $backing_news = BackingNewsModel::find($id);
 
         if (Input::hasFile('news_icon')) {
@@ -233,23 +264,31 @@ class NewsController extends Controller
         }
         Session::flash('success', 'Successfully Data Update...');
         return redirect::to('backing-news');
+        }
+        else{}
 
     }
 
 
     //backing news delete by obydul date:3-8-16
     public function backing_news_delete($id){
+        if(Auth::check()){
         $backing_news_delete=BackingNewsModel::find($id)->delete();
         return redirect::to('backing-news');
+        }
+        else{}
 
     }
     // backing news controll by obydul date:8-8-16
     public function  backing_news_show(Request $request,$id){
+        if(Auth::check()){
         $data =  BackingNewsModel::find($id);
         $data->status = $request->get('backing_news');
         $data->save();
         Session::flash('success', 'Successfully  Insert.');
         return redirect::to('backing-news');
+        }
+        else{}
     }
 //end class
 }

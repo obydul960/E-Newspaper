@@ -6,22 +6,22 @@
                     <a href="{{ url('home')}}"><i class="icon-chevron-right"></i> Dashboard</a>
                 </li>
                 <li>
-                    <a href="{{ url('category-create-form')}}"><i class="icon-chevron-right"></i> Category</a>
+                    <a href="{{ url('category-create-form')}}"><span class="badge badge-success pull-right">812</span>  Category</a>
                 </li>
                 <li>
-                    <a href="{{ url('slider-form')}}"><i class="icon-chevron-right"></i> Slider</a>
+                    <a href="{{ url('slider-form')}}"><span class="badge badge-success pull-right">812</span>  Slider</a>
                 </li>
                 <li>
-                    <a href="{{ url('news-create')}}"><i class="icon-chevron-right"></i> News</a>
+                    <a href="{{ url('news-create')}}"><span class="badge badge-info pull-right">812</span>  News</a>
                 </li>
                 <li>
-                    <a href="{{ url('backing-news')}}"><i class="icon-chevron-right"></i> Backing News</a>
+                    <a href="{{ url('backing-news')}}"><span class="badge badge-info pull-right">812</span>  Backing News</a>
                 </li>
                 <li>
-                    <a href="{{ url('news-show')}}"><i class="icon-chevron-right"></i>News Manage</a>
+                    <a href="{{ url('news-show')}}"><span class="badge badge-important pull-right">812</span> News Manage</a>
                 </li>
                 <li>
-                    <a href="{{ url('add-create-form')}}"><i class="icon-chevron-right"></i>Adds</a>
+                    <a href="{{ url('add-create-form')}}"><span class="badge badge-warning pull-right">812</span> Adds</a>
                 </li>
             </ul>
         </div>

@@ -18,7 +18,7 @@
 
 Route::auth();
 
-Route::get('/home', 'HomeController@index');
+Route::get('home', 'HomeController@index');
 
 // Main category add by obydul date 24-7-16
 
@@ -72,4 +72,12 @@ Route::post('add-store','AddController@add_store');
 Route::post('add-update/{id}','AddController@add_update');
 Route::post('add-status/{id}','AddController@AdsStatus');
 Route::get('add-delete/{id}','AddController@adds_delete');
+
+
+// Change Password
+Route::get('change-password','ChangePasswordController@changePasswordForm');
+Route::post('change-pass','ChangePasswordController@changePassword');
+
+// 404 page controll by obydul date:13-8-16
+Route::get('404','AddController@errorpage');
 

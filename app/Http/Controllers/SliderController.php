@@ -16,13 +16,17 @@ class SliderController extends Controller
 {
     // Slider image form by obydul date 25-7-16
     public function slider_form(){
+        if(Auth::check()){
         //show slider image by obydul date 25-7-16
         $slider_show = SliderModel::orderBy('id','desc')->paginate(4);
         return view('Backend.slider.slider_form',compact('slider_show'));
+        }
+        else{}
     }
 
     // Slider image uploading by obydul date 25-7-16
     public function  slider_upload(Request $request){
+        if(Auth::check()){
         $validator = Validator::make($request->all(),[
             'image_title' => 'required',
             'picture'       => 'required | mimes:jpeg,jpg,png',
@@ -46,9 +50,12 @@ class SliderController extends Controller
             return redirect::to('slider-form')->withErrors($validator);
 
         }
+        }
+        else{}
     }
 
     public function slider_update(Request $request,$id){
+        if(Auth::check()){
         $slider_update = SliderModel::find($id);
         if (Input::hasFile('picture')) {
             $extension3 = Input::file('picture')->getClientOriginalExtension();
@@ -71,21 +78,29 @@ class SliderController extends Controller
             $slider_update->save();
             Session::flash('success', 'Successfully Data Update.');
             return redirect::to('slider-form');
+        }
+        else{}
 
     }
 
     //Delete slider image by obydul date 25-7-16
     public function slider_delete($id){
+        if(Auth::check()){
         $slider_delete = SliderModel::find($id)->delete();
         return redirect::to('slider-form');
+        }
+        else{}
     }
     // slider controll display by obydul date:8-8-16
     public function slider_store(Request $request,$id){
+        if(Auth::check()){
         $data         =  SliderModel::find($id);
         $data->status = $request->get('slider_store');
         $data->save();
         Session::flash('success', 'Successfully  Insert.');
         return redirect::to('slider-form');
+        }
+        else{}
     }
 
 

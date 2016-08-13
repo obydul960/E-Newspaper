@@ -285,11 +285,11 @@
                                     @foreach($v=App\Model\NewsModel::where('main_category','=',$viewHomePage4->id)->where('published','=',1)->take(1)->orderBy('id','desc')->get() as $value)
 
                                     @if($img=App\Model\ImageModel::where('news_id','=',$value->news_id)->first())
-                                   <a href="{{ url('news-details')}}/{{ $national->news_id }}"> <img src="{{URL::to('/')}}/image_folder/{{$img->image}}" class="img-responsive" alt=""></a>
+                                   <a href="{{ url('news-details')}}/{{ $value->news_id }}"> <img src="{{URL::to('/')}}/image_folder/{{$img->image}}" class="img-responsive" alt=""></a>
                                     @endif
                                     <div class="cata-content">
                                         <h4 class="catagory-title1 cata-content-right h-ca">
-                                            <a href="{{ url('news-details')}}/{{ $national->news_id }}">{{ $value->news_title}}</a>
+                                            <a href="{{ url('news-details')}}/{{ $value->news_id }}">{{ $value->news_title}}</a>
                                         </h4>
                                     </div>
                                     @endforeach
@@ -358,11 +358,11 @@
                                     @foreach($v=App\Model\NewsModel::where('main_category','=',$viewHomePage5->id)->where('published','=',1)->take(1)->orderBy('id','desc')->get() as $value)
 
                                     @if($img=App\Model\ImageModel::where('news_id','=',$value->news_id)->first())
-                                    <a href="{{ url('news-details')}}/{{ $national->news_id }}"> <img src="{{URL::to('/')}}/image_folder/{{$img->image}}" class="img-responsive" alt=""></a>
+                                    <a href="{{ url('news-details')}}/{{ $value->news_id }}"> <img src="{{URL::to('/')}}/image_folder/{{$img->image}}" class="img-responsive" alt=""></a>
                                     @endif
                                     <div class="cata-content">
                                         <h4 class="catagory-title1 cata-content-right h-ca">
-                                            <a href="{{ url('news-details')}}/{{ $national->news_id }}">{{ $value->news_title}}</a>
+                                            <a href="{{ url('news-details')}}/{{ $value->news_id }}">{{ $value->news_title}}</a>
                                         </h4>
                                     </div>
                                     @endforeach
