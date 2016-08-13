@@ -33,6 +33,7 @@ Route::post('category-store','CategoryController@store');
 Route::get('category-delete/{id}','CategoryController@category_delete');
 Route::post('home-store/{id}','CategoryController@home_show_store');
 Route::post('up-down-store/{id}','CategoryController@up_down_store');
+Route::post('category-create-form/{id}','CategoryController@main_category_update');
 
 // Sub category add by obydul date 24-7-16
 Route::post('sub-category-store','CategoryController@sub_cat_store');

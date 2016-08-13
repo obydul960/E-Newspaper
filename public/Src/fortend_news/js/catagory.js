@@ -73,7 +73,7 @@ jQuery(document).ready(function ($) {
     
     
             
-    //     home-page national
+    //     home-page national -1
 
     $nationalh = $('#national-h').bxSlider({
         auto: false,
@@ -93,7 +93,8 @@ jQuery(document).ready(function ($) {
         e.preventDefault();
         $nationalh.goToPrevSlide();
     });
-    //     home-page job
+
+    //     home-page job -2
 
     $jobh = $('#job-h').bxSlider({
         auto: false,
@@ -103,7 +104,7 @@ jQuery(document).ready(function ($) {
         pager: false,
         slideMargin: 10,
         controls:false
-        
+
     });
     $('#news-next-job').click(function (e) {
         e.preventDefault();
@@ -113,8 +114,9 @@ jQuery(document).ready(function ($) {
         e.preventDefault();
         $jobh.goToPrevSlide();
     });
-    
-    //     home-page international
+
+
+    //     home-page international -3
 
     $internationalh = $('#international-h').bxSlider({
         auto: false,
@@ -134,7 +136,9 @@ jQuery(document).ready(function ($) {
         e.preventDefault();
         $internationalh.goToPrevSlide();
     });
-    //     home-page sport
+
+
+    //     home-page sport -4
 
     $sporth = $('#sport-h').bxSlider({
         auto: false,
@@ -154,6 +158,28 @@ jQuery(document).ready(function ($) {
         e.preventDefault();
         $sporth.goToPrevSlide();
     });
+    //     home-page sport two--
+
+    $sporth = $('#sport-h2').bxSlider({
+        auto: false,
+        mode: 'vertical',
+        maxSlides: 5,
+        minSlides:2,
+        pager: false,
+        slideMargin: 10,
+        controls:false
+
+    });
+    $('#news-next-sport2').click(function (e) {
+        e.preventDefault();
+        $sporth.goToNextSlide();
+    });
+    $('#news-prev-sport2').click(function (e) {
+        e.preventDefault();
+        $sporth.goToPrevSlide();
+    });
+    //home teo end
+
     //     home-page entertainment
 
     $entertainmenth = $('#entertainment-h').bxSlider({
@@ -174,6 +200,7 @@ jQuery(document).ready(function ($) {
         e.preventDefault();
         $entertainmenth.goToPrevSlide();
     });
+
     //     home-page carrier
 
     $carrier = $('#carrier-h').bxSlider({
