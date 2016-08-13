@@ -37,7 +37,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </a>
-            <a class="brand" href="#">Admin Panel</a>
+            <a class="brand" href="{{ url('home')}}" style="border-right: 2px solid">Dashboard </a>
             <div class="nav-collapse collapse">
                 <ul class="nav pull-right">
                     <li class="dropdown">
@@ -45,14 +45,66 @@
 
                         </a>
                         <ul class="dropdown-menu">
+                            <li>
+                                <a tabindex="-1" href="{{ url('change-password')}}">Change password</a>
+                            </li>
                             <li class="divider"></li>
                             <li>
-                                <a tabindex="-1" href="{{ url('/logout') }}">Logout</a>
+                                <a tabindex="-1" href="#">Logout</a>
                             </li>
                         </ul>
                     </li>
                 </ul>
+                <ul class="nav">
 
+                    <li>
+
+                        <a href="{{ url('category-create-form')}}" style="border-right: 2px solid">Category
+                            <br/>
+                            @if($category =DB::table('news_table')->count())
+                            <span class="badge badge-info">{{$category}}
+                            </span>
+                            @endif
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ url('slider-form')}}" style="border-left: 2px #c0c0c0;border-right: 2px solid">Slider <br/>
+                            @if($slider =DB::table('slider')->count())
+                            <span class="badge badge-info">{{$slider}}</span>
+                            @endif
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ url('news-create')}}" style="border-left: 2px #c0c0c0;border-right: 2px solid">News <br/>
+                            @if($news =DB::table('news_table')->count())
+                            <span class="badge badge-info">{{$news}}</span>
+                            @endif
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ url('backing-news')}}" style="border-left: 2px #c0c0c0;border-right: 2px solid">Backing News <br/>
+                            @if($beakingNews =DB::table('breaking_news')->count())
+                            <span class="badge badge-info">{{ $beakingNews}}</span>
+                            @endif
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ url('news-show')}}" style="border-left: 2px #c0c0c0;border-right: 2px solid">News Manage<br/>
+                            @if($newsMenage =DB::table('news_table')->count())
+                            <span class="badge badge-info">{{$newsMenage}}</span>
+                            @endif
+                        </a>
+
+                    </li>
+                    <li>
+                        <a href="{{ url('add-create-form')}}" style="border-left: 2px #c0c0c0;">Adds <br/>
+                            @if($adds =DB::table('add_table')->count())
+                            <span class="badge badge-info">{{$adds}}</span>
+                            @endif
+                        </a>
+
+                    </li>
+                </ul>
             </div>
             <!--/.nav-collapse -->
         </div>

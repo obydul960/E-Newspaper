@@ -22,8 +22,9 @@ class CategoryController extends Controller
 
     // Main menu store by obydul date 24-7-16
    public function store(Request $request){
-     if(Auth::check())
-  {
+
+       if(Auth::check()){
+
        $validator = Validator::make($request->all(),[
                'main_category_name' => 'required|max:20'
            ]);
@@ -39,10 +40,15 @@ class CategoryController extends Controller
            return redirect::to('category-create-form');
 
        }
+
      }
+
+       else{ }
+
    }
     // Sub menu store by obydul date 24-7-16
     public function sub_cat_store(Request $request){
+        if(Auth::check()){
         $validator = Validator::make($request->all(),[
             'min_category_id'   =>'required',
             'sub_category_name' =>'required'
@@ -59,10 +65,13 @@ class CategoryController extends Controller
             Session::flash('success', 'Successfully Data Insert.');
             return redirect::to('category-create-form');
         }
+        }
+        else{}
     }
 
     // Main menu show by obydul date 24-7-16
     public  function Main_cat_show(){
+        if(Auth::check()){
         // Main category show by obydul date 26-7-16
         $main_category = DB::table('main_category')->orderBy('id', 'desc')->paginate(3);
         $main_category_show = DB::table('main_category')->get();
@@ -72,10 +81,14 @@ class CategoryController extends Controller
             ->select('sub_category.id','sub_category.sub_cat_name', 'main_category.category_name')
             ->orderBy('id', 'desc')->paginate(3);
 
-        return view('Backend.category.main_category',compact('main_category','sub_category','main_category_show'));
+
+       return view('Backend.category.main_category',compact('main_category','sub_category','main_category_show'));
+        }
+        else{}
     }
  // main category show home page by obydul date:7-8-16
     public function  home_show_store(Request $request,$id){
+        if(Auth::check()){
         $a=Input::get('main_category_show');
 
         $check=CategoryModel::where('view_status',$a)->count();
@@ -95,16 +108,20 @@ class CategoryController extends Controller
         }
 
 
-
+       }
+        else{}
 
     }
     // main category up and down home page by obydul date:7-8-16
     public function  up_down_store(Request $request,$id){
+        if(Auth::check()){
         $data         =  CategoryModel::find($id);
         $data->status = $request->get('up_down');
         $data->save();
         Session::flash('success', 'Successfully Data Insert.');
         return redirect::to('category-create-form');
+        }
+        else{}
     }
 
 
@@ -112,6 +129,7 @@ class CategoryController extends Controller
 
     //sub category update by obydul date 24-7-16
     public function sub_cat_update(Request $request,$id){
+        if(Auth::check()){
 
         // main category update form main category table by obydul date 24-7-16
         $main_category = CategoryModel::find($id);
@@ -122,19 +140,27 @@ class CategoryController extends Controller
         $sub_category->sub_cat_name = $request->get('sub_category');
         $sub_category->save();
         return redirect::to('category-create-form');
+        }
+        else{}
     }
 
 
 
     // Main menu delete by obydul date 24-7-16
    public function  category_delete($id){
+       if(Auth::check()){
        $main_category_delete = CategoryModel::find($id)->delete();
        return redirect::to('category-create-form');
+       }
+       else{}
    }
 
     public function sub_cat_delete($id){
+        if(Auth::check()){
        $sub_cat_delete= SubCategoryModel::find($id)->delete();
         return redirect::to('category-create-form');
+        }
+        else{}
     }
     //end class
 }
