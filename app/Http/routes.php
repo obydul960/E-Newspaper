@@ -19,6 +19,10 @@
 Route::auth();
 
 Route::get('/home', 'HomeController@index');
+Route::get('/','FontendNewsController@news_home');
+//Route::get('/','FontendNewsController@create');
+Route::get('news-details/{id}','FontendNewsController@news_details');
+Route::get('category-news-details/{id}','FontendNewsController@category_news_details');
 
 // Main category add by obydul date 24-7-16
 
@@ -59,10 +63,7 @@ Route::post('backing-news-show/{id}','NewsController@backing_news_show');
 // fontend layout controll by obydul date:6-8-16
 
 
-Route::get('/','FontendNewsController@news_home');
-//Route::get('/','FontendNewsController@create');
-Route::get('news-details/{id}','FontendNewsController@news_details');
-Route::get('category-news-details/{id}','FontendNewsController@category_news_details');
+
 
 
 // Add controll by obydul date:7-8-16
@@ -72,4 +73,3 @@ Route::post('add-store','AddController@add_store');
 Route::post('add-update/{id}','AddController@add_update');
 Route::post('add-status/{id}','AddController@AdsStatus');
 Route::get('add-delete/{id}','AddController@adds_delete');
-

@@ -10,7 +10,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <!--Mobile specific metas-->
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bangladesh News Portal</title>
+    <title>CityMail24</title>
     <!--Favicon-->
     <link rel="shortcut icon" type="image/x-icon" href="{{URL::to('/')}}/Src/fortend_news/images/favicon.ico">
     <!--Fonts-->
