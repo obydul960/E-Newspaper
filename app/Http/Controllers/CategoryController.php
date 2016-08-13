@@ -135,6 +135,21 @@ class CategoryController extends Controller
         }
     }
 
+    // category update by obydul date 24-7-16
+    public function main_category_update(Request $request,$id){
+        if(Auth::check()){
+
+            // main category update form main category table by obydul date 24-7-16
+            $main_category = CategoryModel::find($id);
+            $main_category->category_name = $request->get('main_category');
+            $main_category->save();
+            Session::flash('success', 'Successfully  Update.');
+            return redirect::to('category-create-form');
+        }
+        else{
+            return view('errors.404');
+        }
+    }
 
 
 

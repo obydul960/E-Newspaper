@@ -77,7 +77,7 @@ class FontendNewsController extends Controller
     // dd($home_view_category_image);
         return view('Fontend.news.news_home',compact('national_news','national_news_2nd',
         'job_query','home_view_category','home_view_category_image','viewHomePage','slider_image','selected_news','selected_add','selected_add_two','hid_news',
-        'viewHomePage1','viewHomePage2','viewHomePage3','viewHomePage4','viewHomePage5','viewHomePage6'));
+        'viewHomePage1','viewHomePage2','viewHomePage3','viewHomePage4','viewHomePage5','viewHomePage6','viewHomePage7','viewHomePage8','viewHomePage9','viewHomePage10'));
 
         }
 

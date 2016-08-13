@@ -51,13 +51,22 @@
                             <th>Main Category Name</th>
                             <th>Home page view</th>
                             <th>Up & Down</th>
-                            <th>Action</th>
+                            <th colspan="2">Action</th>
                         </tr>
                         </thead>
                         <tbody>
                         @foreach($main_category as $value)
                         <tr>
-                            <td>{{ $value->category_name}}</td>
+                            <td>
+                                {!!Form::open(['url'=>['category-create-form',$value->id],'class'=>'form-horizontal'])!!}
+                                <input type="text" name="main_category" value="{{ $value->category_name}}">
+
+                                <input type="submit" value="Update" class="btn btn-success" style="margin-top: 5px">
+
+                                {!! Form::close() !!}
+
+
+                            </td>
                             <td>
                                 {!!Form::open(['url'=>['home-store',$value->id],'class'=>'form-horizontal'])!!}
                                 <select name="main_category_show" onchange='this.form.submit()' style="width: 100%">
@@ -96,6 +105,7 @@
                             <td>
                                 <button id="main_category_delete" class=" btn btn-danger" data-item-id="{{$value->id}}">Delete</button>
                             </td>
+
                         </tr>
                         @endforeach
 

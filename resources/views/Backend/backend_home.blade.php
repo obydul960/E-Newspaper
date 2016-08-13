@@ -67,7 +67,7 @@
                     @foreach($backingNews as $value)
                     <tr>
                         <td>{{ $value->news_title}}</td>
-                        <td><button class="btn btn-success"><a  href="{{ $value->back_link}}" style="text-decoration: none">View more</a></button></td>
+                        <td><button class="btn btn-success"><a  href="{{ $value->back_link}}" target="_blank" style="text-decoration: none">View more</a></button></td>
                         <td>
                             @if($value->status == 1)
                             Published
