@@ -6,12 +6,14 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Redirect;
+use Intervention\Image\Facades\Image;
 use App\Http\Requests;
 use App\Model\AddModel;
 use Session;
 use Input;
 use DB;
-use Intervention\Image\Facades\Image;
+
+
 
 class AddController extends Controller
 {

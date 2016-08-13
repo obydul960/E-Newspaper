@@ -174,6 +174,10 @@ return [
          *  hite counter use
          */
         Kryptonit3\Counter\CounterServiceProvider::class,
+        /*
+         * add water mark image
+         */
+        Montesjmm\ResizeAndWatermark\ResizeAndWatermarkServiceProvider::class,
 
     ],
 
@@ -240,7 +244,11 @@ return [
         /*
          * hite  counter use
          */
-        'Counter' => Kryptonit3\Counter\Facades\CounterFacade::class
+        'Counter' => Kryptonit3\Counter\Facades\CounterFacade::class,
+        /*
+         * add water mark imge
+         */
+        'ResizeAndWatermark' => Montesjmm\ResizeAndWatermark\ResizeAndWatermark::class
 
     ],
 

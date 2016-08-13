@@ -39,6 +39,8 @@ Route::post('slider-image-store','SliderController@slider_upload');
 Route::post('slider-update/{id}','SliderController@slider_update');
 Route::get('slider-delete/{id}','SliderController@slider_delete');
 Route::post('slider-show-store/{id}','SliderController@slider_store');
+Route::post('slider-form','SliderController@waterpallImage');
+
 
 // news insert update delete by obydul date:31-7-16
 Route::get('news-create','NewsController@create');
