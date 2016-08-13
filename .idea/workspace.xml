@@ -23,10 +23,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="routes.php" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="routes.php" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/Http/routes.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="41" column="32" selection-start="1586" selection-end="1586" vertical-scroll-proportion="-10.666667" vertical-offset="0" max-vertical-offset="1394">
+            <state line="41" column="32" selection-start="1586" selection-end="1586" vertical-scroll-proportion="-0.62835246" vertical-offset="872" max-vertical-offset="1394">
               <folding />
             </state>
           </provider>
@@ -101,10 +101,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SliderController.php" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="SliderController.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Http/Controllers/SliderController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="94" column="52" selection-start="3604" selection-end="3604" vertical-scroll-proportion="2.9213893" vertical-offset="0" max-vertical-offset="1955">
+            <state line="94" column="52" selection-start="3604" selection-end="3604" vertical-scroll-proportion="-43.807693" vertical-offset="459" max-vertical-offset="1955">
               <folding>
                 <element signature="e#40#68#0" expanded="true" />
               </folding>
@@ -856,13 +856,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/routes.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="41" column="32" selection-start="1586" selection-end="1586" vertical-scroll-proportion="-10.666667" vertical-offset="0" max-vertical-offset="1394">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/Backend/slider/slider_form.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="14" column="36" selection-start="626" selection-end="626" vertical-scroll-proportion="-9.153846" vertical-offset="0" max-vertical-offset="2312">
@@ -872,10 +865,17 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/SliderController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="94" column="52" selection-start="3604" selection-end="3604" vertical-scroll-proportion="2.9213893" vertical-offset="0" max-vertical-offset="1955">
+        <state line="94" column="52" selection-start="3604" selection-end="3604" vertical-scroll-proportion="-43.807693" vertical-offset="459" max-vertical-offset="1955">
           <folding>
             <element signature="e#40#68#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/routes.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="41" column="32" selection-start="1586" selection-end="1586" vertical-scroll-proportion="-0.62835246" vertical-offset="872" max-vertical-offset="1394">
+          <folding />
         </state>
       </provider>
     </entry>
