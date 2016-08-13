@@ -11,6 +11,7 @@ use App\Model\SliderModel;
 use Session;
 use Input;
 use DB;
+use Auth;
 
 class SliderController extends Controller
 {

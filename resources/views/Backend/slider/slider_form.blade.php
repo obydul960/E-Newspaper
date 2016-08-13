@@ -12,7 +12,7 @@
             <div class="block-content collapse in">
               <!--  @include('toast::messages')-->
                 <div class="block-content collapse in">
-                    {!! Form::open(['url'=>'slider-image-store','id'=>'register-form','novalidate'=>'novalidate','class'=>'form-horizontal','method'=>'post','enctype' => 'multipart/form-data','files'=>true])!!}
+                    {!! Form::open(['id'=>'register-form','novalidate'=>'novalidate','class'=>'form-horizontal','method'=>'post','enctype' => 'multipart/form-data','files'=>true])!!}
 
                   <!--  <form action="" method="post" id="register-form" novalidate="novalidate">-->
 

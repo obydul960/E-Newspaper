@@ -10,6 +10,7 @@ use App\Model\CategoryModel;
 use App\Model\SubCategoryModel;
 use Session;
 use DB;
+use Auth;
 use Illuminate\Support\Facades\Input;
 
 class CategoryController extends Controller

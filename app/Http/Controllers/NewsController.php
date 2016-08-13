@@ -14,6 +14,7 @@ use App\Http\Requests;
 use Session;
 use Input;
 use DB;
+use Auth;
 use Intervention\Image\Facades\Image;
 
 class NewsController extends Controller
