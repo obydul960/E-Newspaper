@@ -18,8 +18,13 @@ use DB;
 class AddController extends Controller
 {
     public function create(){
+        if(Auth::check()){
         $show_add = AddModel::paginate(4);
        return view('Backend.add.add_added',compact('show_add'));
+        }
+        else{
+            return view('errors.404');
+        }
     }
       // add store database by obydul date:7-8-16
     public function add_store(Request $request){
@@ -53,7 +58,9 @@ class AddController extends Controller
                 return redirect::to('add-create-form');
             }
         }
-        else{}
+        else{
+            return view('errors.404');
+        }
 
 
     }
@@ -87,7 +94,9 @@ class AddController extends Controller
         Session::flash('success', 'Successfully updated.');
         return redirect::to('add-create-form');
         }
-        else{}
+        else{
+            return view('errors.404');
+        }
 
     }
     // ads status by obydul dae:11-8-16
@@ -107,7 +116,9 @@ class AddController extends Controller
         $sub_cat_delete= AddModel::find($id)->delete();
         return redirect::to('add-create-form');
         }
-        else{}
+        else{
+            return view('errors.404');
+        }
     }
 
 

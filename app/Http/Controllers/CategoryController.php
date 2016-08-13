@@ -44,7 +44,9 @@ class CategoryController extends Controller
 
      }
 
-       else{ }
+       else{
+           return view('errors.404');
+       }
 
    }
     // Sub menu store by obydul date 24-7-16
@@ -67,7 +69,9 @@ class CategoryController extends Controller
             return redirect::to('category-create-form');
         }
         }
-        else{}
+        else{
+            return view('errors.404');
+        }
     }
 
     // Main menu show by obydul date 24-7-16
@@ -85,7 +89,9 @@ class CategoryController extends Controller
 
        return view('Backend.category.main_category',compact('main_category','sub_category','main_category_show'));
         }
-        else{}
+        else{
+            return view('errors.404');
+        }
     }
  // main category show home page by obydul date:7-8-16
     public function  home_show_store(Request $request,$id){
@@ -110,7 +116,9 @@ class CategoryController extends Controller
 
 
        }
-        else{}
+        else{
+            return view('errors.404');
+        }
 
     }
     // main category up and down home page by obydul date:7-8-16
@@ -122,7 +130,9 @@ class CategoryController extends Controller
         Session::flash('success', 'Successfully Data Insert.');
         return redirect::to('category-create-form');
         }
-        else{}
+        else{
+            return view('errors.404');
+        }
     }
 
 
@@ -142,7 +152,9 @@ class CategoryController extends Controller
         $sub_category->save();
         return redirect::to('category-create-form');
         }
-        else{}
+        else{
+            return view('errors.404');
+        }
     }
 
 
@@ -153,7 +165,9 @@ class CategoryController extends Controller
        $main_category_delete = CategoryModel::find($id)->delete();
        return redirect::to('category-create-form');
        }
-       else{}
+       else{
+           return view('errors.404');
+       }
    }
 
     public function sub_cat_delete($id){
@@ -161,7 +175,9 @@ class CategoryController extends Controller
        $sub_cat_delete= SubCategoryModel::find($id)->delete();
         return redirect::to('category-create-form');
         }
-        else{}
+        else{
+            return view('errors.404');
+        }
     }
     //end class
 }

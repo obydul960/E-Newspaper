@@ -30,7 +30,9 @@ class NewsController extends Controller
         $min_category_show =CategoryModel::all();
         return view('Backend.news.news_form',compact('min_category_show'));
         }
-        else{}
+        else{
+            return view('errors.404');
+        }
     }
 
     // sub category show category wish form show by obydul date:1-8-16
@@ -47,7 +49,9 @@ class NewsController extends Controller
 
             }
         }
-        else{}
+        else{
+            return view('errors.404');
+        }
 
 
     }
@@ -106,7 +110,9 @@ class NewsController extends Controller
 
         }
         }
-        else{}
+        else{
+            return view('errors.404');
+        }
     }
     //show the news data by obydul date:2-8-16
     public function news_show(){
@@ -117,7 +123,9 @@ class NewsController extends Controller
             ->orderBy('id', 'desc')->paginate(5);
         return view('Backend.news.news_show',compact('show_news'));
         }
-        else{}
+        else{
+            return view('errors.404');
+        }
     }
 
     // news edit form show by obydul date:2-8-16
@@ -134,7 +142,9 @@ class NewsController extends Controller
             ->first($id);
         return view('Backend.news.edit_news',compact('category_show','show_news_data'));
         }
-        else{}
+        else{
+            return view('errors.404');
+        }
     }
 
     // news update by obydul date:2-8-16
@@ -157,7 +167,9 @@ class NewsController extends Controller
         Session::flash('success', 'Successfully Data Update.');
         return redirect::to('news-create');
         }
-        else{}
+        else{
+            return view('errors.404');
+        }
 
     }
 
@@ -171,7 +183,9 @@ class NewsController extends Controller
         Session::flash('success', 'Successfully  Insert.');
         return redirect::to('news-show');
         }
-        else{}
+        else{
+            return view('errors.404');
+        }
     }
 
 
@@ -181,7 +195,9 @@ class NewsController extends Controller
         $news_delete=NewsModel::find($id)->delete();
         return redirect::to('news-show');
         }
-        else{}
+        else{
+            return view('errors.404');
+        }
     }
 
 
@@ -191,7 +207,9 @@ class NewsController extends Controller
         $backing_new=DB::table('breaking_news')->orderBy('id', 'desc')->paginate(5);
         return view('Backend.news.backing_news',compact('backing_new'));
         }
-        else{}
+        else{
+            return view('errors.404');
+        }
     }
     // Backing News store by obydul date:3-8-16
     public function backing_news_store(Request $request){
@@ -235,7 +253,9 @@ class NewsController extends Controller
             return redirect::to('backing-news');
         }
         }
-        else{}
+        else{
+            return view('errors.404');
+        }
     }
 
     //Backing News update by obydul date:3-8-16
@@ -270,7 +290,9 @@ class NewsController extends Controller
         Session::flash('success', 'Successfully Data Update...');
         return redirect::to('backing-news');
         }
-        else{}
+        else{
+            return view('errors.404');
+        }
 
     }
 
@@ -281,7 +303,9 @@ class NewsController extends Controller
         $backing_news_delete=BackingNewsModel::find($id)->delete();
         return redirect::to('backing-news');
         }
-        else{}
+        else{
+            return view('errors.404');
+        }
 
     }
     // backing news controll by obydul date:8-8-16
@@ -293,7 +317,9 @@ class NewsController extends Controller
         Session::flash('success', 'Successfully  Insert.');
         return redirect::to('backing-news');
         }
-        else{}
+        else{
+            return view('errors.404');
+        }
     }
 //end class
 }

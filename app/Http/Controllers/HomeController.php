@@ -40,6 +40,8 @@ class HomeController extends Controller
 
         return view('Backend.backend_home',compact('news_show','backingNews','newCount','backingnewCount'));
         }
-        else{}
+        else{
+            return view('errors.404');
+        }
     }
 }
