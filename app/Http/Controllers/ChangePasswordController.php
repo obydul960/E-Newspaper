@@ -41,7 +41,9 @@ class ChangePasswordController extends Controller
             return Redirect::to('Backend.password.change_password');
         }
         }
-        else{}
+        else{
+          
+        }
     }
 //end class
 }

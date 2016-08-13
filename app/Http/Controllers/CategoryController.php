@@ -16,9 +16,16 @@ use Illuminate\Support\Facades\Input;
 class CategoryController extends Controller
 {
 
+  public function __construct()
+  {
+      $this->middleware('auth');
+  }
+
     // Main menu store by obydul date 24-7-16
    public function store(Request $request){
+
        if(Auth::check()){
+
        $validator = Validator::make($request->all(),[
                'main_category_name' => 'required|max:20'
            ]);
@@ -34,7 +41,9 @@ class CategoryController extends Controller
            return redirect::to('category-create-form');
 
        }
-       }
+
+     }
+
        else{ }
 
    }

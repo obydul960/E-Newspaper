@@ -23,7 +23,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-6">
-                    <span class="pull-left">Copyright 2016 @ by <a href="#" class="footer-list">News paper</a> | All Rights Reserved</span>
+                    <span class="pull-left">Copyright <?php echo date("Y"); ?> @ by <a href="#" class="footer-list">News paper</a> | All Rights Reserved</span>
                 </div>
                 <div class="col-md-6">
                     <span class=" pull-right">Powered by <a href="http://www.belogin.com/" class="footer-list">Belogin</a></span>

@@ -19,6 +19,10 @@ use Intervention\Image\Facades\Image;
 
 class NewsController extends Controller
 {
+  public function __construct()
+  {
+      $this->middleware('auth');
+  }
     // news form show by obydul date:1-8-16
     public  function create(){
         if(Auth::check()){

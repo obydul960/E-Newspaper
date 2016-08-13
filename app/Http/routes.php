@@ -15,10 +15,16 @@
 // });
 
 
+Route::get('/','FontendNewsController@news_home');
+//Route::get('/','FontendNewsController@create');
+Route::get('news-details/{id}','FontendNewsController@news_details');
+Route::get('category-news-details/{id}','FontendNewsController@category_news_details');
 
 Route::auth();
 
-Route::get('home', 'HomeController@index');
+Route::get('/home', 'HomeController@index');
+
+
 
 // Main category add by obydul date 24-7-16
 
@@ -61,10 +67,7 @@ Route::post('backing-news-show/{id}','NewsController@backing_news_show');
 // fontend layout controll by obydul date:6-8-16
 
 
-Route::get('/','FontendNewsController@news_home');
-//Route::get('/','FontendNewsController@create');
-Route::get('news-details/{id}','FontendNewsController@news_details');
-Route::get('category-news-details/{id}','FontendNewsController@category_news_details');
+
 
 
 // Add controll by obydul date:7-8-16
@@ -76,10 +79,10 @@ Route::post('add-status/{id}','AddController@AdsStatus');
 Route::get('add-delete/{id}','AddController@adds_delete');
 
 
+
 // Change Password
 Route::get('change-password','ChangePasswordController@changePasswordForm');
 Route::post('change-pass','ChangePasswordController@changePassword');
 
 // 404 page controll by obydul date:13-8-16
-Route::get('404','AddController@errorpage');
-
+//Route::get('404','AddController@errorpage');
