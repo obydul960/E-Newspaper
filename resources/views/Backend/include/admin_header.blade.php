@@ -41,7 +41,7 @@
             <div class="nav-collapse collapse">
                 <ul class="nav pull-right">
                     <li class="dropdown">
-                        <a href="#" role="button" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-user"></i> Vincent Gabriel <i class="caret"></i>
+                        <a href="#" role="button" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-user"></i>{{ Auth::user()->name }} <i class="caret"></i>
 
                         </a>
                         <ul class="dropdown-menu">
@@ -50,7 +50,7 @@
                             </li>
                             <li class="divider"></li>
                             <li>
-                                <a tabindex="-1" href="#">Logout</a>
+                                <a tabindex="-1" href="{{ url('/logout') }}">Logout</a>
                             </li>
                         </ul>
                     </li>
