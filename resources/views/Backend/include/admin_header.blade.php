@@ -4,8 +4,17 @@
 <head>
     <title>Admin Home Page</title>
     <!-- Bootstrap -->
+    <link href="{{URL::to('/')}}/Src/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
     <link href="{{URL::to('/')}}/Src/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
+    <link href="{{URL::to('/')}}/Src/assets/styles.css" rel="stylesheet" media="screen">
     <link href="{{URL::to('/')}}/Src/assets/DT_bootstrap.css" rel="stylesheet" media="screen">
+    <script src="{{URL::to('/')}}/Src/vendors/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+
+
+
+
+
+    <!-- Bootstrap -->
     <link href="{{URL::to('/')}}/Src/vendors/easypiechart/jquery.easy-pie-chart.css" rel="stylesheet" media="screen">
     <link href="{{URL::to('/')}}/Src/css/toastr.min.css" rel="stylesheet" media="screen">
     <!--- Sweet Alert message --->
@@ -24,10 +33,7 @@
 
 
     <link rel="stylesheet" type="text/css" href="{{URL::to('/')}}/Src/vendors/bootstrap-wysihtml5/src/bootstrap-wysihtml5.css">
-    <link href="{{URL::to('/')}}/Src/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
-    <link href="{{URL::to('/')}}/Src/assets/styles.css" rel="stylesheet" media="screen">
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-    <script src="{{URL::to('/')}}/Src/vendors/modernizr-2.6.2-respond-1.1.0.min.js"></script>
 </head>
 <body>
 <div class="navbar navbar-fixed-top">

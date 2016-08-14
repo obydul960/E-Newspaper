@@ -7,7 +7,7 @@
         <div class="block">
             <div class="navbar navbar-inner block-header">
                 <div class="muted pull-left">News Table</div>
-                <div class="pull-right"><span class="badge badge-warning"><a href="{{ url('news-show')}}" style="text-decoration: none;color: #ffffff">View More</a> </span> Total &nbsp;&nbsp;&nbsp;&nbsp; <span class="badge badge-info">{{$newCount}}</span></div>
+                <div class="pull-right"><span class="badge badge-warning"><a href="{{ url('news-show')}}" target="_blank" style="text-decoration: none;color: #ffffff">View More</a> </span> Total &nbsp;&nbsp;&nbsp;&nbsp; <span class="badge badge-info">{{$newCount}}</span></div>
 
             </div>
             <div class="block-content collapse in">

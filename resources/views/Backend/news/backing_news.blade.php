@@ -75,7 +75,7 @@
                         {!! Form::open(['url' =>['backing-news-update',$value->id],'class'=>'form-horizontal','method'=>'post','enctype' => 'multipart/form-data','files'=>true ]) !!}
                         <fieldset>
                             <td>
-                                <img style="width:50px;height:50px; border-radius: 5px; margin: 0px auto" src="image_folder/{{$value->news_icon}}">
+                                <img style="width:50px;height:50px; border-radius: 5px; margin: 0px auto" src="public/image_folder/{{$value->news_icon}}">
                                 <input type="file" name="news_icon" >
                             </td>
                             <td><input type="text" name="news_title" value="{{ $value->news_title }}" class="span12" id="typeahead"></td>
@@ -108,9 +108,6 @@
                     @endforeach
                     </tbody>
                 </table>
-                <ul class="pagination">
-                    <li>{{$backing_new->render() }}</li>
-                </ul>
             </div>
         </div>
     </div>

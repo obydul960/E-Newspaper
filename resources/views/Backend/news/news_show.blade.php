@@ -49,18 +49,14 @@
                         </td>
                     </tr>
                     @endforeach
-
-
                     </tbody>
                 </table>
-                <ul class="pagination">
-                    <li>{{$show_news->render() }}</li>
-                </ul>
             </div>
         </div>
     </div>
     <!-- /block -->
 </div>
+
 <!--- Swite message show  delete form News by obydul date:28-7-16-->
 <script>
     $('button.new_delete').click(function() {

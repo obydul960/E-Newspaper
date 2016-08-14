@@ -145,9 +145,7 @@
                     @endforeach
                     </tbody>
                 </table>
-                <ul class="pagination">
-                    <li>{{$show_add->render() }}</li>
-                </ul>
+
             </div>
         </div>
     </div>

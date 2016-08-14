@@ -19,7 +19,7 @@ class AddController extends Controller
 {
     public function create(){
         if(Auth::check()){
-        $show_add = AddModel::orderBy('id','desc')->paginate(4);
+        $show_add = AddModel::orderBy('id','desc')->get();
        return view('Backend.add.add_added',compact('show_add'));
         }
         else{
@@ -75,7 +75,7 @@ class AddController extends Controller
     }
     public function add_update(Request $request,$id){
         if(Auth::check()){
-        $adds_data = AddModel::find($id);
+
             if (Input::hasFile('image_add')) {
                 $extension3 = Input::file('image_add')->getClientOriginalExtension();
                 if ($extension3 == 'png' || $extension3 == 'jpg' || $extension3 == 'jpeg' || $extension3 == 'bmp' ||
@@ -90,13 +90,13 @@ class AddController extends Controller
                 }
 
             }
-            $title=$request->get('add_title');
-            $backLink =$request->get('add_position');
-
-            $adds_data = AddModel::where('id', '=', $id)->update(['add_title' =>$title,
-                'position' =>$backLink ,'back_link' => $request->get('back_link')]);
+            $adds_data = AddModel::where('id', '=', $id)->update(['add_title' =>$request->get('add_title'),
+                'position' =>$request->get('add_position') ,'back_link' => $request->get('back_link')]);
             Session::flash('success', 'Successfully updated.');
             return redirect::to('add-create-form');
+
+
+
         }
         else{
             return view('errors.404');

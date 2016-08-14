@@ -35,23 +35,27 @@
             </div>
             <!-- /block -->
         </div>
+
+
         <div class="span6">
+
+        <div class="row-fluid">
             <!-- block -->
             <div class="block">
                 <div class="navbar navbar-inner block-header">
-                    <div class="muted pull-left">Main category table</div>
-                    <div class="pull-right"><span class="badge badge-info"></span>
-
-                    </div>
+                    <div class="muted pull-left">News Show</div>
                 </div>
                 <div class="block-content collapse in">
-                    <table class="table table-bordered">
-                        <thead>
+                    <div class="span12">
+
+
+                        <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered" id="example2">
+                            <thead>
                         <tr>
                             <th>Main Category Name</th>
                             <th>Home page view</th>
                             <th>Up & Down</th>
-                            <th colspan="2">Action</th>
+                            <th>Action</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -114,16 +118,15 @@
                         </tbody>
 
                     </table>
-                    <ul class="pagination">
-                        <li>{{$main_category->render() }}</li>
-                    </ul>
+
                 </div>
 
-
+             </div>
+                </div>
             </div>
             <!-- /block -->
         </div>
-    </div>
+
 
 
 
@@ -178,25 +181,27 @@
     </div>
     <div class="span6">
         <!-- block -->
-        <div class="block">
-            <div class="navbar navbar-inner block-header">
-                <div class="muted pull-left">Main category table</div>
-                <div class="pull-right"><span class="badge badge-info"></span>
-
+        <div class="row-fluid">
+            <!-- block -->
+            <div class="block">
+                <div class="navbar navbar-inner block-header">
+                    <div class="muted pull-left">News Show</div>
                 </div>
-            </div>
-            <div class="block-content collapse in">
-                <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered" id="example2">
-                    <thead>
+                <div class="block-content collapse in">
+                    <div class="span12">
+
+
+                        <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered" id="example2">
+                            <thead>
                     <tr>
                         <th>Main category Name</th>
                         <th>Sub category Name</th>
-                        <th colspan="2">Action</th>
+                        <th>Action</th>
                     </tr>
                     </thead>
                     <tbody>
                     @foreach($sub_category as $value)
-                    <tr class="odd gradeX">
+                    <tr>
                         {!! Form::open(['url' =>['sub-category-update',$value->id],'class'=>'form-horizontal','method'=>'post' ]) !!}
                             <fieldset>
                                 <td><input type="text" name="main_category" value="{{ $value->category_name }}" class="span12" id="typeahead"></td>
@@ -214,13 +219,14 @@
                     </tbody>
                 </table>
                 <ul class="pagination">
-                    <li>{{$main_category->render() }}</li>
+                    <li>{{$sub_category->render() }}</li>
                 </ul>
             </div>
         </div>
         <!-- /block -->
     </div>
 </div>
+        </div>
 <!--- Swite message show  delete form slider image by obydul date:28-7-16-->
 <script>
     $('button.main_category_delete').click(function() {

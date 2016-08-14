@@ -37,24 +37,6 @@
                             <div class="controls">
                                 <select name="sel_sub_category" id="select01" class="sub_category">
                                     <option value="0">First select main category</option>
-                                    <script>
-                                        $(document).ready(function () {
-                                            $('.main_category').change(function () {
-                                                var category = $(this).val();
-                                                //alert(category);
-                                                $.ajax({
-                                                    method: "GET",
-                                                    url: "/news-category-show",
-                                                    data: {sub_category: category}
-                                                })
-                                                    .success(function (response) {
-                                                        //alert(response);
-                                                        $('.sub_category').html(response);
-                                                    });
-
-                                            });
-                                        });
-                                    </script>
                                 </select>
                             </div>
                         </div>

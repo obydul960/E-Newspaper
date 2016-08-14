@@ -6,11 +6,17 @@
 </footer>
 </div>
 <!--/.fluid-container-->
+
+<script src="{{URL::to('/')}}/Src/vendors/jquery-1.9.1.js"></script>
 <script src="{{URL::to('/')}}/Src/bootstrap/js/bootstrap.min.js"></script>
 <script src="{{URL::to('/')}}/Src/vendors/datatables/js/jquery.dataTables.min.js"></script>
-<script src="{{URL::to('/')}}/Src/assets/DT_bootstrap.js"></script>
-<script src="{{URL::to('/')}}/Src/vendors/easypiechart/jquery.easy-pie-chart.js"></script>
+
+
 <script src="{{URL::to('/')}}/Src/assets/scripts.js"></script>
+<script src="{{URL::to('/')}}/Src/assets/DT_bootstrap.js"></script>
+
+<!--/.fluid-container-->
+<script src="{{URL::to('/')}}/Src/vendors/easypiechart/jquery.easy-pie-chart.js"></script>
 <link href="{{URL::to('/')}}/Src/vendors/datepicker.css" rel="stylesheet" media="screen">
 <link href="{{URL::to('/')}}/Src/vendors/uniform.default.css" rel="stylesheet" media="screen">
 <link href="{{URL::to('/')}}/Src/vendors/chosen.min.css" rel="stylesheet" media="screen">
@@ -24,12 +30,12 @@
 <script src="{{URL::to('/')}}/Src/js/toastr/toastr.min.js"></script>
 
 <!--- jquery validation ----->
-<script src="{{URL::to('/')}}/Src/validation/jquery.min.js"></script>
+<!--<script src="{{URL::to('/')}}/Src/validation/jquery.min.js"></script>-->
 <script src="{{URL::to('/')}}/Src/validation/jquery.validate.min.js"></script>
 <!--- editor  runing--->
 <!--/.fluid-container-->
 <script src="{{URL::to('/')}}/Src/vendors/bootstrap-wysihtml5/lib/js/wysihtml5-0.3.0.js"></script>
-<script src="{{URL::to('/')}}/Src/vendors/jquery-1.9.1.min.js"></script>
+<!--<script src="{{URL::to('/')}}/Src/vendors/jquery-1.9.1.min.js"></script>-->
 <script src="{{URL::to('/')}}/Src/vendors/bootstrap-wysihtml5/src/bootstrap-wysihtml5.js"></script>
 
 <script src="{{URL::to('/')}}/Src/vendors/ckeditor/ckeditor.js"></script>
@@ -176,9 +182,6 @@
             $('#rootwizard').find("a[href*='tab1']").trigger('click');
         });
     });
-</script>
-
-
 
 
 

@@ -57,11 +57,12 @@
         </div>
     </div>
 <!-----slider image show and edit delete by obydul date:27-7-16 ---->
+<hr>
 <div class="row-fluid">
     <!-- block -->
     <div class="block">
         <div class="navbar navbar-inner block-header">
-            <div class="muted pull-left">Bootstrap dataTables with Toolbar</div>
+            <div class="muted pull-left">Backing news show</div>
         </div>
         <div class="block-content collapse in">
             <div class="span12">
@@ -69,13 +70,12 @@
 
                 <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered" id="example2">
                     <thead>
-                    <tr>
                         <th>Image</th>
                         <th>Title</th>
                         <th>Link</th>
                         <th>Action</th>
                         <th>.</th>
-                        <th colspan="2">status</th>
+                        <th>status</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -117,9 +117,7 @@
                     @endforeach
                     </tbody>
                 </table>
-                <ul class="pagination" style="float: left;text-decoration: none">
-                    <li>{{$slider_show->render() }}</li>
-                </ul>
+
             </div>
         </div>
     </div>

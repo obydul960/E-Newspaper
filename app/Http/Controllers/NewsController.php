@@ -36,8 +36,8 @@ class NewsController extends Controller
     }
 
     // sub category show category wish form show by obydul date:1-8-16
-    public function sub_category(Request $request){
-        if(Auth::check()){
+/*    public function sub_category(Request $request){
+
             $subCategory_show = SubCategoryModel::where('main_cat_id',$request->get('sub_category'))->get();
             foreach($subCategory_show as $value){
                 if($value!= NULL ){
@@ -48,13 +48,11 @@ class NewsController extends Controller
                 }
 
             }
-        }
-        else{
-            return view('errors.404');
-        }
 
 
-    }
+
+
+    }*/
 
     // news new store  by obydul date:1-8-16
     public function news_store(Request $request){
@@ -120,7 +118,7 @@ class NewsController extends Controller
         $show_news = DB::table('news_table')
             ->join('image_table', 'news_table.news_id', '=', 'image_table.news_id')
             ->select('news_table.id','news_table.published','news_table.news_title','news_table.short_details','image_table.image')
-            ->orderBy('id', 'desc')->paginate(5);
+            ->orderBy('id', 'desc')->get();
         return view('Backend.news.news_show',compact('show_news'));
         }
         else{
@@ -204,7 +202,7 @@ class NewsController extends Controller
  // backing New form show by obydul date:3-8-16
     public function  backing_news_form(){
         if(Auth::check()){
-        $backing_new=DB::table('breaking_news')->orderBy('id', 'desc')->paginate(5);
+        $backing_new=DB::table('breaking_news')->orderBy('id', 'desc')->get();
         return view('Backend.news.backing_news',compact('backing_new'));
         }
         else{
@@ -224,33 +222,32 @@ class NewsController extends Controller
             return redirect::to("backing-news")->withErrors($validator);
         }
         else{
-            $news = new BackingNewsModel();
             if (Input::hasFile('news_icon')) {
                 $extension3 = Input::file('news_icon')->getClientOriginalExtension();
                 if ($extension3 == 'png' || $extension3 == 'jpg' || $extension3 == 'jpeg' || $extension3 == 'bmp' ||
                     $extension3 == 'PNG' || $extension3 == 'jpg' || $extension3 == 'JPEG' || $extension3 == 'BMP') {
-                    $date = time();
+                    $date = uniqid() . 'pid';
                     $fname = $date . '.' . $extension3;
+                    $final1=$fname;
                     $image = Input::file('news_icon');
-                    $path = public_path('image_folder/');
-                    $image->move($path,$fname);
-                    $news_id = uniqid();
-                    $news->news_icon = $fname;
-                    $news->news_id    =$news_id;
-                    $news->news_title =$request->get('news_title');
-                    $news->back_link  =$request->get('back_link');
-                    $news->save();
+                    $path = public_path('image_folder/'.$final1);
+                    Image::make($image->getRealPath())->save($path);
                 }
             }
             else{
-                $news_title       = uniqid();
-                $news->news_id    = $news_title;
-                $news->news_title = $request->get('news_title');
-                $news->back_link  = $request->get('back_link');
-                $news->save();
+                $final1='';
             }
+            $backingNews = new BackingNewsModel();
+            $news_id       = uniqid();
+            $backingNews->news_id  = $news_id ;
+            $backingNews->news_title    = $request->get('news_title');
+            $backingNews->news_icon =$final1;
+            $backingNews->back_link = $request->get('back_link');
+            $backingNews->save();
+
             Session::flash('success', 'Successfully Data Insert.');
             return redirect::to('backing-news');
+
         }
         }
         else{
@@ -261,39 +258,28 @@ class NewsController extends Controller
     //Backing News update by obydul date:3-8-16
     public function backing_news_update(Request $request,$id){
         if(Auth::check()){
-        $backing_news = BackingNewsModel::find($id);
+            if (Input::hasFile('news_icon')) {
+                $extension3 = Input::file('news_icon')->getClientOriginalExtension();
+                if ($extension3 == 'png' || $extension3 == 'jpg' || $extension3 == 'jpeg' || $extension3 == 'bmp' ||
+                    $extension3 == 'PNG' || $extension3 == 'jpg' || $extension3 == 'JPEG' || $extension3 == 'BMP') {
+                    $date = uniqid() . 'pid';
+                    $fname = $date . '.' . $extension3;
+                    $final1=$fname;
+                    $image = Input::file('news_icon');
+                    $path = public_path('image_folder/'.$final1);
+                    Image::make($image->getRealPath())->save($path);
+                    $adds_data = BackingNewsModel::where('id', '=', $id)->update(['news_icon' => $final1]);
+                }
 
-        if (Input::hasFile('news_icon')) {
-            $extension3 = Input::file('news_icon')->getClientOriginalExtension();
-            if ($extension3 == 'png' || $extension3 == 'jpg' || $extension3 == 'jpeg' || $extension3 == 'bmp' ||
-                $extension3 == 'PNG' || $extension3 == 'jpg' || $extension3 == 'JPEG' || $extension3 == 'BMP') {
-                $date = time();
-                $fname = $date . '.' . $extension3;
-                $image = Input::file('news_icon');
-                $path = public_path('image_folder/');
-                $image->move($path,$fname);
-                $backing_news->news_icon = $fname;
-                $news_id                 = uniqid();
-                $backing_news->news_id    =$news_id;
-                $backing_news->news_title =$request->get('news_title');
-                $backing_news->back_link  =$request->get('back_link');
-                $backing_news->save();
             }
-        }
-        else{
-            $news_id                 = uniqid();
-            $backing_news->news_id    =$news_id;
-            $backing_news->news_title =$request->get('news_title');
-            $backing_news->back_link  =$request->get('back_link');
-            $backing_news->save();
-        }
-        Session::flash('success', 'Successfully Data Update...');
-        return redirect::to('backing-news');
-        }
+            $adds_data = BackingNewsModel::where('id', '=', $id)->update(['news_title' =>$request->get('news_title'),
+                'back_link' =>$request->get('back_link')]);
+            Session::flash('success', 'Successfully updated.');
+            return redirect::to('backing-news');
+         }
         else{
             return view('errors.404');
         }
-
     }
 
 
@@ -321,5 +307,6 @@ class NewsController extends Controller
             return view('errors.404');
         }
     }
+
 //end class
 }
