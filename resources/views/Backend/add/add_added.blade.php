@@ -98,7 +98,7 @@
                         {!! Form::open(['url' =>['add-update',$value->id],'class'=>'form-horizontal','method'=>'post','enctype' => 'multipart/form-data','files'=>true ]) !!}
                         <fieldset>
                             <td>
-                                <img style="width:50px;height:50px; border-radius: 5px; margin: 0px auto" src="image_folder/{{$value->add_image}}">
+                                <img style="width:50px;height:50px; border-radius: 5px; margin: 0px auto" src="public/image_folder/{{$value->add_image}}">
                                 <input type="file" name="image_add" value="{{ $value->add_image }}" class="span12" id="typeahead">
                             </td>
                             <td><input type="text" name="add_title" value="{{ $value->add_title }}" class="span12" id="typeahead"></td>
@@ -122,7 +122,7 @@
                         </fieldset>
                         {!! Form::close() !!}
                         <td>
-                            <button id="adds-delete-item" class=" btn btn-danger " data-item-id="{{$value->id}}">Delete</button>
+                            <button  class="ads_news_image btn btn-danger " data-item-id="{{$value->id}}">Delete</button>
 
                         </td>
                         <td class="span2">
@@ -155,11 +155,11 @@
 </div>
 <!--- Swite message show  delete form News by obydul date:28-7-16-->
 <script>
-    $('button#adds-delete-item').click(function() {
+    $('button.ads_news_image').click(function() {
         var itemId = $(this).attr("data-item-id");
-        deleteadds(itemId);
+        adsNewsDelete(itemId);
     });
-    function deleteadds(itemId) {
+    function adsNewsDelete(itemId) {
         swal({
             title: "Are you sure?",
             text: "Are you sure that you want to delete this Item ?",
@@ -171,7 +171,7 @@
         }, function() {
             $.ajax({
                 method: "GET",
-                url: "/add-delete/" + itemId,
+                url: "{{URL::to('/')}}/add-delete/" + itemId,
                 type: "DELETE"
             })
                 .done(function(data) {

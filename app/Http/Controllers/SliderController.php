@@ -44,15 +44,25 @@ class SliderController extends Controller
             Session::flash('error', 'Something went wrong!');
             return redirect::to("slider-form")->withErrors($validator);
         }else{
-            $image                      =Input::file('picture');
-            $uploadFolder               ='Slider_image';
-            $createFileName             = time() . '.' . $image->getClientOriginalExtension();
-            $moveFile                   =$image->move($uploadFolder,$createFileName);
-            $image_upload               = new SliderModel;
-            $image_upload->image_title  = $request->get('image_title');
-            $image_upload->image        = $createFileName;
-            $image_upload->back_link    = $request->get('back_link');
-            $image_upload->save();
+            return 111;
+            if (Input::hasFile('picture')) {
+                $extension3 = Input::file('picture')->getClientOriginalExtension();
+                if ($extension3 == 'png' || $extension3 == 'jpg' || $extension3 == 'jpeg' || $extension3 == 'bmp' ||
+                    $extension3 == 'PNG' || $extension3 == 'jpg' || $extension3 == 'JPEG' || $extension3 == 'BMP') {
+                    $date = uniqid() . 'pid';
+                    $fname = $date . '.' . $extension3;
+                    $final1=$fname;
+                    $image = Input::file('picture');
+                    $path = public_path('Slider_image/'.$final1);
+                    Image::make($image->getRealPath())->save($path);
+                }
+            }
+            $add_content = new SliderModel();
+            $add_content->image_title = $request->get('image_title');
+            $add_content->image       = $final1 ;
+            $add_content->back_link    = $request->get('back_link');
+            $add_content->save();
+
             Session::flash('success', 'Successfully Data Insert.');
             return redirect::to('slider-form')->withErrors($validator);
 
@@ -88,9 +98,7 @@ class SliderController extends Controller
             Session::flash('success', 'Successfully Data Update.');
             return redirect::to('slider-form');
         }
-        else{
-            return view('errors.404');
-        }
+        else{}
 
     }
 
@@ -100,9 +108,7 @@ class SliderController extends Controller
         $slider_delete = SliderModel::find($id)->delete();
         return redirect::to('slider-form');
         }
-        else{
-            return view('errors.404');
-        }
+        else{}
     }
     // slider controll display by obydul date:8-8-16
     public function slider_store(Request $request,$id){
@@ -113,9 +119,7 @@ class SliderController extends Controller
         Session::flash('success', 'Successfully  Insert.');
         return redirect::to('slider-form');
         }
-        else{
-            return view('errors.404');
-        }
+        else{}
     }
 
 

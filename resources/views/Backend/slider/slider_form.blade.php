@@ -94,7 +94,7 @@
                         {!! Form::close() !!}
 
                         <td>
-                            <button class=" btn btn-danger slider-delete" data-item-id="{{$value->id}}">Delete</button>
+                            <button class="slider_delete btn btn-danger " data-item-id="{{$value->id}}">Delete</button>
 
                         </td>
                         <td class="span2">
@@ -125,6 +125,36 @@
     </div>
     <!-- /block -->
 </div>
+<!--- Swite message show  delete form slider image by obydul date:28-7-16-->
+<script>
+    $('button.slider_delete').click(function() {
+        var itemId = $(this).attr("data-item-id");
+        sliderDelete(itemId);
+    });
+    function sliderDelete(itemId) {
+        swal({
+            title: "Are you sure?",
+            text: "Are you sure that you want to delete this Item ?",
+            type: "warning",
+            showCancelButton: true,
+            closeOnConfirm: false,
+            confirmButtonText: "Yes, delete it!",
+            confirmButtonColor: "#ec6c62"
+        }, function() {
+            $.ajax({
+                method: "GET",
+                url: "{{URL::to('/')}}/slider-delete/" + itemId,
+                type: "DELETE"
+            })
+                .done(function(data) {
+                    swal("Deleted!", "Your item was successfully deleted!", "success");
+                })
+                .error(function(data) {
+                    swal("Oops", "We couldn't connect to the server!", "error");
+                });
+        });
+    }
+</script>
 
 
 @endsection

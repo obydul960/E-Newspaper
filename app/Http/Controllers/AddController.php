@@ -19,7 +19,7 @@ class AddController extends Controller
 {
     public function create(){
         if(Auth::check()){
-        $show_add = AddModel::paginate(4);
+        $show_add = AddModel::orderBy('id','desc')->paginate(4);
        return view('Backend.add.add_added',compact('show_add'));
         }
         else{
@@ -40,22 +40,31 @@ class AddController extends Controller
                 return redirect::to("add-create-form")->withErrors($validator);
             }
             else{
+
+                if (Input::hasFile('add_image')) {
+                    $extension3 = Input::file('add_image')->getClientOriginalExtension();
+                    if ($extension3 == 'png' || $extension3 == 'jpg' || $extension3 == 'jpeg' || $extension3 == 'bmp' ||
+                        $extension3 == 'PNG' || $extension3 == 'jpg' || $extension3 == 'JPEG' || $extension3 == 'BMP') {
+                        $date = uniqid() . 'pid';
+                        $fname = $date . '.' . $extension3;
+                        $final1=$fname;
+                        $image = Input::file('add_image');
+                        $path = public_path('image_folder/'.$final1);
+                        Image::make($image->getRealPath())->save($path);
+
+                    }
+
+                }
                 $add_content = new AddModel();
-
-                //dd($add_content);
-                $image = Input::file('add_image');
-                $filename  = time() . '.' . $image->getClientOriginalExtension();
-                $path = public_path('image_folder/' . $filename);
-                Image::make($image->getRealPath())->resize(200, 200)->save($path);
-
                 $add_content->add_title = $request->get('add_title');
-                $add_content->add_image  = $filename ;
+                $add_content->add_image  = $final1 ;
                 $add_content->position    = $request->get('add_position');
                 $add_content->back_link = $request->get('back_link');
                 $add_content->save();
 
                 Session::flash('success', 'Successfully Data Insert.');
                 return redirect::to('add-create-form');
+
             }
         }
         else{
@@ -67,32 +76,27 @@ class AddController extends Controller
     public function add_update(Request $request,$id){
         if(Auth::check()){
         $adds_data = AddModel::find($id);
+            if (Input::hasFile('image_add')) {
+                $extension3 = Input::file('image_add')->getClientOriginalExtension();
+                if ($extension3 == 'png' || $extension3 == 'jpg' || $extension3 == 'jpeg' || $extension3 == 'bmp' ||
+                    $extension3 == 'PNG' || $extension3 == 'jpg' || $extension3 == 'JPEG' || $extension3 == 'BMP') {
+                    $date = uniqid() . 'pid';
+                    $fname = $date . '.' . $extension3;
+                    $final1=$fname;
+                    $image = Input::file('image_add');
+                    $path = public_path('image_folder/'.$final1);
+                    Image::make($image->getRealPath())->save($path);
+                    $adds_data = AddModel::where('id', '=', $id)->update(['add_image' => $final1]);
+                }
 
-        if (Input::hasFile('image_add')) {
-            $extension3 = Input::file('image_add')->getClientOriginalExtension();
-            if ($extension3 == 'png' || $extension3 == 'jpg' || $extension3 == 'jpeg' || $extension3 == 'bmp' ||
-                $extension3 == 'PNG' || $extension3 == 'jpg' || $extension3 == 'JPEG' || $extension3 == 'BMP') {
-                $date = time();
-                $fname = $date . '.' . $extension3;
-                $image = Input::file('image_add');
-                $path = public_path('image_folder/');
-                $image->move($path,$fname);
-
-                $adds_data->add_title  =$request->get('add_title');
-                $adds_data->add_image  =$fname;
-                $adds_data->position   =$request->get('add_position');
-                $adds_data->back_link  =$request->get('back_link');
-                $adds_data->save();
             }
-        }
-        else{
-            $adds_data->add_title  =$request->get('add_title');
-            $adds_data->position   =$request->get('add_position');
-            $adds_data->back_link  =$request->get('back_link');
-            $adds_data->save();
-        }
-        Session::flash('success', 'Successfully updated.');
-        return redirect::to('add-create-form');
+            $title=$request->get('add_title');
+            $backLink =$request->get('add_position');
+
+            $adds_data = AddModel::where('id', '=', $id)->update(['add_title' =>$title,
+                'position' =>$backLink ,'back_link' => $request->get('back_link')]);
+            Session::flash('success', 'Successfully updated.');
+            return redirect::to('add-create-form');
         }
         else{
             return view('errors.404');

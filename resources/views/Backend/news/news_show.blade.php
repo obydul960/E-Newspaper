@@ -45,7 +45,7 @@
                         <td>
 
                             <a class="btn btn-success" href="{{ url('news-edit-form')}}/{{$value->id}}">Edit</a>
-                            <button id="news-delete-item" class=" btn btn-danger" data-item-id="{{$value->id}}">Delete</button>
+                            <button  class="new_delete btn btn-danger" data-item-id="{{$value->id}}">Delete</button>
                         </td>
                     </tr>
                     @endforeach
@@ -63,11 +63,11 @@
 </div>
 <!--- Swite message show  delete form News by obydul date:28-7-16-->
 <script>
-    $('button#news-delete-item').click(function() {
+    $('button.new_delete').click(function() {
         var itemId = $(this).attr("data-item-id");
-        deletenews(itemId);
+        newsDelete(itemId);
     });
-    function deletenews(itemId) {
+    function newsDelete(itemId) {
         swal({
             title: "Are you sure?",
             text: "Are you sure that you want to delete this Item ?",
@@ -79,7 +79,7 @@
         }, function() {
             $.ajax({
                 method: "GET",
-                url: "/news-show-delete/" + itemId,
+                url: "{{URL::to('/')}}/news-show-delete/" + itemId,
                 type: "DELETE"
             })
                 .done(function(data) {

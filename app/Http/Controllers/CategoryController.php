@@ -97,8 +97,9 @@ class CategoryController extends Controller
     public function  home_show_store(Request $request,$id){
         if(Auth::check()){
         $a=Input::get('main_category_show');
+           // return $id;
 
-        $check=CategoryModel::where('view_status',$a)->count();
+        $check=CategoryModel::where('view_status',$a)->where('id',$id)->count();
         //return $check;
         if($check>0)
         {

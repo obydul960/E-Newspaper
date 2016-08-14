@@ -86,7 +86,7 @@
                         {!! Form::close() !!}
 
                         <td>
-                            <button class="backing-new-delete btn btn-danger" data-item-id="{{$value->id}}">Delete</button>
+                            <button class="backing_news_delete btn btn-danger" data-item-id="{{$value->id}}">Delete</button>
                         </td>
                         <td class="span2">
                             {!!Form::open(['url'=>['backing-news-show',$value->id],'class'=>'form-horizontal'])!!}
@@ -116,6 +116,36 @@
     </div>
     <!-- /block -->
 </div>
+<!--- Swite message show  delete form backing news  by obydul date:28-7-16-->
+<script>
+    $('button.backing_news_delete').click(function() {
+        var itemId = $(this).attr("data-item-id");
+        backingnewsDelete(itemId);
+    });
+    function backingnewsDelete(itemId) {
+        swal({
+            title: "Are you sure?",
+            text: "Are you sure that you want to delete this Item ?",
+            type: "warning",
+            showCancelButton: true,
+            closeOnConfirm: false,
+            confirmButtonText: "Yes, delete it!",
+            confirmButtonColor: "#ec6c62"
+        }, function() {
+            $.ajax({
+                method: "GET",
+                url: "{{URL::to('/')}}/backing-news-delete/" + itemId,
+                type: "DELETE"
+            })
+                .done(function(data) {
+                    swal("Deleted!", "Your item was successfully deleted!", "success");
+                })
+                .error(function(data) {
+                    swal("Oops", "We couldn't connect to the server!", "error");
+                });
+        });
+    }
+</script>
 
 
 @endsection

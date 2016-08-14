@@ -71,6 +71,7 @@
                                 {!!Form::open(['url'=>['home-store',$value->id],'class'=>'form-horizontal'])!!}
                                 <select name="main_category_show" onchange='this.form.submit()' style="width: 100%">
                                     <option selected>{{ $value->view_status }}</option>
+                                    <option value="0">0</option>
                                     <option value="1">1</option>
                                     <option value="2">2</option>
                                     <option value="3">3</option>
@@ -103,7 +104,7 @@
                                 {!!Form::close()!!}
                             </td>
                             <td>
-                                <button id="main_category_delete" class=" btn btn-danger" data-item-id="{{$value->id}}">Delete</button>
+                                <button  class="main_category_delete btn btn-danger" data-item-id="{{$value->id}}">Delete</button>
                             </td>
 
                         </tr>
@@ -206,7 +207,7 @@
                        {!! Form::close() !!}
 
                         <td>
-                            <button class="sub-category-delete btn btn-danger" data-item-id="{{$value->id}}">Delete</button>
+                            <button class="sub_cat_delete btn btn-danger" data-item-id="{{$value->id}}">Delete</button>
                         </td>
                     </tr>
                     @endforeach
@@ -220,15 +221,13 @@
         <!-- /block -->
     </div>
 </div>
-<!--- Swite message show  delete form main category  by obydul date:28-7-16-->
+<!--- Swite message show  delete form slider image by obydul date:28-7-16-->
 <script>
-    $('button#main_category_delete').click(function() {
+    $('button.main_category_delete').click(function() {
         var itemId = $(this).attr("data-item-id");
-
-        deletec(itemId);
+        mainCategoryDelete(itemId);
     });
-    function deletec(itemId) {
-
+    function mainCategoryDelete(itemId) {
         swal({
             title: "Are you sure?",
             text: "Are you sure that you want to delete this Item ?",
@@ -238,10 +237,9 @@
             confirmButtonText: "Yes, delete it!",
             confirmButtonColor: "#ec6c62"
         }, function() {
-
             $.ajax({
                 method: "GET",
-                url: "/category-delete/" + itemId,
+                url: "{{URL::to('/')}}/category-delete/" + itemId,
                 type: "DELETE"
             })
                 .done(function(data) {
@@ -253,5 +251,36 @@
         });
     }
 </script>
+<!--- Swite message show  delete form sub category  by obydul date:28-7-16-->
+<script>
+    $('button.sub_cat_delete').click(function() {
+        var itemId = $(this).attr("data-item-id");
+        subCatDelete(itemId);
+    });
+    function subCatDelete(itemId) {
+        swal({
+            title: "Are you sure?",
+            text: "Are you sure that you want to delete this Item ?",
+            type: "warning",
+            showCancelButton: true,
+            closeOnConfirm: false,
+            confirmButtonText: "Yes, delete it!",
+            confirmButtonColor: "#ec6c62"
+        }, function() {
+            $.ajax({
+                method: "GET",
+                url: "{{URL::to('/')}}/sub-category-delete/" + itemId,
+                type: "DELETE"
+            })
+                .done(function(data) {
+                    swal("Deleted!", "Your item was successfully deleted!", "success");
+                })
+                .error(function(data) {
+                    swal("Oops", "We couldn't connect to the server!", "error");
+                });
+        });
+    }
+</script>
+
 
 @endsection
